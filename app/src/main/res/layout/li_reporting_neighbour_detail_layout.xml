@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/neighbourDetailsLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_edittext_"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="5"
+            android:gravity="left"
+            android:text="N/A"
+            android:textColor="@color/app_orange"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <TextView
+                android:id="@+id/Mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="2dp"
+                android:gravity="left"
+                android:text="XXXXXXXXXX"
+                android:textColor="@color/app_orange"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/deleteDetails"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:textColor="@color/app_orange"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:tint="@color/app_red" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

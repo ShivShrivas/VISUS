@@ -1,0 +1,1892 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LifeInsuranceReportingFormatActivity">
+
+    <LinearLayout
+        android:id="@+id/linear_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_orange"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:onClick="goBack"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="MACT Claim Reporting Format"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Investigator Code"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInvestigatorCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Investigator Name "
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInvestigatorName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Contact Number"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInvestigatorContactNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Claim Number"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextClaimNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Claim Title"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextClaimTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Date of Accident"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDateofAccident"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="false"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Whether deceased admitted to the hospital"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <RadioGroup
+                    android:id="@+id/rg_WhetherDeceasedAdmittedHospital"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_WhetherDeceasedAdmittedHospital_Yes"
+                        style="@style/MyRadioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="YES"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_WhetherDeceasedAdmittedHospital_No"
+                        style="@style/MyRadioButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NO"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="left"
+                    android:text="If, Admitted (Provide First Admission Papers/MLC)*"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextIfAdmitted"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:editable="true"
+                    android:focusable="true"
+                    android:gravity="left"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Injury Case"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="First Hospital Admission Details*"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextFirstHospitalAdmissionDetails"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Disability Certificate"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_DisabilityCertificate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_DisabilityCertificateYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_DisabilityCertificateNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Condition of the Injured"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Meeting with Claimant (Provide Photograph)"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_MeetingWithClaimant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_MeetingWithClaimantYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_MeetingWithClaimantNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Deceased/Injured Occupation *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDeceasedInjuredOccupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="If Deceased/Injured Salaried or filing ITRs, verification is Must *"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDeceasedInjuredSalariedfilingITRs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="Deceased Age Proofs Documents *"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:backgroundTint="#170BA8A0"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="High School Mark sheet"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextHighSchoolMarksheet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:backgroundTint="#170BA8A0"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="Ration Card"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextRationCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:backgroundTint="#170BA8A0"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="Voter ID Card"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextVoterIDCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:backgroundTint="#170BA8A0"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="Pariwar Register"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextPariwarRegister"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button"
+                        android:backgroundTint="#170BA8A0"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:text="Aadhar Card"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextAadharCard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            android:editable="true"
+                            android:focusable="true"
+                            android:gravity="left"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Meeting with the insured * (Provide Photograph)"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_MeetingWithInsured"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rg_MeetingWithInsuredYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rg_MeetingWithInsuredNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Insured Occupation"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInsuredOccupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Driver Name &amp; Contact No."
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDriverNameContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="IS TP Vehicle Involved (Provide Vehicle No.)"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextISTPVehicleInvolved"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Driver &amp; DL of TP Vehicle"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_Driver_DL_of_TP_Vehicle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_Driver_DL_of_TP_Vehicle_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_Driver_DL_of_TP_Vehicle_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Insured Vehicle Paper"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="RC"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_RC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_RC_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_RC_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="DL* with Particulars"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_DLwithParticulars"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_DLwithParticularsYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_DLwithParticulars_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Permit * (in case of commercial vehicle)"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextPermit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Insurance Policy"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_InsurancePolicy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_InsurancePolicy_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_InsurancePolicy_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Criminal Papers"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="FIR"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_FIR"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_FIR_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_FIR_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Police Panchnama"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rg_PolicePanchnama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_PolicePanchnama_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_PolicePanchnama_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="PM Report"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_PMReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_PMReport_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_PMReport_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Charge sheet/Final Report"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_ChargeSheetReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_ChargeSheetReport_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_ChargeSheetReport_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Case Diary"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_CaseDiary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_CaseDiary_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_CaseDiary_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Is Charge sheet filed against TP Vehicle"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_ChargeSheetAgainst"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_ChargeSheetAgainst_Yes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="YES"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_ChargeSheetAgainst_No"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NO"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Contact Details"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Claimant Advocate No. &amp; Name"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextClaimantAdvocateNameAndNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Claimant Contact No"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextClaimantContactNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:digits="0123456789"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Insured Advocate No. &amp; Name"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInsuredAdvocateNameAndNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button"
+                    android:backgroundTint="#170BA8A0"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="Insured Contact Number"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextInsuredContactNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:digits="0123456789"
+                        android:clickable="true"
+                        android:editable="true"
+                        android:focusable="true"
+                        android:gravity="left"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Write about Claimant Visit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextWriteAboutClaimantVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top|start"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Write About Insured Visit "
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextWriteAboutInsuredVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top|start"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Write about driver visit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextWriteAboutDriverVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top|start"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Write about accidental spot visit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextWriteAboutAccidentalSpotVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top|start"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Write about Hospital Visit (in Injury cases)"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/editTextWriteAboutHospitalVisit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:gravity="top|start"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="6"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.skydoves.elasticviews.ElasticButton
+                    android:id="@+id/buttonSubmitMACTDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimaryText"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Submit Report"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:backgroundTint="@null" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

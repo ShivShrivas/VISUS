@@ -1,0 +1,2230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.GI_OD_ReportingFormatActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp"
+             android:padding="5dp"
+             android:background="@drawable/square_stroke_bg"
+             android:orientation="vertical">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="E-claim form Filled"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="IL Take care app downloaded and screenshot shared"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Previous year policy provided and any break-in then reason mentioned on statement. Renewal policy/ Rollover policy."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Current year policy "
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Delay in FIR"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Keys Impression and statement regarding the keys."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="If insured forgot the key in the ignition then u have to take his statement on affidavit of 20 rupees and ignition word has to be used."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Google timeline collected"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="IO number and name  "
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Delay in intimation and reason  "
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Neighbour statement"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Spot witness Statement"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Purchase Bill "
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Fas tag detail collected"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="GPS Detail"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Service History and RTO intimation"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Loan Statement"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="NON repossession letter and Financier mail ID and contact number"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal">
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:layout_gravity="top"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="15dp"
+                 android:text="Insured name mentioned over the keys and insured photo along with the"
+                 android:textStyle="bold"
+                 android:textColor="@color/black"
+                 android:textSize="15sp" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="top"
+                 android:layout_marginStart="10dp"
+                 android:textStyle="bold"
+                 android:layout_marginTop="15dp"
+                 android:text=":"
+                 android:textColor="@color/black"
+                 android:textSize="15sp" />
+             <EditText
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="5dp"
+
+                 android:textColor="@color/black"
+                 android:textSize="15sp" />
+         </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Insured photo holding the statement and key."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Bank Passbook clear and duly verified or 25- Cancelled Cheque"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="RTO Forms duly signed (Triplicate of 28,29,30)"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="If original RC stolen then RC particular along with form 26 duly signed"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="If IV is on loan then form 35 and loan statement and NON repossession letter."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="FIR if FIR not filed then police application/ FIR delay then reason"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Indemnity Bond on 200 and satisfaction letter on 10 rupees stamp paper."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="UP112 call record if call done"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Motor vehicle Tax receipt if Insured vehicle was unregistered."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Pan Card if insured having no PAN then form 60 is mandatory."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Key status (Used/ genuine)"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="In commercial vehicle Permit, Fitness, collected"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Last user statement and KYC."
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Driver statement and contact detail in commercial vehicle"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Case status (Payable/ Repudiation/ Fraud)"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="15dp"
+                     android:text="Investigators’ Findings"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="top"
+                     android:layout_marginStart="10dp"
+                     android:textStyle="bold"
+                     android:layout_marginTop="15dp"
+                     android:text=":"
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+                 <EditText
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:layout_gravity="center_vertical"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="5dp"
+
+                     android:textColor="@color/black"
+                     android:textSize="15sp" />
+             </LinearLayout>
+
+
+
+
+
+
+         </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_DulyFilledClaimForm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_DulyFilledClaimFormYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_DulyFilledClaimFormNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDulyFilledClaimForm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Duly filled in claim form   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_AttestedDeathCertificate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_AttestedDeathCertificateYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_AttestedDeathCertificateNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextAttestedDeathCertificate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Attested Death certificate \n   (issued by Govt/Municipal corporation)\n   FIR/MLC (Medico Legal Case Report)   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_AttestedPostMortem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_AttestedPostMortemYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_AttestedPostMortemNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextAttestedPostMortem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Attested Post Mortem. Spot \n   and/or Inquest Panchnama   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_CancelledChequeWithClaimant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_CancelledChequeWithClaimantYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_CancelledChequeWithClaimantNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextCancelledChequeWithClaimant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Cancelled cheque with claimant/payee name\n    printed on it (else supported by a
+passbook copy)\n    or NEFT form verified by bank   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_RegistrationCopyOfVehicle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_RegistrationCopyOfVehicleYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_RegistrationCopyOfVehicleNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextRegistrationCopyOfVehicle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="    Registration copy of the vehicle   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_DrivingLicenseOfDriver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_DrivingLicenseOfDriverYes"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/rb_DrivingLicenseOfDriverNo"
+                            style="@style/MyRadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="4"
+                        android:text="Available / Not available"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/editTextDrivingLicenseOfDriver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="7dp"
+                        android:layout_weight="6"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Driving License of the Driver   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text="Collect newspaper clip "
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Newspaper Clip   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text="Register Entry / MLC / Date of Admission"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="Treatment papers / Discharge slip"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="Photograph of the Hospital in Lat- Long"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Hospital Visit   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text="Contact No. of the IO / contact person"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Police Station Visit   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text="Any Other relevant Details"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Other   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text="Payable/Not Payable"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Status of the Claim   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/square_stroke_bg"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="#ffffff"
+                    android:text="   Investigator's finding   "
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

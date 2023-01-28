@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/app_orange"
+    android:layout_height="match_parent"
+    tools:context=".activity.DashboardActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/linearTop"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal">
+       <!-- <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="gone"
+            android:src="@drawable/user"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Name"
+                    android:textSize="16sp"
+                    android:id="@+id/title"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="code"
+                    android:layout_marginStart="5dp"
+                    android:textSize="14sp"
+                    android:id="@+id/code"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="location"
+                android:layout_marginTop="5dp"
+                android:id="@+id/location"
+                android:textSize="12sp"
+                android:textColor="#83000000"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date "
+                android:layout_marginTop="5dp"
+                android:id="@+id/currentdate"
+                android:textSize="12sp"
+                android:textColor="@color/purple_700"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+      android:layout_below="@id/linearTop"
+        android:layout_height="match_parent"
+        android:background="@drawable/dash_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/myassigment_linear"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#170BA8A0"
+                    android:background="@drawable/square_round"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/assignment"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Assignment work"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                       />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#170BA8A0"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/square_round"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/salary"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Salary\n"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="#170BA8A0"
+                    android:background="@drawable/square_round"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/user"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile\n"
+                        android:layout_marginBottom="10dp"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="#170BA8A0"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/square_round"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/dataprocess"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data Synchronization"
+                        android:padding="5dp"
+                        android:gravity="center"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:backgroundTint="#170BA8A0"
+                android:layout_marginStart="10dp"
+                android:id="@+id/finalsubmit_assignment"
+                android:background="@drawable/square_round"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="10dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/submit"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Final Submission of\nMy Assignment"
+                    android:padding="5dp"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

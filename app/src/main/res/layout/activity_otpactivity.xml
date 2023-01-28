@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OTPActivity">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="@drawable/visuswave"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingVertical="20dp">
+
+        <TextView
+            android:id="@+id/top_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="OTP Verification"
+            android:textColor="@color/app_red"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="An 6-digit code has been sent to "
+                android:textColor="#56000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/setmobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:text="+91********"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <com.chaos.view.PinView
+            android:id="@+id/otp_view"
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:cursorVisible="true"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cursorColor="@color/app_red"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="false"
+            app:itemCount="6"
+            app:itemHeight="48dp"
+            app:itemRadius="20dp"
+            app:itemSpacing="5dp"
+            app:itemWidth="48dp"
+            app:lineColor="@color/app_red"
+            app:lineWidth="2dp"
+            app:viewType="rectangle" />
+
+
+        <com.skydoves.elasticviews.ElasticButton
+            android:id="@+id/verify_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/app_red"
+            android:text="VERIFY"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:button_duration="150" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Your Code will be display within  "
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:id="@+id/counterTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textStyle="bold"
+                android:text="00:00"
+                android:textColor="@color/purple_700"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" seconds"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:rotation="180"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/visuswave"/>
+
+</RelativeLayout>

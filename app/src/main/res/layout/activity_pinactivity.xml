@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PINActivity">
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="@drawable/visuswave"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+   android:layout_centerInParent="true"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/white"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:paddingVertical="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/top_linear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Enter Pin"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.chaos.view.PinView
+                android:id="@+id/otp_view_visus"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:cursorVisible="true"
+                android:gravity="start"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorColor="@color/app_red"
+                app:cursorWidth="2dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="4"
+                app:itemHeight="48dp"
+                app:itemRadius="20dp"
+                app:itemSpacing="5dp"
+                app:itemWidth="48dp"
+                app:lineColor="@color/app_red"
+                app:lineWidth="2dp"
+                app:viewType="rectangle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Enter Confirm PIN"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.chaos.view.PinView
+                android:id="@+id/confirm_otp_view_visus"
+                style="@style/PinWidget.PinView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:cursorVisible="true"
+                android:gravity="start"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:cursorColor="@color/app_red"
+                app:cursorWidth="2dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="4"
+                app:itemHeight="48dp"
+                app:itemRadius="20dp"
+                app:itemSpacing="5dp"
+                app:itemWidth="48dp"
+                app:lineColor="@color/app_red"
+                app:lineWidth="2dp"
+                app:viewType="rectangle" />
+        </LinearLayout>
+
+
+        <com.skydoves.elasticviews.ElasticButton
+            android:id="@+id/otp_view_visus_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/app_red"
+            android:text="SUBMIT"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:button_duration="150" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:rotation="180"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/visuswave"/>
+
+</RelativeLayout>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:background="@drawable/square_round"
+    android:backgroundTint="#170BA8A0"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:id="@+id/linear_top"
+        android:orientation="horizontal"
+        android:padding="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="Claim Number"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="Policy Number"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="Insurance Company"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="Assigned Date"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="TAT For Investigation"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text=":"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewClaimNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewPolicyNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewInsuranceCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewAssignedDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/textViewTATForInvestigation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="N/A"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+   <Button
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="15dp"
+       android:id="@+id/take_action"
+       android:layout_marginEnd="15dp"
+       android:layout_marginBottom="10dp"
+       android:layout_below="@id/linear_top"
+       android:text="Take Action"/>
+
+</RelativeLayout>
