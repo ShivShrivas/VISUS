@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -1284,947 +1285,2544 @@
 
          </LinearLayout>-->
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="ACCIDENTAL DEATH CLAIMS"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_DulyFilledClaimForm"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_DulyFilledClaimFormYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_DulyFilledClaimForm"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_DulyFilledClaimFormNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_DulyFilledClaimFormYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_DulyFilledClaimFormNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextDulyFilledClaimForm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/editTextDulyFilledClaimForm"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Duly filled in claim form   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Duly filled in claim form   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/square_stroke_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_AttestedDeathCertificate"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
                         android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_AttestedDeathCertificateYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_AttestedDeathCertificate"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_AttestedDeathCertificateNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_AttestedDeathCertificateYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_AttestedDeathCertificateNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextAttestedDeathCertificate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/editTextAttestedDeathCertificate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Attested Death certificate \n   (issued by Govt/Municipal corporation)\n   FIR/MLC (Medico Legal Case Report)   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Attested Death certificate \n   (issued by Govt/Municipal corporation)\n   FIR/MLC (Medico Legal Case Report)   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/square_stroke_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_AttestedPostMortem"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
                         android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_AttestedPostMortemYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_AttestedPostMortem"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_AttestedPostMortemNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_AttestedPostMortemYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_AttestedPostMortemNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextAttestedPostMortem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Attested Post Mortem. Spot \n   and/or Inquest Panchnama   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                    <EditText
-                        android:id="@+id/editTextAttestedPostMortem"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Attested Post Mortem. Spot \n   and/or Inquest Panchnama   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/square_stroke_bg"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_CancelledChequeWithClaimant"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
                         android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_CancelledChequeWithClaimantYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_CancelledChequeWithClaimant"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_CancelledChequeWithClaimantNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_CancelledChequeWithClaimantYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_CancelledChequeWithClaimantNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextCancelledChequeWithClaimant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <EditText
-                        android:id="@+id/editTextCancelledChequeWithClaimant"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Cancelled cheque with claimant/payee name\n    printed on it (else supported by a
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Cancelled cheque with claimant/payee name\n    printed on it (else supported by a
 passbook copy)\n    or NEFT form verified by bank   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_RegistrationCopyOfVehicle"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_RegistrationCopyOfVehicleYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_RegistrationCopyOfVehicle"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_RegistrationCopyOfVehicleNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_RegistrationCopyOfVehicleYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_RegistrationCopyOfVehicleNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextRegistrationCopyOfVehicle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Registration copy of the vehicle   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                    <EditText
-                        android:id="@+id/editTextRegistrationCopyOfVehicle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="    Registration copy of the vehicle   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
-
-                    <RadioGroup
-                        android:id="@+id/rg_DrivingLicenseOfDriver"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="2dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
 
-                        <RadioButton
-                            android:id="@+id/rb_DrivingLicenseOfDriverYes"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+
+                        <RadioGroup
+                            android:id="@+id/rg_DrivingLicenseOfDriver"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Yes"
-                            android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                        <RadioButton
-                            android:id="@+id/rb_DrivingLicenseOfDriverNo"
-                            style="@style/MyRadioButtonStyle"
-                            android:layout_width="wrap_content"
+                            <RadioButton
+                                android:id="@+id/rb_DrivingLicenseOfDriverYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_DrivingLicenseOfDriverNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="No"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                    </RadioGroup>
+                        <EditText
+                            android:id="@+id/editTextDrivingLicenseOfDriver"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_weight="4"
-                        android:text="Available / Not available"
-                        android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Driving License of the Driver   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                    <EditText
-                        android:id="@+id/editTextDrivingLicenseOfDriver"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="7dp"
-                        android:layout_weight="6"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Driving License of the Driver   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_IndemnityCumDeclarationBond"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_IndemnityCumDeclarationBondYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_IndemnityCumDeclarationBondNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text="Collect newspaper clip "
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextIndemnityCumDeclarationBond"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Indemnity Cum Declaration Bond on \n   Rs 100 Stamp Paper, to be filled by nominee   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Newspaper Clip   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_AMLDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_AMLDocumentsYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_AMLDocumentsNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text="Register Entry / MLC / Date of Admission"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextAMLDocuments"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   AML Documents [if claimed amount is >1Lakh]\n   (2 passport size photos, one address and ID proof\n   of the nominee as in C-KYC form)   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:text="Treatment papers / Discharge slip"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:text="Photograph of the Hospital in Lat- Long"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Hospital Visit   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_NomineeDeclarationDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_NomineeDeclarationDocumentsYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_NomineeDeclarationDocumentsNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text="Contact No. of the IO / contact person"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextNomineeDeclarationDocuments"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Nominee Declaration Documents \n   (If nominee not mentioned in policy copy)\n   Nominee proof of relationship with deceased/\n   Legal Heir Certificate. No Objection Certificate\n   from all other Legal heirs duly attested by Notary \n   on a stamp paper duly   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Police Station Visit   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_CaseSpecificDocuments"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_CaseSpecificDocumentsYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_CaseSpecificDocumentsNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text="Any Other relevant Details"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextCaseSpecificDocuments"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Case Specific Documents  "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Other   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_PoliceFinalChargeSheetCourtFinalOrder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_PoliceFinalChargeSheetCourtFinalOrderYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_PoliceFinalChargeSheetCourtFinalOrderNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text="Payable/Not Payable"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextPoliceFinalChargeSheetCourtFinalOrder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Police final charge sheet or Court Final Order \n   (if case closed) ,Forensic Science Laboratory \n   (FSL)/ Histopathology/ Chemical analysis Report \n   If recommended in PM   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Status of the Claim   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/square_stroke_bg"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:orientation="vertical"
-                    android:padding="15dp">
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_MedicalCauseDeathCertificateIssued"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_MedicalCauseDeathCertificateIssuedYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_MedicalCauseDeathCertificateIssuedNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_weight="1"
-                            android:text=""
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="top"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="15dp"
-                            android:text=":"
-                            android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <EditText
+                            android:id="@+id/editTextMedicalCauseDeathCertificateIssued"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
 
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Medical Cause of Death certificate issued \n   by Hospital with supporting treatment   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_HospitalizationPaperTreatmentPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_HospitalizationPaperTreatmentPaperYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_HospitalizationPaperTreatmentPaperNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextHospitalizationPaperTreatmentPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Hospitalization paper / Treatment paper   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_PastConsultationPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_PastConsultationPaperYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_PastConsultationPaperNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextPastConsultationPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Past consultation paper   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_NeighbourStatementAlongWithKYC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_NeighbourStatementAlongWithKYCYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_NeighbourStatementAlongWithKYCNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextNeighbourStatementAlongWithKYC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Neighbour statement along with KYC   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_ContactNumberOfPersonWhoMeetDuringSpotVisit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_ContactNumberOfPersonWhoMeetDuringSpotVisitYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_ContactNumberOfPersonWhoMeetDuringSpotVisitNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextContactNumberOfPersonWhoMeetDuringSpotVisit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Medical Cause of Death certificate issued \n   by Hospital with supporting treatment   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_IVPhotosAlongWithEngineChassisNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_IVPhotosAlongWithEngineChassisNumberYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_IVPhotosAlongWithEngineChassisNumberNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextIVPhotosAlongWithEngineChassisNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   IV photos along with Engine Chassis Number   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_SpotVerificationDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_SpotVerificationDetailYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_SpotVerificationDetailNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextSpotVerificationDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Medical Cause of Death certificate issued \n   by Hospital with supporting treatment   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_IONumberAndName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_IONumberAndNameYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_IONumberAndNameNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextIONumberAndName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    IO Number and name   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_ReasonForNoFIR_N0PMR_Panchnama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_ReasonForNoFIR_N0PMR_PanchnamaYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_ReasonForNoFIR_N0PMR_PanchnamaNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextReasonForNoFIR_N0PMR_Panchnama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Reason for no FIR and NO PMR And Panchnama   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#170BA8A0"
+                android:orientation="vertical"
+                android:padding="0dp">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="ACCIDENTAL PERMANENT TOTAL DISABILITY- INJURED"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_DulyFilledClaimForm_Injured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_DulyFilledClaimForm_InjuredYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_DulyFilledClaimForm_InjuredNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextDulyFilledClaimForm_Injured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Duly filled in claim form  "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_DisabilityCertificateStatingPercentageDisablement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_DisabilityCertificateStatingPercentageDisablementYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_DisabilityCertificateStatingPercentageDisablementNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextDisabilityCertificateStatingPercentageDisablement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Disability Certificate stating percentage \n   of disablement (issued by authorized\n   medical officer/ civil surgeon of civil hospital / \n   govt. hospital of the district / units concerned)   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_FIR_MLC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_FIR_MLCYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_FIR_MLCNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextFIR_MLC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    FIR/ MLC (Medico Legal Case Report)   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_IndemnityCumDeclarationBondRs_100_StampPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_IndemnityCumDeclarationBondRs_100_StampPaperYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_IndemnityCumDeclarationBondRs_100_StampPaperNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextIndemnityCumDeclarationBondRs_100_StampPaper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Indemnity Cum Declaration Bond on Rs 100 Stamp Paper, to be filled by nominee   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_RegistrationCopyVehicle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_RegistrationCopyVehicleYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_RegistrationCopyVehicleNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextRegistrationCopyVehicle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Registration copy of the vehicle   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_DrivingLicenseDriverInjured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_DrivingLicenseDriverInjuredYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_DrivingLicenseDriverInjuredNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextDrivingLicenseDriverInjured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Driving License of the Driver   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_HospitalTreatmentPapersEssentialConfirmation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_HospitalTreatmentPapersEssentialConfirmationYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_HospitalTreatmentPapersEssentialConfirmationNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextHospitalTreatmentPapersEssentialConfirmation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   Hospital treatment papers essential\n   of confirmation of the type and percentage\n   of disability (like X-Ray reports,\n   discharge summary, consultation notes)   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_ColorPhotographInjuredReflectingDisability"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_ColorPhotographInjuredReflectingDisabilityYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_ColorPhotographInjuredReflectingDisabilityNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextColorPhotographInjuredReflectingDisability"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Color Photograph of the injured reflecting disability   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_PhotoIDProofInjured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_PhotoIDProofInjuredYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_PhotoIDProofInjuredNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextPhotoIDProofInjured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Photo ID proof of the injured   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_CancelledChequePayeeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_CancelledChequePayeeNameYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_CancelledChequePayeeNameNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextCancelledChequePayeeName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="    Cancelled cheque with payee name printed\n    on it (else supported by a passbook copy)\n    or NEFT form verified by bank   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/square_stroke_bg"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_AMLDocuments_Injured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rb_AMLDocuments_InjuredYes"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yes"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <RadioButton
+                                android:id="@+id/rb_AMLDocuments_InjuredNo"
+                                style="@style/MyRadioButtonStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="No"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="4"
+                            android:text="Available / Not available"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/editTextAMLDocuments_Injured"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="7dp"
+                            android:layout_weight="6"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="15dp"
+                        android:background="#ffffff"
+                        android:text="   AML Documents [if claimed \n   amount is >1Lakh (2 passport size photos,\n   one address and ID proof of the injured as in\n   C-KYC form)]   "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.skydoves.elasticviews.ElasticButton
+                    android:id="@+id/buttonSubmitGI_PA_Details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginLeft="15dp"
-                    android:background="#ffffff"
-                    android:text="   Investigator's finding   "
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimaryText"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Submit Report"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:backgroundTint="@null" />
 
-
+            </LinearLayout>
         </LinearLayout>
+
+
     </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
