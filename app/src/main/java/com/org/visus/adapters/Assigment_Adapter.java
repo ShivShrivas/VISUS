@@ -49,6 +49,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
                 holder.textViewPolicyNumber.setText(data.get(position).getPolicyNumber());
                 holder.textViewInsuranceCompany.setText(data.get(position).getInsuranceCompanyName());
                 holder.textViewAssignedDate.setText(data.get(position).getInsuranceAssignedOnDate());
+                holder.textViewProductSubCategory.setText(data.get(position).getProductSubCategory());
                 holder.textViewTATForInvestigation.setText(data.get(position).gettATForInvestigator().toString());
 
                 holder.take_action.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +78,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation;
+        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, textViewProductSubCategory;
         Button take_action;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -87,6 +88,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
             textViewInsuranceCompany = itemView.findViewById(R.id.textViewInsuranceCompany);
             textViewAssignedDate = itemView.findViewById(R.id.textViewAssignedDate);
             textViewTATForInvestigation = itemView.findViewById(R.id.textViewTATForInvestigation);
+            textViewProductSubCategory = itemView.findViewById(R.id.textViewProductSubCategory);
             take_action = itemView.findViewById(R.id.take_action);
         }
     }

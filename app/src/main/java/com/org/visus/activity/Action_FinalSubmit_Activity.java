@@ -12,6 +12,7 @@ import com.org.visus.apis.ApiService;
 import com.org.visus.databinding.ActivityActionFinalSubmitBinding;
 import com.org.visus.models.InvReqActivityFile;
 import com.org.visus.models.MyAssignment;
+import com.org.visus.utility.ConnectionUtility;
 import com.org.visus.utility.PrefUtils;
 
 import retrofit2.Call;
@@ -37,7 +38,11 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
         }
-        getMyPendingAssignment(VisusServiceID);
+        if (ConnectionUtility.isConnected(Action_FinalSubmit_Activity.this)) {
+            getMyPendingAssignment(VisusServiceID);
+        } else {
+            ConnectionUtility.AlertDialogForNoConnectionAvaialble(Action_FinalSubmit_Activity.this);
+        }
     }
 
 
@@ -45,7 +50,7 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
         apiService = ApiClient.getClient(this).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(Action_FinalSubmit_Activity.this, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(Action_FinalSubmit_Activity.this, PrefUtils.InvestigatorID);
-        Call<InvReqActivityFile> call2 = apiService.getInvReqActivityFile("Bearer " + Token, visusServiceID, myPendingAssignmentData.getInsuranceDataID().toString(), InvestigatorID);
+        Call<InvReqActivityFile> call2 = apiService.getInvReqActivityFile("Bearer " + Token, visusServiceID, myPendingAssignmentData.getInsuranceDataID().toString(), InvestigatorID, myPendingAssignmentData.getInvInsuranceRelID());
         call2.enqueue(new Callback<InvReqActivityFile>() {
             @Override
             public void onResponse(Call<InvReqActivityFile> call, Response<InvReqActivityFile> response) {

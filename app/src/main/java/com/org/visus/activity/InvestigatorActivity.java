@@ -23,7 +23,6 @@ import retrofit2.Response;
 public class InvestigatorActivity extends AppCompatActivity {
 
     Button InvestigatorInfo_btn;
-    String Token;
     TextInputEditText investi_edit;
 
     @Override
@@ -58,7 +57,7 @@ public class InvestigatorActivity extends AppCompatActivity {
     private void getInvestigatorInfoAccordingToInvestigatorID(String insCode) {
         ApiService apiService;
         apiService = ApiClient.getClient(this).create(ApiService.class);
-        Token = PrefUtils.getFromPrefs(InvestigatorActivity.this, PrefUtils.Token);
+        String Token = PrefUtils.getFromPrefs(InvestigatorActivity.this, PrefUtils.Token);
         Call<Investigator> call2 = apiService.getInvestigatorInfoAccordingToInvestigatorID("Bearer " + Token, insCode);
         call2.enqueue(new Callback<Investigator>() {
             @Override
@@ -84,7 +83,15 @@ public class InvestigatorActivity extends AppCompatActivity {
                                 if (investigator.getData().get(0).getiSActive() != null && investigator.getData().get(0).getiSActive().equalsIgnoreCase("yes")) {
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_code, investigator.getData().get(0).getiNVCode());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_name, investigator.getData().get(0).getiNVName());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_name, investigator.getData().get(0).getiNVFatherName());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.ContactNumber, investigator.getData().get(0).getiNVContactNumber1());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.ContactNumber2, investigator.getData().get(0).getiNVContactNumber2());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.Email, investigator.getData().get(0).getEmail());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.PanNumber, investigator.getData().get(0).getpANNumber());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.JoiningDate, investigator.getData().get(0).getJoiningDate());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.Status, investigator.getData().get(0).getiSActive());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.InvestigatorID, investigator.getData().get(0).getInvId().toString());
+                                    /////////////////////////////////////////////////////////////////
                                     Intent intentOTPActivity = new Intent(InvestigatorActivity.this, OTPActivity.class);
                                     intentOTPActivity.putExtra("InvestigatorID", investigator.getData().get(0).getInvId().toString());
                                     intentOTPActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

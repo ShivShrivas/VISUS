@@ -29,6 +29,18 @@ public class GI_Theft implements Serializable {
     @SerializedName("lstInvGiTheftCheckList")
     @Expose
     private List<GI_TheftData> lstInvGiTheftCheckList = new ArrayList<>();
+    @SerializedName("GiTheft_InvInsuranceRelID")
+    @Expose
+    private Integer GiTheft_InvInsuranceRelID;
+
+    public Integer getGiTheft_InvInsuranceRelID() {
+        return GiTheft_InvInsuranceRelID;
+    }
+
+    public void setGiTheft_InvInsuranceRelID(Integer giTheft_InvInsuranceRelID) {
+        GiTheft_InvInsuranceRelID = giTheft_InvInsuranceRelID;
+    }
+
 
     public Boolean getGiTheftCheckListDataSaved() {
         return isGiTheftCheckListDataSaved;
@@ -87,7 +99,7 @@ public class GI_Theft implements Serializable {
     }
 
 
-    public class GI_TheftData {
+    public static class GI_TheftData {
         @SerializedName("invGiTheftCheckList_ID")
         @Expose
         private Integer invGiTheftCheckListID;
@@ -115,17 +127,6 @@ public class GI_Theft implements Serializable {
         @SerializedName("entryByUserName")
         @Expose
         private String entryByUserName;
-        @SerializedName("IsHoldCase")
-        @Expose
-        private Boolean IsHoldCase;
-
-        public Boolean getHoldCase() {
-            return IsHoldCase;
-        }
-
-        public void setHoldCase(Boolean holdCase) {
-            IsHoldCase = holdCase;
-        }
 
         public Integer getInvGiTheftCheckListID() {
             return invGiTheftCheckListID;

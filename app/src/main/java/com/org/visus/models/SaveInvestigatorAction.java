@@ -127,6 +127,18 @@ public class SaveInvestigatorAction implements Serializable {
         @Expose
         private String addressAtClickingPhoto;
 
+        public String getInvestigatorCaseActivity_ClientD() {
+            return InvestigatorCaseActivity_ClientD;
+        }
+
+        public void setInvestigatorCaseActivity_ClientD(String investigatorCaseActivity_ClientD) {
+            InvestigatorCaseActivity_ClientD = investigatorCaseActivity_ClientD;
+        }
+
+        @SerializedName("InvestigatorCaseActivity_ClientD")
+        @Expose
+        private String InvestigatorCaseActivity_ClientD;
+
         public Integer getInvestigatorCaseActivityID() {
             return investigatorCaseActivityID;
         }

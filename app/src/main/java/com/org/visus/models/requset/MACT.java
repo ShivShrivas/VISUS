@@ -29,6 +29,18 @@ public class MACT implements Serializable {
     @SerializedName("exceptionIfAny")
     @Expose
     private String exceptionIfAny;
+    @SerializedName("MACT_InvInsuranceRelID")
+    @Expose
+    private Integer MACT_InvInsuranceRelID;
+
+    public Integer getMACT_InvInsuranceRelID() {
+        return MACT_InvInsuranceRelID;
+    }
+
+    public void setMACT_InvInsuranceRelID(Integer MACT_InvInsuranceRelID) {
+        this.MACT_InvInsuranceRelID = MACT_InvInsuranceRelID;
+    }
+
 
     public String getInvestigatorSubmittionDate() {
         return investigatorSubmittionDate;

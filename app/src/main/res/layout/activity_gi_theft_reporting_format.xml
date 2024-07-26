@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.GI_Theft_ReportingFormatActivity">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -46,6 +47,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextE_claim_form_Filled"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -86,13 +88,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextILTake_care_app_downloaded_and_screenshot_shared"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -126,13 +128,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextPrevious_year_policy_provided"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -166,13 +168,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextCurrent_year_policy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -206,13 +208,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextDelay_in_FIR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -246,13 +248,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextKeys_Impression_statement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -286,13 +288,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextinsured_forgot_key"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -326,13 +328,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextGoogle_timeline_collected"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -366,13 +368,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextIO_number_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -406,13 +408,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextDelay_intimation_and_reason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -446,13 +448,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextNeighbour_statement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -486,13 +488,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextSpot_witness_Statement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -526,13 +528,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextPurchase_Bill"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -566,13 +568,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextFas_tag_detail_collected"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -606,13 +608,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextGPS_Detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -646,13 +648,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextService_History_RTO_intimation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -686,13 +688,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextLoan_Statement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -726,13 +728,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextNON_repossession_letter_Financier_mail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -766,13 +768,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextInsured_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -806,13 +808,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextInsured_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -846,13 +848,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextBank_Passbook"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -886,13 +888,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextRTO_Forms_duly_signed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -926,13 +928,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextIf_original_RC_stolen_then_RC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -966,13 +968,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextIf_IV_on_loan_then_form_35"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1006,13 +1008,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextFIR_if_FIR_not_filed_then_police_application"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1046,13 +1048,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextIndemnity_Bond_200_satisfaction_letter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1086,13 +1088,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextUP112_call_record_call_done"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1126,13 +1128,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextMoto_vehicle_Tax_receipt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1166,13 +1168,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextPan_Card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1206,13 +1208,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextKey_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1246,13 +1248,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextIn_commercial_vehicle_Permit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1286,13 +1288,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextLast_user_statement_and_KYC"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1326,13 +1328,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextDriver_statement_contact_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1366,13 +1368,13 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextCase_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
@@ -1406,6 +1408,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/editTextInvestigators_Findings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -1415,7 +1418,32 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
             </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.skydoves.elasticviews.ElasticButton
+                    android:id="@+id/buttonSubmitGI_Theft_Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimaryText"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="Submit Report"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:backgroundTint="@null" />
+
+            </LinearLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 
 </RelativeLayout>

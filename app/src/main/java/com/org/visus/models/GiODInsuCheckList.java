@@ -54,7 +54,7 @@ public class GiODInsuCheckList implements Serializable {
     }
 
 
-    public class GiODInsuCheckListData {
+    public class GiODInsuCheckListData implements Serializable {
         @SerializedName("InvestigatorODVisitDocument_ID")
         @Expose
         private Integer investigatorODVisitDocumentID;
@@ -79,6 +79,7 @@ public class GiODInsuCheckList implements Serializable {
         @SerializedName("IsTextEntry")
         @Expose
         private Boolean isTextEntry;
+
 
         public Integer getInvestigatorODVisitDocumentID() {
             return investigatorODVisitDocumentID;

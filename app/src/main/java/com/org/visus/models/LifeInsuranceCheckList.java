@@ -189,6 +189,18 @@ public class LifeInsuranceCheckList implements Serializable {
         @SerializedName("IsLiCheckListDataSaved")
         @Expose
         private Boolean isLiCheckListDataSaved;
+        @SerializedName("Li_InvInsuranceRelID")
+        @Expose
+        private Integer Li_InvInsuranceRelID;
+
+        public Integer getLi_InvInsuranceRelID() {
+            return Li_InvInsuranceRelID;
+        }
+
+        public void setLi_InvInsuranceRelID(Integer li_InvInsuranceRelID) {
+            Li_InvInsuranceRelID = li_InvInsuranceRelID;
+        }
+
 
         public Integer getTat() {
             return tat;

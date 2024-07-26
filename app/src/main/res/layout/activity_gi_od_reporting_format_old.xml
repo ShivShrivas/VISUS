@@ -34,7 +34,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -48,40 +48,23 @@
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_WrittenStatementWithKYC"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextWrittenStatementWithKYC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -89,7 +72,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -97,46 +80,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Selfie with insured "
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_SelfieWithInsured"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_SelfieWithInsured_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_SelfieWithInsured_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextSelfieWithInsured"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
-                            android:text=""
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -144,7 +110,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -152,45 +118,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Google Timeline"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_GoogleTimeline"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_GoogleTimeline_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_GoogleTimeline_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextGoogleTimeline"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -198,7 +148,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -206,45 +156,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Vehicle related Papers Rc, Policy, Invoice, Permit, Authorization, Fitness, MV Tax, Previous Policy"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_VehicleRelatedPapers"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_VehicleRelatedPapers_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_VehicleRelatedPapers_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextVehicleRelatedPapers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -252,7 +186,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -260,45 +194,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Occupation Details and Living status"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_OccupationDetailsLivingStatus"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_OccupationDetailsLivingStatus_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_OccupationDetailsLivingStatus_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextOccupationDetailsLivingStatus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -334,7 +252,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -342,45 +260,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Written Statement with KYC / DL copy"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_WrittenStatementWithKYCDLCopy"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYCDLCopy_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYCDLCopy_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextWrittenStatementWithKYCDLCopy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -388,7 +290,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -396,45 +298,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:text="Google Timeline / Roaming Message / photo with simple phone"
+                            android:layout_weight="1"
+                            android:text="Google Timeline / Roaming Message / photo with simple phone. "
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_GoogleTimelineRoamingMessagePhotoPhone"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_GoogleTimelineRoamingMessagePhotoPhone_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_GoogleTimelineRoamingMessagePhotoPhone_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextGoogleTimelineRoamingMessagePhotoPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -470,7 +356,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -478,45 +364,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="8 Photos with Wide Angle"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_8_PhotosWithWideAngle"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_8_PhotosWithWideAngle_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_8_PhotosWithWideAngle_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editText8_PhotosWithWideAngle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -524,7 +394,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -538,36 +408,18 @@
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_WitnessVideo_Statement"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_WitnessVideo_Statement_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_WitnessVideo_Statement_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextWitnessVideo_Statement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -580,7 +432,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -594,36 +446,18 @@
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_Name_ContactNo"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_Name_ContactNo_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_Name_ContactNo_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextName_ContactNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -636,7 +470,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -650,36 +484,18 @@
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_AnyOtherDetail"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_AnyOtherDetail_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_AnyOtherDetail_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextAnyOtherDetail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -718,7 +534,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -726,95 +542,24 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Service History"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_ServiceHistory"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_ServiceHistory_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_ServiceHistory_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
-
-                        <EditText
-                            android:id="@+id/editTextServiceHistory"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="15sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
-                            android:text="Gate Entry"
+                            android:layout_marginTop="15dp"
+                            android:text=":"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_GateEntry"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="vertical">
-
-                            <RadioButton
-                                android:id="@+id/rb_GateEntry_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_GateEntry_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
-
                         <EditText
-                            android:id="@+id/editTextGateEntry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -827,7 +572,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -835,45 +580,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:text="Estimates / Quotation"
+                            android:layout_weight="1"
+                            android:text="Gate Entry"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_Estimates_Quotation"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_Estimates_Quotation_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_Estimates_Quotation_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextEstimates_Quotation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -881,7 +610,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -889,41 +618,62 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="Estimates / Quotation"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Job Card"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_JobCard"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_JobCard_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_JobCard_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextJobCard"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -947,7 +697,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -955,45 +705,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="•	Photos from every side"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_PhotosFromEverySide"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotosFromEverySide_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotosFromEverySide_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextPhotosFromEverySide"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1001,7 +735,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1009,45 +743,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="•	Inside photos"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_InsidePhotos"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_InsidePhotos_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_InsidePhotos_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextInsidePhotos"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1055,7 +773,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1063,45 +781,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="•	Meter Reading"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rg_MeterReading"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_MeterReading_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_MeterReading_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextMeterReading"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1109,7 +811,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1117,45 +819,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="•	Registration No. Chassis No. / Engine No."
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgRegistration_Chassis_EngineNumber"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_Registration_Chassis_EngineNumber_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_Registration_Chassis_EngineNumber_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextRegistration_Chassis_EngineNumber"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1163,7 +849,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1171,45 +857,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="•	Colour of Vehicle"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgColourOfVehicle"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_ColourOfVehicle_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_ColourOfVehicle_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextColourOfVehicle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1243,7 +913,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1251,45 +921,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Written statement with KYC / DL Copy"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgWrittenStatementWithKYC_OccupantVisit"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_OccupantVisit_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_OccupantVisit_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextWrittenStatementWithKYC_OccupantVisit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1297,7 +951,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1305,45 +959,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Photographs with statement"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgPhotographsWithStatement_OccupantVisit"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographsWithStatement_OccupantVisit_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographsWithStatement_OccupantVisit_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextPhotographsWithStatement"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1377,7 +1015,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1385,41 +1023,24 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Written statement with KYC"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgWrittenStatementWithKYC_TPDetails"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_TPDetails_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_WrittenStatementWithKYC_TPDetails_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextWrittenStatementWithKYC_TPDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1432,7 +1053,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1440,45 +1061,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Photograph with statement / Video Recording"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgPhotographStatementVideoRecording_TPDetails"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographStatementVideoRecording_TPDetails_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographStatementVideoRecording_TPDetails_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextPhotographStatementVideoRecording_TPDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1512,7 +1117,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1520,45 +1125,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Collect newspaper clip "
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgCollectNewspaperClip"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_CollectNewspaperClip_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_CollectNewspaperClip_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextCollectNewspaperClip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1593,7 +1182,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1601,45 +1190,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Register Entry / MLC / Date of Admission"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgRegisterEntryDateOfAdmission"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_RegisterEntryDateOfAdmission_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_RegisterEntryDateOfAdmission_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextRegisterEntryDateOfAdmission"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1647,7 +1220,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1655,45 +1228,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Treatment papers / Discharge slip"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgTreatmentPapersDischargeSlip"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_TreatmentPapersDischargeSlip_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_TreatmentPapersDischargeSlip_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextTreatmentPapersDischargeSlip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1701,7 +1258,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1709,45 +1266,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
+                            android:layout_weight="1"
                             android:text="Photograph of the Hospital in Lat- Long"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgPhotographHospital"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographHospital_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_PhotographHospital_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="10dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextPhotographHospital"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1781,7 +1322,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1789,45 +1330,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Contact No. of the IO / contact person"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgContactNoIOContactPerson"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_ContactNoIOContactPerson_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_ContactNoIOContactPerson_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextContactNoIOContactPerson"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1862,7 +1387,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1870,45 +1395,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Any Other relevant Details"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgAnyOtherRelevantDetails"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_AnyOtherRelevantDetails_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_AnyOtherRelevantDetails_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextAnyOtherRelevantDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>
@@ -1943,7 +1452,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -1951,45 +1460,29 @@
                             android:layout_gravity="top"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="15dp"
+                            android:layout_weight="1"
                             android:text="Payable/Not Payable"
                             android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
-                        <RadioGroup
-                            android:id="@+id/rgPayableNotPayable"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="top"
                             android:layout_marginStart="10dp"
-                            android:layout_marginTop="5dp"
-                            android:orientation="horizontal">
-
-                            <RadioButton
-                                android:id="@+id/rb_PayableNotPayable_Yes"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="YES"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                            <RadioButton
-                                android:id="@+id/rb_PayableNotPayable_No"
-                                style="@style/MyRadioButtonStyle"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-
-                        </RadioGroup>
+                            android:layout_marginTop="15dp"
+                            android:text=":"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <EditText
-                            android:id="@+id/editTextPayableNotPayable"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </LinearLayout>

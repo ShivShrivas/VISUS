@@ -64,6 +64,18 @@ public class GiTheftInsuCheckList implements Serializable {
         @SerializedName("IsActiveInvGiTheftCheckListHead")
         @Expose
         private Boolean isActiveInvGiTheftCheckListHead;
+        @SerializedName("GiTheft_InvInsuranceRelID")
+        @Expose
+        private String GiTheft_InvInsuranceRelID;
+
+        public String getGiTheft_InvInsuranceRelID() {
+            return GiTheft_InvInsuranceRelID;
+        }
+
+        public void setGiTheft_InvInsuranceRelID(String giTheft_InvInsuranceRelID) {
+            GiTheft_InvInsuranceRelID = giTheft_InvInsuranceRelID;
+        }
+
 
         public Integer getInvGiTheftCheckListHeadID() {
             return invGiTheftCheckListHeadID;

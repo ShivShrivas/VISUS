@@ -30,51 +30,10 @@ public class ApiClient {
         if (retrofit == null) {
             OkHttpClient.Builder httpClient;
             httpClient = new OkHttpClient.Builder();
-            httpClient.connectTimeout(2, TimeUnit.MINUTES); // connect timeout
-            httpClient.readTimeout(2, TimeUnit.MINUTES);
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient.build())
-                    .build();
+            httpClient.connectTimeout(1, TimeUnit.MINUTES); // connect timeout
+            httpClient.readTimeout(1, TimeUnit.MINUTES);
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
         }
         return retrofit;
-    }
-
-    private static Cache provideCache(Context context) {
-        Cache cache = null;
-        try {
-            cache = new Cache(new File(context.getCacheDir(), "http-cache"),
-                    30 * 1024 * 1024); // 30 MB
-        } catch (Exception e) {
-            Log.e("@@@@", "Could not create Cache!");
-        }
-        return cache;
-    }
-
-    public static boolean isOnline(Context context) {
-        ConnectivityManager cm =
-                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
-
-    public static Interceptor provideOfflineCacheInterceptor(final Context context) {
-        return new Interceptor() {
-            @RequiresApi(api = Build.VERSION_CODES.GINGERBREAD)
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                if (!isOnline(context)) {
-                    CacheControl cacheControl = new CacheControl.Builder()
-                            .maxStale(7, TimeUnit.DAYS)
-                            .build();
-                    request = request.newBuilder()
-                            .cacheControl(cacheControl)
-                            .build();
-                }
-                return chain.proceed(request);
-            }
-        };
     }
 }

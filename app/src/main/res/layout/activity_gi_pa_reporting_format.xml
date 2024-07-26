@@ -1711,7 +1711,7 @@ passbook copy)\n    or NEFT form verified by bank   "
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="15dp"
                         android:background="#ffffff"
-                        android:text="    Registration copy of the vehicle   "
+                        android:text="    Registration copy of the vehicle, Driving License of the Driver   "
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </RelativeLayout>
@@ -1721,7 +1721,7 @@ passbook copy)\n    or NEFT form verified by bank   "
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495754494320",
+    "project_id": "visus-1ab39",
+    "storage_bucket": "visus-1ab39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495754494320:android:f48ac5241f77ef68e14fb5",
+        "android_client_info": {
+          "package_name": "com.org.visus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495754494320-i7fmkvhrf8l376j9f4hi00t8ujrjciqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRvnAg1LkvkzXzFWD91JgPMKsbauJSBEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495754494320-i7fmkvhrf8l376j9f4hi00t8ujrjciqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

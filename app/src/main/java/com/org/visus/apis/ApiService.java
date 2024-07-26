@@ -61,21 +61,25 @@ public interface ApiService {
     @GET("api/MyAssignmentList/getMyAssignment")
     Call<MyAssignment> getMyAssignment(@Header("Authorization") String Authorization, @Query("ServicesID") String ServicesID, @Query("InvID") String InvID);
 
+    @GET("api/MyAssignmentList/getMyAssignmentAll")
+    Call<MyAssignment> getMyPendingAssignmentAll(@Header("Authorization") String Authorization, @Query("InvID") String InvID);
+
     @GET("api/MyAssignmentList/getMyReqActionList")
     Call<RequreActions> getMyReqActionList(@Header("Authorization") String Authorization);
 
     @Multipart
     @POST("api/MyAssignmentList/SaveInvestigatorActionData")
-    Call<SaveInvestigatorAction> postInvestigatorActionData(@Header("Authorization") String Authorization, @Part MultipartBody.Part OriginalFileName, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID, @Query("Comments") String Comments, @Query("ActionID") String ActionID, @Query("Latitude") String Latitude, @Query("Longitude") String Longitude, @Query("CellAddress") String CellAddress);
+    Call<SaveInvestigatorAction> postInvestigatorActionData(@Header("Authorization") String Authorization, @Part MultipartBody.Part OriginalFileName, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID, @Query("Comments") String Comments, @Query("ActionID") String ActionID, @Query("Latitude") String Latitude, @Query("Longitude") String Longitude, @Query("CellAddress") String CellAddress, @Query("ClientID") String ClientID, @Query("InvInsuranceRelID") String InvInsuranceRelID);
 
     @GET("api/MyPendingAssignment/getMyAssignment")
     Call<MyAssignment> getMyPendingAssignment(@Header("Authorization") String Authorization, @Query("ServicesID") String ServicesID, @Query("InvID") String InvID);
+
 
     @POST("api/MyPendingAssignment/SubmitMyAssignment")
     Call<Boolean> postMyAssignmentFinal(@Header("Authorization") String Authorization, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID, @Query("SubmitDateTime") String SubmitDateTime, @Query("TAT") String TAT);
 
     @GET("api/myUploadedFile/getInvReqActivityFile")
-    Call<InvReqActivityFile> getInvReqActivityFile(@Header("Authorization") String Authorization, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID);
+    Call<InvReqActivityFile> getInvReqActivityFile(@Header("Authorization") String Authorization, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID, @Query("InvInsuRelID") String InvInsuRelID);
 
     @GET("api/LiCheckList/getLifeInsuCheckList")
     Call<LifeInsuranceCheckList> getLifeInsuCheckList(@Header("Authorization") String Authorization, @Query("lifeInsuranceID") String lifeInsuranceID, @Query("InvID") String InvID);
@@ -86,13 +90,13 @@ public interface ApiService {
     @GET("api/giODCheckList/getGiODInsuCheckList")
     Call<GiODInsuCheckList> getGiODInsuCheckList(@Header("Authorization") String Authorization);
 
-    @POST("api/giODCheckList/saveGeneralInsuODCheckList")
+    @POST("api/giODCheckList/saveGeneralInsuODCheckListData")
     Call<GI_ODResponse> postGI_OD(@Header("Authorization") String Authorization, @Body GI_OD value);
 
     @GET("api/giTheftCheckList/getGiTheftInsuCheckList")
     Call<GiTheftInsuCheckList> getGiTheftInsuCheckList(@Header("Authorization") String Authorization);
 
-    @POST("api/giTheftCheckList/saveGeneralInsuTheftCheck")
+    @POST("api/giTheftCheckList/saveGeneralInsuTheftCheckListData")
     Call<GI_TheftResponse> postGI_Theft(@Header("Authorization") String Authorization, @Body GI_Theft value);
 
     @GET("api/giPACheckList/getGiPAInsuCheckList")

@@ -2,10 +2,13 @@ package com.org.visus.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import com.org.visus.utility.PrefUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +50,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
     MyAssignment.MyAssignmentData data;
     List<MACT.MACTData> mactDataList = new ArrayList<>();
     MACT.MACTData mactData1, mactData2, mactData3, mactData4, mactData5, mactData6, mactData7, mactData8, mactData9, mactData10, mactData11, mactData12, mactData13, mactData14, mactData15, mactData16, mactData17, mactData18, mactData19, mactData20, mactData21, mactData22, mactData23, mactData24, mactData25, mactData26, mactData27, mactData28, mactData29, mactData30, mactData31, mactData32, mactData33, mactData34, mactData35, mactData36, mactData37, mactData38, mactData39, mactData40, mactData41, mactData42;
+    private int mYear, mMonth, mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +68,25 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
         if (mactInsuCheckListData != null) {
             String INV_code = PrefUtils.getFromPrefs(MACT_ReportingFormatActivity.this, PrefUtils.INV_code);
             String INV_name = PrefUtils.getFromPrefs(MACT_ReportingFormatActivity.this, PrefUtils.INV_name);
+            String ContactNumber = PrefUtils.getFromPrefs(MACT_ReportingFormatActivity.this, PrefUtils.ContactNumber);
             activityMactReportingFormatBinding.editTextInvestigatorCode.setText(INV_code);
             activityMactReportingFormatBinding.editTextInvestigatorName.setText(INV_name);
             activityMactReportingFormatBinding.editTextClaimNumber.setText(data.getClaimNumber());
             activityMactReportingFormatBinding.editTextClaimTitle.setText(data.getCaseTitle());
-            activityMactReportingFormatBinding.editTextDateofAccident.setText(data.getDateOfAccident());
+            if (data.getDateOfAccident() == null || data.getDateOfAccident().equalsIgnoreCase("") || data.getDateOfAccident().equalsIgnoreCase("N/A")) {
+                activityMactReportingFormatBinding.editTextDateofAccident.setText("");
+                activityMactReportingFormatBinding.editTextDateofAccident.setFocusable(true);
+                activityMactReportingFormatBinding.editTextDateofAccident.setFocusableInTouchMode(true);
+                activityMactReportingFormatBinding.editTextDateofAccident.setClickable(true);
+                activityMactReportingFormatBinding.editTextDateofAccident.setEnabled(true);
+            } else {
+                activityMactReportingFormatBinding.editTextDateofAccident.setText(data.getDateOfAccident());
+                activityMactReportingFormatBinding.editTextDateofAccident.setFocusable(false);
+                activityMactReportingFormatBinding.editTextDateofAccident.setFocusableInTouchMode(false);
+                activityMactReportingFormatBinding.editTextDateofAccident.setClickable(false);
+                activityMactReportingFormatBinding.editTextDateofAccident.setEnabled(false);
+            }
+            //activityMactReportingFormatBinding.editTextClaimNumber.setText(ContactNumber);
             //////////////////Start Radio Button//////////////////////////
 
             mactData1 = new MACT.MACTData();
@@ -130,92 +149,162 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
 
             //////////////////Start Edit Text//////////////////////////
             mactData2 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextIfAdmitted.setText(mactInsuCheckListData.get(1).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextIfAdmitted.setText(mactInsuCheckListData.get(1).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextIfAdmitted.setText("");
 
             mactData4 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextFirstHospitalAdmissionDetails.setText(mactInsuCheckListData.get(3).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextFirstHospitalAdmissionDetails.setText(mactInsuCheckListData.get(3).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextFirstHospitalAdmissionDetails.setText("");
 
             mactData8 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextDeceasedInjuredOccupation.setText(mactInsuCheckListData.get(7).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextDeceasedInjuredOccupation.setText(mactInsuCheckListData.get(7).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextDeceasedInjuredOccupation.setText("");
 
             mactData9 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextDeceasedInjuredSalariedfilingITRs.setText(mactInsuCheckListData.get(8).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextDeceasedInjuredSalariedfilingITRs.setText(mactInsuCheckListData.get(8).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextDeceasedInjuredSalariedfilingITRs.setText("");
 
             mactData10 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextHighSchoolMarksheet.setText(mactInsuCheckListData.get(9).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextHighSchoolMarksheet.setText(mactInsuCheckListData.get(9).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextHighSchoolMarksheet.setText("");
 
             mactData11 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextRationCard.setText(mactInsuCheckListData.get(10).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextRationCard.setText(mactInsuCheckListData.get(10).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextRationCard.setText("");
 
             mactData12 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextVoterIDCard.setText(mactInsuCheckListData.get(11).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextVoterIDCard.setText(mactInsuCheckListData.get(11).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextVoterIDCard.setText("");
 
             mactData13 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextPariwarRegister.setText(mactInsuCheckListData.get(12).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextPariwarRegister.setText(mactInsuCheckListData.get(12).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextPariwarRegister.setText("");
 
             mactData14 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextAadharCard.setText(mactInsuCheckListData.get(13).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextAadharCard.setText(mactInsuCheckListData.get(13).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextAadharCard.setText("");
 
 
             mactData17 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextInsuredOccupation.setText(mactInsuCheckListData.get(16).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextInsuredOccupation.setText(mactInsuCheckListData.get(16).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextInsuredOccupation.setText("");
 
             mactData18 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextDriverNameContact.setText(mactInsuCheckListData.get(17).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextDriverNameContact.setText(mactInsuCheckListData.get(17).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextDriverNameContact.setText("");
 
             mactData19 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextISTPVehicleInvolved.setText(mactInsuCheckListData.get(18).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextISTPVehicleInvolved.setText(mactInsuCheckListData.get(18).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextISTPVehicleInvolved.setText("");
 
             mactData24 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextPermit.setText(mactInsuCheckListData.get(23).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextPermit.setText(mactInsuCheckListData.get(23).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextPermit.setText("");
 
 
             mactData34 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextClaimantAdvocateNameAndNumber.setText(mactInsuCheckListData.get(33).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextClaimantAdvocateNameAndNumber.setText(mactInsuCheckListData.get(33).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextClaimantAdvocateNameAndNumber.setText("");
 
             mactData35 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextClaimantContactNumber.setText(mactInsuCheckListData.get(34).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextClaimantContactNumber.setText(mactInsuCheckListData.get(34).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextClaimantContactNumber.setText("");
 
             mactData36 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextInsuredAdvocateNameAndNumber.setText(mactInsuCheckListData.get(35).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextInsuredAdvocateNameAndNumber.setText(mactInsuCheckListData.get(35).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextInsuredAdvocateNameAndNumber.setText("");
 
             mactData37 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextInsuredContactNumber.setText(mactInsuCheckListData.get(36).getpInvMACTCheckListHeadText());
+            // activityMactReportingFormatBinding.editTextInsuredContactNumber.setText(mactInsuCheckListData.get(36).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextInsuredContactNumber.setText("");
 
             mactData38 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextWriteAboutClaimantVisit.setText(mactInsuCheckListData.get(37).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextWriteAboutClaimantVisit.setText(mactInsuCheckListData.get(37).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextWriteAboutClaimantVisit.setText("");
 
             mactData39 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextWriteAboutInsuredVisit.setText(mactInsuCheckListData.get(38).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextWriteAboutInsuredVisit.setText(mactInsuCheckListData.get(38).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextWriteAboutInsuredVisit.setText("");
 
             mactData40 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextWriteAboutDriverVisit.setText(mactInsuCheckListData.get(39).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextWriteAboutDriverVisit.setText(mactInsuCheckListData.get(39).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextWriteAboutDriverVisit.setText("");
 
             mactData41 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextWriteAboutAccidentalSpotVisit.setText(mactInsuCheckListData.get(40).getpInvMACTCheckListHeadText());
+            //activityMactReportingFormatBinding.editTextWriteAboutAccidentalSpotVisit.setText(mactInsuCheckListData.get(40).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextWriteAboutAccidentalSpotVisit.setText("");
 
             mactData42 = new MACT.MACTData();
-            activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.setText(mactInsuCheckListData.get(41).getpInvMACTCheckListHeadText());
-
+            //activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.setText(mactInsuCheckListData.get(41).getpInvMACTCheckListHeadText());
+            activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.setText("");
             //////////////////End Edit Text//////////////////////////
         }
+
+        activityMactReportingFormatBinding.editTextDateofAccident.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MACT_ReportingFormatActivity.this, R.style.DatePicker, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        String month = null, date_1 = null;
+
+                        if ((monthOfYear + 1) < 10) {
+
+                            month = "0" + (monthOfYear + 1);
+                        } else {
+                            month = String.valueOf(monthOfYear + 1);
+                        }
+                        if (dayOfMonth < 10) {
+
+                            date_1 = "0" + dayOfMonth;
+                        } else {
+                            date_1 = String.valueOf(dayOfMonth);
+                        }
+                        // String date = year + "-" + month + "-" + date_1;
+                        String date = date_1 + "/" + month + "/" + year;
+                                /*try {
+                                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                                    Log.i("TAG", "" + date1);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }*/
+
+
+                        activityMactReportingFormatBinding.editTextDateofAccident.setText(date);
+
+//                                date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    }
+                }, mYear, mMonth, mDay);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                datePickerDialog.show();
+                datePickerDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.purple_500));
+                datePickerDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.purple_500));
+                // datePickerDialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.purple_500));
+            }
+        });
 
         activityMactReportingFormatBinding.buttonSubmitMACTDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String HospitalVisitText = activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.getText().toString().trim();
-                if (HospitalVisitText.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Write about Hospital Visit (in Injury cases)", Toast.LENGTH_LONG).show();
+                String DateofAccident = activityMactReportingFormatBinding.editTextDateofAccident.getText().toString().trim();
+                if (DateofAccident.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Enter Date Of Accident", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MACT_ReportingFormatActivity.this);
                     builder.setTitle("Confirmation!");
-                    builder.setMessage("After submitting your data will be removed from the list.Are you sure you want to submit?");
+                    builder.setMessage("After submitting your checklist, Claim will be removed from the dashboard.Are you sure want to submit?");
                     builder.setCancelable(false);
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             MACT mact = new MACT();
+                            mact.setMACT_InvInsuranceRelID(Integer.valueOf(data.getInvInsuranceRelID()));
                             mact.setInvestigatorSubmittionDate(getCurrentDateTime());
                             mact.setTat(data.gettATForInvestigator());
                             mact.setInvestigatorID(data.getInvestigatorObj().getInvId());
@@ -693,7 +782,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData40.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData40.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData40.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData40.setInvMACTCheckListHeadID(mactInsuCheckListData.get(39).getInvMACTCheckListHeadID());
+                            mactData40.setInvMACTCheckListHeadID(mactInsuCheckListData.get(38).getInvMACTCheckListHeadID());
                             mactData40.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutDriverVisit.getText().toString().trim());
                             mactData40.setEntryOnDate(getCurrentDateTime());
                             mactData40.setEntryByUserID(-1);
@@ -704,7 +793,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData41.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData41.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData41.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData41.setInvMACTCheckListHeadID(mactInsuCheckListData.get(40).getInvMACTCheckListHeadID());
+                            mactData41.setInvMACTCheckListHeadID(mactInsuCheckListData.get(39).getInvMACTCheckListHeadID());
                             mactData41.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutAccidentalSpotVisit.getText().toString().trim());
                             mactData41.setEntryOnDate(getCurrentDateTime());
                             mactData41.setEntryByUserID(-1);
@@ -715,7 +804,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData42.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData42.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData42.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData42.setInvMACTCheckListHeadID(mactInsuCheckListData.get(41).getInvMACTCheckListHeadID());
+                            mactData42.setInvMACTCheckListHeadID(mactInsuCheckListData.get(40).getInvMACTCheckListHeadID());
                             mactData42.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.getText().toString().trim());
                             mactData42.setEntryOnDate(getCurrentDateTime());
                             mactData42.setEntryByUserID(-1);
@@ -768,12 +857,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactDataList.add(mactData41);
                             mactDataList.add(mactData42);
                             mact.setLstInvMACTCheckList(mactDataList);
-
-                            GsonBuilder gsonBuilder = new GsonBuilder();
-                            Gson gson = gsonBuilder.create();
-                            String JSONObject = gson.toJson(mact);
-
-                            ///////////postMactData(mact);
+                            postMactData(mact);
                         }
                     });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -824,6 +908,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
     }
 
     private void postMactData(MACT mactData) {
+        ProgressDialog dialog = ProgressDialog.show(MACT_ReportingFormatActivity.this, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(this).create(ApiService.class);
         if (ConnectionUtility.isConnected(MACT_ReportingFormatActivity.this)) {
             Token = PrefUtils.getFromPrefs(MACT_ReportingFormatActivity.this, PrefUtils.Token);
@@ -832,6 +917,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<MACTResponse> call, Response<MACTResponse> response) {
                     if (response.isSuccessful()) {
+                        dialog.dismiss();
                         if (response.body() != null) {
                             MACTResponse lifeInsuranceCheckList = response.body();
                             if (lifeInsuranceCheckList.getStatusCode() == 200) {
@@ -875,12 +961,14 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
+                        dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<MACTResponse> call, Throwable t) {
+                    dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }
             });

@@ -1,6 +1,7 @@
 package com.org.visus.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.org.visus.models.GiTheftInsuCheckList;
 import com.org.visus.models.LifeInsuranceCheckList;
 import com.org.visus.models.MACTInsuCheckList;
 import com.org.visus.models.MyAssignment;
+import com.org.visus.utility.ConnectionUtility;
 import com.org.visus.utility.PrefUtils;
 
 import java.io.Serializable;
@@ -74,6 +76,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         if (data != null) {
             if (data.get(position).getClaimNumber() != null) {
                 holder.textViewClaimNumber.setText(data.get(position).getClaimNumber());
+                holder.textViewProductSubCategory.setText(data.get(position).getProductSubCategory());
                 holder.textViewPolicyNumber.setText(data.get(position).getPolicyNumber());
                 holder.textViewInsuranceCompany.setText(data.get(position).getInsuranceCompanyName());
                 holder.textViewAssignedDate.setText(data.get(position).getInsuranceAssignedOnDate());
@@ -82,12 +85,17 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                 holder.view_action.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(context, Action_FinalSubmit_Activity.class);
-                        intent.putExtra("Data", data.get(position));
-                        intent.putExtra("VisusService", visusService);
-                        intent.putExtra("VisusServiceID", visusServiceID);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
+                        if (ConnectionUtility.isConnected(context)) {
+                            Intent intent = new Intent(context, Action_FinalSubmit_Activity.class);
+                            intent.putExtra("Data", data.get(position));
+                            intent.putExtra("VisusService", visusService);
+                            intent.putExtra("VisusServiceID", visusServiceID);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.getApplicationContext().startActivity(intent);
+                        } else {
+                            Toast.makeText(finalSubmissionAssignment_activity, "SORRY!! No Internet Available", Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
 
@@ -95,21 +103,26 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                 holder.finalsubmit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (visusServiceID.equalsIgnoreCase("1")) {
-                            getLifeInsuCheckList(data.get(position).getInsuranceDataID().toString());
-                        } else if (visusServiceID.equalsIgnoreCase("2")) {
-                            if (data.get(position).getProductID().equals(1)) {
-                                //////1 is used for Theft//////
-                                getGiTheftInsuCheckList(data.get(position).getInsuranceDataID().toString());
-                            } else if (data.get(position).getProductID().equals(2)) {
-                                //////2 is used for OD (Own Damage)//////
-                                getGiODInsuCheckList(data.get(position).getInsuranceDataID().toString());
-                            } else if (data.get(position).getProductID().equals(3)) {
-                                //////3 is used of PA (Personal Accident)//////
-                                getGiPAInsuCheckList(data.get(position).getInsuranceDataID().toString());
+                        if (ConnectionUtility.isConnected(context)) {
+                            if (visusServiceID.equalsIgnoreCase("1")) {
+                                getLifeInsuCheckList(data.get(position).getInsuranceDataID().toString());
+                            } else if (visusServiceID.equalsIgnoreCase("2")) {
+                                //data.get(position).setProductID(2);
+                                if (data.get(position).getProductID().equals(1)) {
+                                    //////1 is used for Theft//////
+                                    getGiTheftInsuCheckList(data.get(position).getInsuranceDataID().toString());
+                                } else if (data.get(position).getProductID().equals(2)) {
+                                    //////2 is used for OD (Own Damage)//////
+                                    getGiODInsuCheckList(data.get(position).getInsuranceDataID().toString());
+                                } else if (data.get(position).getProductID().equals(3)) {
+                                    //////3 is used of PA (Personal Accident)//////
+                                    getGiPAInsuCheckList(data.get(position).getInsuranceDataID().toString());
+                                }
+                            } else if (visusServiceID.equalsIgnoreCase("3")) {
+                                getMACTInsuCheckList(data.get(position));
                             }
-                        } else if (visusServiceID.equalsIgnoreCase("3")) {
-                            getMACTInsuCheckList(data.get(position));
+                        } else {
+                            Toast.makeText(finalSubmissionAssignment_activity, "SORRY!! No Internet Available", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -166,12 +179,13 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation;
+        TextView textViewClaimNumber, textViewProductSubCategory, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation;
         Button view_action, finalsubmit;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewClaimNumber = itemView.findViewById(R.id.textViewClaimNumber);
+            textViewProductSubCategory = itemView.findViewById(R.id.textViewProductSubCategory);
             textViewPolicyNumber = itemView.findViewById(R.id.textViewPolicyNumber);
             textViewInsuranceCompany = itemView.findViewById(R.id.textViewInsuranceCompany);
             textViewAssignedDate = itemView.findViewById(R.id.textViewAssignedDate);
@@ -192,6 +206,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     private void getLifeInsuCheckList(String InsuranceDataID) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(context).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
@@ -199,6 +214,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         call2.enqueue(new Callback<LifeInsuranceCheckList>() {
             @Override
             public void onResponse(Call<LifeInsuranceCheckList> call, Response<LifeInsuranceCheckList> response) {
+                dialog.dismiss();
                 if (response.body() != null) {
                     LifeInsuranceCheckList lifeInsuranceCheckList = response.body();
                     if (lifeInsuranceCheckList != null) {
@@ -221,6 +237,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
 
             @Override
             public void onFailure(Call<LifeInsuranceCheckList> call, Throwable t) {
+                dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -228,6 +245,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     private void getGiODInsuCheckList(String InsuranceDataID) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(context).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
@@ -235,6 +253,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         call2.enqueue(new Callback<GiODInsuCheckList>() {
             @Override
             public void onResponse(Call<GiODInsuCheckList> call, Response<GiODInsuCheckList> response) {
+                dialog.dismiss();
                 if (response.body() != null) {
                     GiODInsuCheckList giODInsuCheckList = response.body();
                     if (giODInsuCheckList != null) {
@@ -248,7 +267,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 intent.putExtra("VisusService", visusService);
                                 intent.putExtra("VisusServiceID", visusServiceID);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(intent);
+                                context.getApplicationContext().startActivity(intent);
                             }
                         } else {
                         }
@@ -258,6 +277,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
 
             @Override
             public void onFailure(Call<GiODInsuCheckList> call, Throwable t) {
+                dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -265,6 +285,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     private void getGiTheftInsuCheckList(String InsuranceDataID) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(context).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
@@ -272,6 +293,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         call2.enqueue(new Callback<GiTheftInsuCheckList>() {
             @Override
             public void onResponse(Call<GiTheftInsuCheckList> call, Response<GiTheftInsuCheckList> response) {
+                dialog.dismiss();
                 if (response.body() != null) {
                     GiTheftInsuCheckList giTheftInsuCheckList = response.body();
                     if (giTheftInsuCheckList != null) {
@@ -295,6 +317,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
 
             @Override
             public void onFailure(Call<GiTheftInsuCheckList> call, Throwable t) {
+                dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -302,6 +325,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     private void getGiPAInsuCheckList(String InsuranceDataID) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(context).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
@@ -309,6 +333,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         call2.enqueue(new Callback<GiPAInsuCheckList>() {
             @Override
             public void onResponse(Call<GiPAInsuCheckList> call, Response<GiPAInsuCheckList> response) {
+                dialog.dismiss();
                 if (response.body() != null) {
                     GiPAInsuCheckList giPAInsuCheckList = response.body();
                     if (giPAInsuCheckList != null) {
@@ -332,6 +357,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
 
             @Override
             public void onFailure(Call<GiPAInsuCheckList> call, Throwable t) {
+                dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -339,6 +365,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     private void getMACTInsuCheckList(MyAssignment.MyAssignmentData data) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
         apiService = ApiClient.getClient(context).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
@@ -346,6 +373,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
         call2.enqueue(new Callback<MACTInsuCheckList>() {
             @Override
             public void onResponse(Call<MACTInsuCheckList> call, Response<MACTInsuCheckList> response) {
+                dialog.dismiss();
                 if (response.body() != null) {
                     MACTInsuCheckList mactInsuCheckList = response.body();
                     if (mactInsuCheckList != null) {
@@ -370,6 +398,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
 
             @Override
             public void onFailure(Call<MACTInsuCheckList> call, Throwable t) {
+                dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -427,7 +456,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 call.cancel();
-                Toast.makeText(finalSubmissionAssignment_activity, "fail " + t.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(finalSubmissionAssignment_activity, "fail " + t, Toast.LENGTH_LONG).show();
             }
         });
     }
