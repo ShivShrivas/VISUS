@@ -28,6 +28,17 @@ public class GI_OD implements Serializable {
     @SerializedName("exceptionIfAny")
     @Expose
     private String exceptionIfAny;
+    @SerializedName("GiOD_InvInsuranceRelID")
+    @Expose
+    private String GiOD_InvInsuranceRelID;
+
+    public String getGiOD_InvInsuranceRelID() {
+        return GiOD_InvInsuranceRelID;
+    }
+
+    public void setGiOD_InvInsuranceRelID(String giOD_InvInsuranceRelID) {
+        GiOD_InvInsuranceRelID = giOD_InvInsuranceRelID;
+    }
 
     public String getInvestigatorSubmittionDateTime() {
         return investigatorSubmittionDateTime;
@@ -86,7 +97,7 @@ public class GI_OD implements Serializable {
     }
 
 
-    public class GI_ODData {
+    public static class GI_ODData implements Serializable {
         @SerializedName("investigatorGiODCheckList_ID")
         @Expose
         private Integer investigatorGiODCheckListID;
@@ -117,16 +128,16 @@ public class GI_OD implements Serializable {
         @SerializedName("giInvCheckListReason")
         @Expose
         private String giInvCheckListReason;
-        @SerializedName("IsHoldCase")
+        @SerializedName("GiOD_InvInsuranceRelID")
         @Expose
-        private Boolean IsHoldCase;
+        private Boolean GiOD_InvInsuranceRelID;
 
-        public Boolean getHoldCase() {
-            return IsHoldCase;
+        public Boolean getGiOD_InvInsuranceRelID() {
+            return GiOD_InvInsuranceRelID;
         }
 
-        public void setHoldCase(Boolean holdCase) {
-            IsHoldCase = holdCase;
+        public void setGiOD_InvInsuranceRelID(Boolean giOD_InvInsuranceRelID) {
+            GiOD_InvInsuranceRelID = giOD_InvInsuranceRelID;
         }
 
 

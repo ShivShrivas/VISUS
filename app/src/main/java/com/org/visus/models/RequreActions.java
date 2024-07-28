@@ -54,7 +54,7 @@ public class RequreActions implements Serializable {
     }
 
 
-    public class RequreActionsData implements Serializable {
+    public static class RequreActionsData implements Serializable {
         @SerializedName("InvestigatorReqActivity_ID")
         @Expose
         private Integer investigatorReqActivityID;

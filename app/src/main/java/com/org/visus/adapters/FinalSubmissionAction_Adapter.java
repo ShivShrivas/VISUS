@@ -41,6 +41,7 @@ public class FinalSubmissionAction_Adapter extends RecyclerView.Adapter<FinalSub
         if (data != null) {
             if (data.get(position) != null) {
                 holder.textViewClaimNumber.setText(myPendingAssignmentData.getClaimNumber() != null ? myPendingAssignmentData.getClaimNumber() : "N/A");
+                holder.textViewProductSubCategory.setText(myPendingAssignmentData.getProductSubCategory() != null ? myPendingAssignmentData.getProductSubCategory() : "N/A");
                 holder.textViewPolicyNumber.setText(myPendingAssignmentData.getPolicyNumber() != null ? myPendingAssignmentData.getPolicyNumber() : "N/A");
                 holder.textViewInsuranceCompany.setText(myPendingAssignmentData.getInsuranceCompanyName() != null ? myPendingAssignmentData.getInsuranceCompanyName() : "N/A");
                 holder.textViewAssignedDate.setText(myPendingAssignmentData.getInsuranceAssignedOnDate() != null ? myPendingAssignmentData.getInsuranceAssignedOnDate() : "N/A");
@@ -68,12 +69,13 @@ public class FinalSubmissionAction_Adapter extends RecyclerView.Adapter<FinalSub
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, textViewActionType, textViewComments, textViewLattitude, textViewLongitude, textViewAddress;
+        TextView textViewClaimNumber, textViewProductSubCategory, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, textViewActionType, textViewComments, textViewLattitude, textViewLongitude, textViewAddress;
         ImageView imageViewPhoto;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewClaimNumber = itemView.findViewById(R.id.textViewClaimNumber);
+            textViewProductSubCategory = itemView.findViewById(R.id.textViewProductSubCategory);
             textViewPolicyNumber = itemView.findViewById(R.id.textViewPolicyNumber);
             textViewInsuranceCompany = itemView.findViewById(R.id.textViewInsuranceCompany);
             textViewAssignedDate = itemView.findViewById(R.id.textViewAssignedDate);

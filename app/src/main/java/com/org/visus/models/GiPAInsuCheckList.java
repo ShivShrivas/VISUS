@@ -54,7 +54,7 @@ public class GiPAInsuCheckList implements Serializable {
     }
 
 
-    public class GiPAInsuCheckListData {
+    public class GiPAInsuCheckListData implements Serializable {
         @SerializedName("InvGiPACheckListHead_ID")
         @Expose
         private Integer invGiPACheckListHeadID;
@@ -70,6 +70,18 @@ public class GiPAInsuCheckList implements Serializable {
         @SerializedName("IsActiveInvGiPACheckListHead")
         @Expose
         private Boolean isActiveInvGiPACheckListHead;
+        @SerializedName("GiPA_InvInsuranceRelID")
+        @Expose
+        private String GiPA_InvInsuranceRelID;
+
+        public String getGiPA_InvInsuranceRelID() {
+            return GiPA_InvInsuranceRelID;
+        }
+
+        public void setGiPA_InvInsuranceRelID(String giPA_InvInsuranceRelID) {
+            GiPA_InvInsuranceRelID = giPA_InvInsuranceRelID;
+        }
+
 
         public Integer getInvGiPACheckListHeadID() {
             return invGiPACheckListHeadID;

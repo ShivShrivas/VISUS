@@ -53,7 +53,7 @@ public class MyAssignment implements Serializable {
         this.data = data;
     }
 
-    public class MyAssignmentData implements Serializable {
+    public static class MyAssignmentData implements Serializable {
         @SerializedName("InsuranceDataID")
         @Expose
         private Integer insuranceDataID;
@@ -65,7 +65,7 @@ public class MyAssignment implements Serializable {
         private String visusServicesText;
         @SerializedName("InvestigatorObj")
         @Expose
-        private InvestigatorObj investigatorObj;
+        private InvestigatorObj investigatorObj = new InvestigatorObj();
         @SerializedName("InsuranceAssignedOnDate")
         @Expose
         private String insuranceAssignedOnDate;
@@ -100,6 +100,31 @@ public class MyAssignment implements Serializable {
         @SerializedName("DateOfAccident")
         @Expose
         private String DateOfAccident;
+        ///////////////////////////////////Add 2 Fields
+        @SerializedName("InvInsuranceRelID")
+        @Expose
+        private String InvInsuranceRelID;
+        @SerializedName("ProductSubCategory")
+        @Expose
+        private String ProductSubCategory;
+
+        public String getInvInsuranceRelID() {
+            return InvInsuranceRelID;
+        }
+
+        public void setInvInsuranceRelID(String invInsuranceRelID) {
+            InvInsuranceRelID = invInsuranceRelID;
+        }
+
+        public String getProductSubCategory() {
+            return ProductSubCategory;
+        }
+
+        public void setProductSubCategory(String productSubCategory) {
+            ProductSubCategory = productSubCategory;
+        }
+
+
 
         public String getCaseTitle() {
             return CaseTitle;
@@ -224,7 +249,7 @@ public class MyAssignment implements Serializable {
         }
     }
 
-    public class InvestigatorObj implements Serializable {
+    public static class InvestigatorObj implements Serializable {
         @SerializedName("INV_ID")
         @Expose
         private Integer invId;

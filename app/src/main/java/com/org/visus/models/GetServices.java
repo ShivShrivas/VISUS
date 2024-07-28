@@ -54,7 +54,7 @@ public class GetServices implements Serializable {
     }
 
 
-    public class GetServicesData {
+    public static class GetServicesData {
         @SerializedName("VisusServicesID")
         @Expose
         private Integer visusServicesID;

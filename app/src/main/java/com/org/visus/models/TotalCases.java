@@ -54,7 +54,7 @@ public class TotalCases implements Serializable {
     }
 
 
-    public class TotalCasesData {
+    public static class TotalCasesData {
         @SerializedName("InvestigationUsedForID")
         @Expose
         private Integer investigationUsedForID;

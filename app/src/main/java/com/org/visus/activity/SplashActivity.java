@@ -3,6 +3,7 @@ package com.org.visus.activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
@@ -37,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private int i = 0;
     ApiService apiService;
-    String Token;
+    String Token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,24 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        getToken();
+        Token = PrefUtils.getFromPrefs(SplashActivity.this, PrefUtils.Token);
+        if (Token.equalsIgnoreCase("")) {
+            if (ConnectionUtility.isConnected(SplashActivity.this)) {
+                getToken();
+            } else {
+                findViewById(R.id.img).setVisibility(View.GONE);
+                findViewById(R.id.img_no_internet).setVisibility(View.VISIBLE);
+                ConnectionUtility.AlertDialogForNoConnectionAvaialble(SplashActivity.this);
+            }
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    updateUI();
+                }
+            }, 5000);   //5 seconds
+
+        }
 
         /*try {
             String DeviceID = PrefUtils.getFromPrefs(SplashActivity.this, PrefUtils.DeviceID);
@@ -79,6 +97,11 @@ public class SplashActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_LONG).show();
         }*/
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void getToken() {
@@ -172,6 +195,7 @@ public class SplashActivity extends AppCompatActivity {
             deviceRegistration.enqueue(new Callback<DeviceRegistrationResponse>() {
                 @Override
                 public void onResponse(Call<DeviceRegistrationResponse> call, Response<DeviceRegistrationResponse> response) {
+                    Log.d("TAG", "onResponse: "+new Gson().toJson(response.body()));
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             DeviceRegistrationResponse deviceInfo = response.body();

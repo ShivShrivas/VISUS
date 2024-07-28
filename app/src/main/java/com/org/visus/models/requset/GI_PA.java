@@ -29,8 +29,76 @@ public class GI_PA implements Serializable {
     @SerializedName("lstInvGiPACheckList")
     @Expose
     private List<GI_PAData> lstInvGiPACheckList = new ArrayList<>();
+    @SerializedName("GiPA_InvInsuranceRelID")
+    @Expose
+    private Integer GiPA_InvInsuranceRelID;
 
-    public class GI_PAData implements Serializable {
+    public Integer getGiPA_InvInsuranceRelID() {
+        return GiPA_InvInsuranceRelID;
+    }
+
+    public void setGiPA_InvInsuranceRelID(Integer giPA_InvInsuranceRelID) {
+        GiPA_InvInsuranceRelID = giPA_InvInsuranceRelID;
+    }
+
+
+    public Boolean getGiPACheckListDataSaved() {
+        return isGiPACheckListDataSaved;
+    }
+
+    public void setGiPACheckListDataSaved(Boolean giPACheckListDataSaved) {
+        isGiPACheckListDataSaved = giPACheckListDataSaved;
+    }
+
+    public Object getExceptionIfAny() {
+        return exceptionIfAny;
+    }
+
+    public void setExceptionIfAny(Object exceptionIfAny) {
+        this.exceptionIfAny = exceptionIfAny;
+    }
+
+    public String getInvestigatorSubmittionDateTime() {
+        return investigatorSubmittionDateTime;
+    }
+
+    public void setInvestigatorSubmittionDateTime(String investigatorSubmittionDateTime) {
+        this.investigatorSubmittionDateTime = investigatorSubmittionDateTime;
+    }
+
+    public Integer getTat() {
+        return tat;
+    }
+
+    public void setTat(Integer tat) {
+        this.tat = tat;
+    }
+
+    public Integer getInvestigatorID() {
+        return investigatorID;
+    }
+
+    public void setInvestigatorID(Integer investigatorID) {
+        this.investigatorID = investigatorID;
+    }
+
+    public Integer getGeneralInsuranceID() {
+        return generalInsuranceID;
+    }
+
+    public void setGeneralInsuranceID(Integer generalInsuranceID) {
+        this.generalInsuranceID = generalInsuranceID;
+    }
+
+    public List<GI_PAData> getLstInvGiPACheckList() {
+        return lstInvGiPACheckList;
+    }
+
+    public void setLstInvGiPACheckList(List<GI_PAData> lstInvGiPACheckList) {
+        this.lstInvGiPACheckList = lstInvGiPACheckList;
+    }
+
+    public static class GI_PAData implements Serializable {
         @SerializedName("invGiPACheckList_ID")
         @Expose
         private Integer invGiPACheckListID;

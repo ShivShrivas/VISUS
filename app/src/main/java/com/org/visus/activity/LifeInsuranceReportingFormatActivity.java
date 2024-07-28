@@ -244,6 +244,7 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            LifeInsuranceCheckListData.setLi_InvInsuranceRelID(LifeInsuranceCheckListData.getLi_InvInsuranceRelID());
                             LifeInsuranceCheckListData.setInvestigatorName(activityLifeInsuranceReportingFormatBinding.editTextInvestigatorName.getText().toString().trim());
                             LifeInsuranceCheckListData.setInvestigatorContactNo(activityLifeInsuranceReportingFormatBinding.editTextInvestigatorContactNumber.getText().toString().trim());
                             LifeInsuranceCheckListData.setInsuredFatherOrHusbandName(activityLifeInsuranceReportingFormatBinding.editTextInsuredFatherOrHusbandName.getText().toString().trim());
