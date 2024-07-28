@@ -1,7 +1,9 @@
 package com.org.visus.apis;
 
+import com.google.gson.JsonObject;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceRegistrationResponse;
+import com.org.visus.models.ExceptionInfoRequest;
 import com.org.visus.models.GI_ODResponse;
 import com.org.visus.models.GI_PAResponse;
 import com.org.visus.models.GI_TheftResponse;
@@ -110,5 +112,9 @@ public interface ApiService {
 
     @POST("api/InvMACTCheckList/saveMACTCheckListData")
     Call<MACTResponse> postMACT(@Header("Authorization") String Authorization, @Body MACT value);
+
+    @POST("api/app/exceptionInfoData")
+    Call<JsonObject> sendExceptionInfo(@Header("Authorization") String Authorization,@Body ExceptionInfoRequest request);
+
 
 }

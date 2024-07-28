@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiPaReportingFormatBinding;
 import com.org.visus.models.GI_PAResponse;
 import com.org.visus.models.GiPAInsuCheckList;
@@ -767,6 +768,8 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
+                        ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_PA_ReportingFormatActivity.this,"GI_PA_ReportingFormatActivity","giPACheckList/saveGeneralInsuPACheckListData", response.message()+" "+response.code(),"API Exception");
+                        apiCall.saveErrorLog();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -774,6 +777,8 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_PAResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_PA_ReportingFormatActivity.this,"GI_PA_ReportingFormatActivity","giPACheckList/saveGeneralInsuPACheckListData", t.getMessage(),"API Exception");
+                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

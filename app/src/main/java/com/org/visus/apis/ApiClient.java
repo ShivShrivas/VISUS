@@ -1,6 +1,7 @@
 package com.org.visus.apis;
 
 import static com.org.visus.apis.APIUrl.BASE_URL;
+import static com.org.visus.apis.APIUrl.BASE_URL_UAT;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -33,6 +34,17 @@ public class ApiClient {
             httpClient.connectTimeout(1, TimeUnit.MINUTES); // connect timeout
             httpClient.readTimeout(1, TimeUnit.MINUTES);
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
+        }
+        return retrofit;
+    }
+
+    public static Retrofit getClientUAT(final Context context) {
+        if (retrofit == null) {
+            OkHttpClient.Builder httpClient;
+            httpClient = new OkHttpClient.Builder();
+            httpClient.connectTimeout(1, TimeUnit.MINUTES); // connect timeout
+            httpClient.readTimeout(1, TimeUnit.MINUTES);
+            retrofit = new Retrofit.Builder().baseUrl(BASE_URL_UAT).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
         }
         return retrofit;
     }

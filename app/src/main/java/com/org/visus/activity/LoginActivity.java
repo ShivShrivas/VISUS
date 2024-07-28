@@ -12,6 +12,7 @@ import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.GetServices;
 import com.org.visus.models.MyAssignment;
 import com.org.visus.models.RequreActions;
@@ -75,11 +76,16 @@ public class LoginActivity extends AppCompatActivity {
                             visus_dataSource.close();
                         }
                     }
+                }else {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","VisusServices/getservices", response.message(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GetServices> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","VisusServices/getservices", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -106,11 +112,17 @@ public class LoginActivity extends AppCompatActivity {
                             visus_dataSource.close();
                         }
                     }
+                }else{
+
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","MyAssignmentList/getMyReqActionList", response.message(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<RequreActions> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","MyAssignmentList/getMyReqActionList",t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -141,11 +153,16 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","investigationUsedFor/gettotalCases", response.message(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","investigationUsedFor/gettotalCases", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -174,6 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             visus_dataSource.close();
                         } else {
+                            ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","MyAssignmentList/getMyAssignmentAll", response.message(),"API Exception");
+                            apiCall.saveErrorLog();
                         }
                     }
                 }
@@ -181,6 +200,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(LoginActivity.this,"LoginActivity","MyAssignmentList/getMyAssignmentAll", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }

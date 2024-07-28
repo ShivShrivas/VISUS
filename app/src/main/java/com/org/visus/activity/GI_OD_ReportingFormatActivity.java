@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiOdReportingFormatBinding;
 import com.org.visus.models.GI_ODResponse;
 import com.org.visus.models.GiODInsuCheckList;
@@ -949,6 +950,8 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
+                        ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_OD_ReportingFormatActivity.this,"GI_OD_ReportingFormatActivity","giODCheckList/saveGeneralInsuODCheckListData", response.message()+" "+response.code(),"API Exception");
+                        apiCall.saveErrorLog();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -956,6 +959,8 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_ODResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_OD_ReportingFormatActivity.this,"GI_OD_ReportingFormatActivity","giODCheckList/saveGeneralInsuODCheckListData", t.getMessage(),"API Exception");
+                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

@@ -55,6 +55,7 @@ import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityMyActionBinding;
 import com.org.visus.models.MyAssignment;
 import com.org.visus.models.RequreActions;
@@ -295,6 +296,7 @@ public class MyActionActivity extends AppCompatActivity {
         call2.enqueue(new Callback<SaveInvestigatorAction>() {
             @Override
             public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
+
                 dialog.dismiss();
                 if (response.body() != null) {
                     final SaveInvestigatorAction saveInvestigatorAction = response.body();
@@ -328,6 +330,8 @@ public class MyActionActivity extends AppCompatActivity {
                         }
                     }
                 } else {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(MyActionActivity.this,"MyActionActivity","postActionTypeData", response.message(),"API Exception");
+                    apiCall.saveErrorLog();
                     if (response.code() == 401) {
                         SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
                         sweetAlertDialog.setTitleText("Sorry!!!");
@@ -354,9 +358,11 @@ public class MyActionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
                 dialog.dismiss();
-                call.cancel();
-//                Toast.makeText(MyActionActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(MyActionActivity.this,"MyActionActivity","MyAssignmentList/SaveInvestigatorActionData", t.toString(),"API Exception");
+                apiCall.saveErrorLog();
+                Toast.makeText(MyActionActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }

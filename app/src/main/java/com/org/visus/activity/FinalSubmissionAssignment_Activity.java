@@ -19,6 +19,7 @@ import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.adapters.FinalSubmissionAssignment_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityFinalSubmissionAssignmentBinding;
 import com.org.visus.models.GetServices;
 import com.org.visus.models.MyAssignment;
@@ -162,11 +163,16 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
 
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","investigationUsedFor/gettotalCases", response.message(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","investigationUsedFor/gettotalCases", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -208,6 +214,8 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
                         }
                     }
                 } else {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","MyPendingAssignment/getMyAssignment", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                     TotalPendingCases = 0;
                     TotalSubmittedCases = 0;
                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FinalSubmissionAssignment_Activity.this, SweetAlertDialog.ERROR_TYPE);
@@ -226,6 +234,11 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
+
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","MyPendingAssignment/getMyAssignment", t.getMessage(),"API Exception");
+                    apiCall.saveErrorLog();
+
+
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }

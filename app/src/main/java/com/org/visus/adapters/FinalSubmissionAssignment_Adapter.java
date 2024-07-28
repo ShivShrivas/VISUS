@@ -26,6 +26,7 @@ import com.org.visus.activity.LifeInsuranceReportingFormatActivity;
 import com.org.visus.activity.MACT_ReportingFormatActivity;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.GiODInsuCheckList;
 import com.org.visus.models.GiPAInsuCheckList;
 import com.org.visus.models.GiTheftInsuCheckList;
@@ -232,11 +233,16 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                         } else {
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","LiCheckList/getLifeInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<LifeInsuranceCheckList> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","LiCheckList/getLifeInsuCheckList", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -272,11 +278,17 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                         } else {
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giODCheckList/getGiODInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GiODInsuCheckList> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giODCheckList/getGiODInsuCheckList", t.getMessage()
+                        ,"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -310,13 +322,20 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 context.startActivity(intent);
                             }
                         } else {
+                            ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                            apiCall.saveErrorLog();
                         }
                     }
+                }else {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GiTheftInsuCheckList> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -352,11 +371,17 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                         } else {
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giPACheckList/getGiPAInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GiPAInsuCheckList> call, Throwable t) {
+
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giPACheckList/getGiPAInsuCheckList", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -393,11 +418,16 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                         } else {
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","InvMACTCheckList/getMACTInsuCheckList", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<MACTInsuCheckList> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","InvMACTCheckList/getMACTInsuCheckList", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -449,12 +479,17 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                             });
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","MyPendingAssignment/SubmitMyAssignment", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
 
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","MyPendingAssignment/SubmitMyAssignment", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(finalSubmissionAssignment_activity, "fail " + t, Toast.LENGTH_LONG).show();
             }

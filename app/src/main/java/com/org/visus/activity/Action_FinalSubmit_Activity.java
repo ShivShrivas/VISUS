@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.org.visus.adapters.FinalSubmissionAction_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityActionFinalSubmitBinding;
 import com.org.visus.models.InvReqActivityFile;
 import com.org.visus.models.MyAssignment;
@@ -70,6 +71,9 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
                         } else {
                         }
                     }
+                }else{
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(Action_FinalSubmit_Activity.this,"FinalSubmissionAssignment_Adapter","myUploadedFile/getInvReqActivityFile", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             }
 

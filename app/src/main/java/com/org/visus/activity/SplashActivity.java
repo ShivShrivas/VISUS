@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceRegistrationResponse;
 import com.org.visus.models.TokenResponse;
@@ -196,6 +197,8 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<DeviceRegistrationResponse> call, Response<DeviceRegistrationResponse> response) {
                     Log.d("TAG", "onResponse: "+new Gson().toJson(response.body()));
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(SplashActivity.this,"SplashActivity","postDeviceRegistration", response.body().getMsg(),"API Exception");
+                    apiCall.saveErrorLog();
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             DeviceRegistrationResponse deviceInfo = response.body();
@@ -253,6 +256,9 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<DeviceRegistrationResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
+                    call.cancel();
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(SplashActivity.this,"SplashActivity","postDeviceRegistration", t.toString(),"API Exception");
+                    apiCall.saveErrorLog();
                 }
             });
         } else {

@@ -9,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityDashboardBinding;
 import com.org.visus.models.PostInvestigatorActionData;
 import com.org.visus.models.SaveInvestigatorAction;
@@ -208,15 +210,23 @@ public class DashboardActivity extends AppCompatActivity {
                             });
                           //  Toast.makeText(DashboardActivity.this, "Syncing Successfully", Toast.LENGTH_SHORT).show();
                         } else {
+                            ErrorLogAPICall apiCall= new ErrorLogAPICall(DashboardActivity.this,"DashboardActivity","MyAssignmentList/SaveInvestigatorActionData", response.message()+" "+response.code(),"API Exception");
+                            apiCall.saveErrorLog();
                             Toast.makeText(DashboardActivity.this, "Fail!!", Toast.LENGTH_SHORT).show();
                         }
                     }
+                }else {
+                    ErrorLogAPICall apiCall= new ErrorLogAPICall(DashboardActivity.this,"DashboardActivity","MyAssignmentList/SaveInvestigatorActionData", response.message()+" "+response.code(),"API Exception");
+                    apiCall.saveErrorLog();
+                    Toast.makeText(DashboardActivity.this, "Fail!!", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                ErrorLogAPICall apiCall= new ErrorLogAPICall(DashboardActivity.this,"DashboardActivity","MyAssignmentList/SaveInvestigatorActionData", t.getMessage(),"API Exception");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(DashboardActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
@@ -249,7 +259,14 @@ public class DashboardActivity extends AppCompatActivity {
                             ProgressDialog dialog = ProgressDialog.show(DashboardActivity.this, "Synchronization", "Please wait...", true);
                             List<PostInvestigatorActionData> getPostInvestigatorActionData = visus_dataSource.getPostInvestigatorActionData();
                             for (PostInvestigatorActionData postInvestigatorActionData : getPostInvestigatorActionData) {
-                                postActionTypeData(postInvestigatorActionData, dialog);
+
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                      postActionTypeData(postInvestigatorActionData, dialog);
+                                    }
+                                }, 5000);
                             }
                         } else {
                             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.WARNING_TYPE);
