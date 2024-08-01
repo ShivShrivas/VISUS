@@ -126,6 +126,15 @@ public class InvReqActivityFile implements Serializable {
         @SerializedName("InvestigatorCaseActivity_CaseInsuranceID")
         @Expose
         private Integer investigatorCaseActivityCaseInsuranceID;
+        private List<ActionUploadedFile> LstActionUploadedFiles ;
+
+        public List<ActionUploadedFile> getLstActionUploadedFiles() {
+            return LstActionUploadedFiles;
+        }
+
+        public void setLstActionUploadedFiles(List<ActionUploadedFile> lstActionUploadedFile) {
+            this.LstActionUploadedFiles = lstActionUploadedFile;
+        }
 
         public Integer getInvestigatorCaseActivityID() {
             return investigatorCaseActivityID;

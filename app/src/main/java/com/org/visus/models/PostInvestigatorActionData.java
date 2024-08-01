@@ -1,9 +1,10 @@
 package com.org.visus.models;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class PostInvestigatorActionData implements Serializable {
+
+
     private String Token;
     private String OriginalFileName;
     private String ServiceTypeID;
@@ -16,7 +17,7 @@ public class PostInvestigatorActionData implements Serializable {
     private String CellAddress;
     private String ClientID;
     private String InvInsuranceRelID_SAVING;
-    private File OriginalFile;
+    //todo new
 
     public String getInvInsuranceRelID_SAVING() {
         return InvInsuranceRelID_SAVING;
@@ -126,11 +127,5 @@ public class PostInvestigatorActionData implements Serializable {
         this.isSyncedRequreActionsData = isSyncedRequreActionsData;
     }
 
-    public File getOriginalFile() {
-        return OriginalFile;
-    }
 
-    public void setOriginalFile(File originalFile) {
-        OriginalFile = originalFile;
-    }
 }

@@ -3,11 +3,14 @@ package com.org.visus.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -20,12 +23,15 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+
+
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -36,7 +42,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -50,24 +57,28 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityMyActionBinding;
 import com.org.visus.models.MyAssignment;
 import com.org.visus.models.RequreActions;
 import com.org.visus.models.SaveInvestigatorAction;
+
+import com.org.visus.models.SaveInvestigatorActionOnlyData;
 import com.org.visus.models.TakeActionPhoto;
 import com.org.visus.utility.ConnectionUtility;
 import com.org.visus.utility.PrefUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -76,6 +87,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import okhttp3.MediaType;
@@ -90,12 +102,17 @@ public class MyActionActivity extends AppCompatActivity {
     private static int addImagesCount = 0;
     ApiService apiService;
     ActivityMyActionBinding actionBinding;
+
     BottomSheetDialog sheetDialog;
     LinearLayout camera_linear, photo_linear;
     private int PHOTO_CODE = 100;
-    private static final int CAMERA_REQUEST = 1888;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private static final int CAMERA_REQUEST = 1888;
     private static final int MY_Photo_PERMISSION_CODE = 200;
+    private static final int ACTION_GET_CONTENT_PDF_WORD = 101;
+    private static final int ACTION_GET_CONTENT_PDF_WORD_REQUEST = 1;
+    String uriString = "";
+    File myFile = null;
     List<String> actionTypeList = new ArrayList<>();
     List<String> IDActionTypeList = new ArrayList<>();
     String actionType = "Select Action Type";
@@ -108,11 +125,11 @@ public class MyActionActivity extends AppCompatActivity {
     LinearLayout img_container;
     Location currentLocation = null;
     FusedLocationProviderClient fusedLocationProviderClient;
-    String Token, InvestigatorID;
+    String Token, InvestigatorID, DEVICEServerID;
     View view1;
     Bundle bundle;
     MyAssignment.MyAssignmentData myAssignmentData;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType = "";
     List<String> stringList = new ArrayList<>();
     Map<Integer, TakeActionPhoto> hashMapTakeActionPhoto = new HashMap<Integer, TakeActionPhoto>();
     String itemaction = "";
@@ -120,6 +137,8 @@ public class MyActionActivity extends AppCompatActivity {
     Bitmap action_image_bitmap;
     File action_image_file;
     MultipartBody.Part body_action_image = null;
+    private ArrayList<SaveInvestigatorAction.SaveInvestigatorActionData> arrayListSaveInvestigatorActionDataPhoto = new ArrayList();
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +150,14 @@ public class MyActionActivity extends AppCompatActivity {
             myAssignmentData = (MyAssignment.MyAssignmentData) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
+            actionBinding.textViewInsuranceType.setText(VisusService);
+            actionBinding.textViewClaimNumber.setText(myAssignmentData.getClaimNumber());
+            actionBinding.textViewAssignedDate.setText(myAssignmentData.getInsuranceAssignedOnDate());
+            actionBinding.textViewTATForInvestigation.setText(myAssignmentData.gettATForInvestigator().toString());
+            actionBinding.textViewLocation.setText("Location Not Available");
         }
-        actionBinding.textViewInsuranceType.setText(VisusService);
-        actionBinding.textViewClaimNumber.setText(myAssignmentData.getClaimNumber());
-        actionBinding.textViewAssignedDate.setText(myAssignmentData.getInsuranceAssignedOnDate());
-        actionBinding.textViewTATForInvestigation.setText(myAssignmentData.gettATForInvestigator().toString());
-        actionBinding.textViewLocation.setText("Location Not Available");
+
         resetActionType();
         getActionType();
         callListener();
@@ -165,206 +186,264 @@ public class MyActionActivity extends AppCompatActivity {
                     Toast.makeText(MyActionActivity.this, "Select Action Type", Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    if (body_action_image == null) {
+                    if (arrayListSaveInvestigatorActionDataPhoto == null || arrayListSaveInvestigatorActionDataPhoto.size() == 0) {
                         Toast.makeText(MyActionActivity.this, "Take Photo", Toast.LENGTH_LONG).show();
                         openBottomSheetDialog();
                         return;
                     } else {
-                        if (ConnectionUtility.isConnected(MyActionActivity.this)) {
-                            openEsignPopup();
-                          //  postActionTypeData();
-                        } else {
+                        InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
+                        DEVICEServerID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.DEVICEServerID);
+
+                        long insertPostInvestigatorActionData = 0;
+                        SaveInvestigatorActionOnlyData saveInvestigatorActionData = new SaveInvestigatorActionOnlyData();
+                        SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData = (saveInvestigatorActionData).new InvestigatorActionData();
+                        investigatorActionData.setServiceTypeID(VisusServiceID != null ? VisusServiceID + "" : "0");
+                        investigatorActionData.setInvID(InvestigatorID != null ? InvestigatorID : "0");
+                        investigatorActionData.setSavedInvActionData("false");
+                        investigatorActionData.setInvestigatorActionDataServerID("-1");
+                        investigatorActionData.setClientID("-1");
+                        investigatorActionData.setServiceID(myAssignmentData.getInsuranceDataID() != null ? myAssignmentData.getInsuranceDataID().toString() : "0");
+                        investigatorActionData.setComments(actionBinding.actionComments.getText().toString().trim() != null ? actionBinding.actionComments.getText().toString().trim() : "0");
+                        investigatorActionData.setActionID(actionTypeID != null ? actionTypeID : "0");
+                        investigatorActionData.setLatitude(currentLocation != null ? currentLocation.getLatitude() + "" : "0.0");
+                        investigatorActionData.setLongitude(currentLocation != null ? currentLocation.getLongitude() + "" : "0.0");
+                        actionBinding.textViewLocation.getText().toString().trim();
+                        investigatorActionData.setCellAddress(actionBinding.textViewLocation.getText().toString().trim());
+                        investigatorActionData.setInvInsuranceRelID(myAssignmentData.getInvInsuranceRelID() != null ? myAssignmentData.getInvInsuranceRelID() : "0");
+                        if (investigatorActionData != null) {
                             VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
                             visus_dataSource.open();
-                            InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
-                            long insertPostInvestigatorActionData = 0;
-                            if (currentLocation == null) {
-                                insertPostInvestigatorActionData = visus_dataSource.insertPostInvestigatorActionData(action_image_file.getAbsolutePath(), VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionBinding.actionComments.getText().toString().trim(), actionTypeID, "0.0", "0.0", actionBinding.textViewLocation.getText().toString().trim(), myAssignmentData.getInvInsuranceRelID(),action_image_file);
-                            } else {
-                                insertPostInvestigatorActionData = visus_dataSource.insertPostInvestigatorActionData(action_image_file.getAbsolutePath(), VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionBinding.actionComments.getText().toString().trim(), actionTypeID, String.valueOf(currentLocation.getLatitude()), String.valueOf(currentLocation.getLongitude()), actionBinding.textViewLocation.getText().toString().trim(), myAssignmentData.getInvInsuranceRelID(),action_image_file);
+                            insertPostInvestigatorActionData = visus_dataSource.insertPostInvestigatorActionDataNew(investigatorActionData);
+                            if (insertPostInvestigatorActionData > 0) {
+                                if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                                    for (int i = 0; i < arrayListSaveInvestigatorActionDataPhoto.size(); i++) {
+                                        SaveInvestigatorAction.SaveInvestigatorActionData arr = arrayListSaveInvestigatorActionDataPhoto.get(i);
+                                        arr.setInvestigatorCaseActivity_ClientD(insertPostInvestigatorActionData + "");
+                                        long val = visus_dataSource.insertPostInvestigatorActionDataPhoto(arr);
+                                        arrayListSaveInvestigatorActionDataPhoto.get(i).setCommon_ID(String.valueOf(val));
+                                    }
+                                }
                             }
                             visus_dataSource.close();
                             if (insertPostInvestigatorActionData > 0) {
-                                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                                sweetAlertDialog.setTitleText("Great!");
-                                sweetAlertDialog.setCancelable(false);
-                                sweetAlertDialog.setContentText("Take Action Successfully");
-                                sweetAlertDialog.show();
-                                sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        sweetAlertDialog.dismiss();
-                                        finish();
-                                    }
-                                });
+                                Toast.makeText(MyActionActivity.this, "Take Action Successfully", Toast.LENGTH_SHORT).show();
                             } else {
-                                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
-                                sweetAlertDialog.setTitleText("Sorry!!!");
-                                sweetAlertDialog.setCancelable(false);
-                                sweetAlertDialog.setContentText("Take Action ERROR");
-                                sweetAlertDialog.show();
-                                sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        sweetAlertDialog.dismiss();
-                                    }
-                                });
+                                Toast.makeText(MyActionActivity.this, "Something Went to Wrong", Toast.LENGTH_SHORT).show();
                             }
-                        }                        //postActionTypeData();
+                            if (ConnectionUtility.isConnected(MyActionActivity.this)) {
+                                try {
+                                    postActionTypeDataNew(investigatorActionData, insertPostInvestigatorActionData);
+                                } catch (Exception e) {
+                                    e.getMessage();
+                                }
+                            } else {
+                                count = 0;
+                                arrayListSaveInvestigatorActionDataPhoto.clear();
+                                actionBinding.llPhotoImgShow.removeAllViews();
+                                actionBinding.pdf.setVisibility(View.GONE);
+                                actionBinding.actionComments.getText().clear();
+                                actionBinding.spinnerSelectActionType.setSelection(0);
+                            }
+                        }
                     }
                 }
             }
         });
-    }
-
-    private void openEsignPopup() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.option_popup);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        CardView btnSaveOnline = dialog.findViewById(R.id.btnSaveOnline);
-        CardView saveDataOffline = dialog.findViewById(R.id.saveDataOffline);
-
-
-
-        btnSaveOnline.setOnClickListener(new View.OnClickListener() {
+        actionBinding.pdf.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                dialog.cancel();
-                postActionTypeData();
-            }
-        });
+            public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(MyActionActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
-        saveDataOffline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.cancel();
-                VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-                visus_dataSource.open();
-                InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
-                long insertPostInvestigatorActionData = 0;
-                if (currentLocation == null) {
-                    insertPostInvestigatorActionData = visus_dataSource.insertPostInvestigatorActionData(action_image_file.getAbsolutePath(), VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionBinding.actionComments.getText().toString().trim(), actionTypeID, "0.0", "0.0", actionBinding.textViewLocation.getText().toString().trim(), myAssignmentData.getInvInsuranceRelID(),action_image_file);
+                    ActivityCompat.requestPermissions(MyActionActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 } else {
-                    insertPostInvestigatorActionData = visus_dataSource.insertPostInvestigatorActionData(action_image_file.getAbsolutePath(), VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionBinding.actionComments.getText().toString().trim(), actionTypeID, String.valueOf(currentLocation.getLatitude()), String.valueOf(currentLocation.getLongitude()), actionBinding.textViewLocation.getText().toString().trim(), myAssignmentData.getInvInsuranceRelID(),action_image_file);
-                }
-                visus_dataSource.close();
-                if (insertPostInvestigatorActionData > 0) {
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                    sweetAlertDialog.setTitleText("Great!");
-                    sweetAlertDialog.setCancelable(false);
-                    sweetAlertDialog.setContentText("Take Action Successfully");
-                    sweetAlertDialog.show();
-                    sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sweetAlertDialog.dismiss();
-                            finish();
-                        }
-                    });
-                } else {
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
-                    sweetAlertDialog.setTitleText("Sorry!!!");
-                    sweetAlertDialog.setCancelable(false);
-                    sweetAlertDialog.setContentText("Take Action ERROR");
-                    sweetAlertDialog.show();
-                    sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sweetAlertDialog.dismiss();
-                        }
-                    });
+                    openfile();
                 }
             }
         });
-
-        dialog.show();
     }
 
-    private void postActionTypeData() {
+    private void postActionTypeDataNew(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData, long insertPostInvestigatorActionData) {
         ProgressDialog dialog = ProgressDialog.show(MyActionActivity.this, "Loading", "Please wait...", true);
-        apiService = ApiClient.getClient(this).create(ApiService.class);
         Token = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.Token);
-        InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
-        if (currentLocation == null) {
-            currentLocation.setLatitude(0.0);
-            currentLocation.setLongitude(0.0);
-        }
-
-        Call<SaveInvestigatorAction> call2 = apiService.postInvestigatorActionData("Bearer " + Token, body_action_image, VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionBinding.actionComments.getText().toString().trim(), actionTypeID, String.valueOf(currentLocation.getLatitude()), String.valueOf(currentLocation.getLongitude()), actionBinding.textViewLocation.getText().toString().trim(), "-1", myAssignmentData.getInvInsuranceRelID());
-        call2.enqueue(new Callback<SaveInvestigatorAction>() {
+        apiService = ApiClient.getClient(this).create(ApiService.class);
+        Call<SaveInvestigatorActionOnlyData> call2 = apiService.postInvestigatorActionDataNew("Bearer " + Token, investigatorActionData);
+        call2.enqueue(new Callback<SaveInvestigatorActionOnlyData>() {
             @Override
-            public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
-
-                dialog.dismiss();
+            public void onResponse(Call<SaveInvestigatorActionOnlyData> call, Response<SaveInvestigatorActionOnlyData> response) {
                 if (response.body() != null) {
-                    final SaveInvestigatorAction saveInvestigatorAction = response.body();
-                    if (saveInvestigatorAction != null) {
-                        ///if (saveInvestigatorAction.getStatus() != null && saveInvestigatorAction.getStatus().equalsIgnoreCase("success")) {
-                        if (saveInvestigatorAction.getStatusCode() == 200) {
-                            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                            sweetAlertDialog.setTitleText("Great!");
-                            sweetAlertDialog.setCancelable(false);
-                            sweetAlertDialog.setContentText(saveInvestigatorAction.getMsg());
-                            sweetAlertDialog.show();
-                            sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    sweetAlertDialog.dismiss();
-                                    finish();
+                    final SaveInvestigatorActionOnlyData saveInvestigatorActionData = response.body();
+                    if (investigatorActionData != null) {
+                        Log.d("error1", saveInvestigatorActionData.getStatusCode() + "");
+                        if (saveInvestigatorActionData.getStatusCode() == 200) {
+                            if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                                if (saveInvestigatorActionData.getData().get(0).getInvestigatorActionDataServerID() != null) {
+                                    VISUS_DataSource visus_dataSource1 = new VISUS_DataSource(getApplicationContext());
+                                    visus_dataSource1.open();
+                                    long valMainData = visus_dataSource1.delete_tblPostInvestigatorActionData(String.valueOf(insertPostInvestigatorActionData));
+                                    visus_dataSource1.open();
+                                    postActionTypeData(saveInvestigatorActionData.getData().get(0).getInvestigatorActionDataServerID(), dialog, insertPostInvestigatorActionData);
+                                } else {
+                                    setSweetDailog(saveInvestigatorActionData.getMsg(), "Sorry!!!", 0);
                                 }
-                            });
+                            }
                         } else {
-                            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
-                            sweetAlertDialog.setTitleText("Sorry!!!");
-                            sweetAlertDialog.setCancelable(false);
-                            sweetAlertDialog.setContentText(saveInvestigatorAction.getMsg());
-                            sweetAlertDialog.show();
-                            sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    sweetAlertDialog.dismiss();
-                                }
-                            });
+                            setSweetDailog(saveInvestigatorActionData.getMsg(), "Sorry!!!", 0);
                         }
                     }
                 } else {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(MyActionActivity.this,"MyActionActivity","postActionTypeData", response.message(),"API Exception");
-                    apiCall.saveErrorLog();
                     if (response.code() == 401) {
-                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
-                        sweetAlertDialog.setTitleText("Sorry!!!");
-                        sweetAlertDialog.setCancelable(false);
-                        sweetAlertDialog.setContentText(response.message());
-                        sweetAlertDialog.show();
-                        sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                PrefUtils.removeFromSharedPreferences(MyActionActivity.this, PrefUtils.Token);
-                                Intent intent = new Intent(MyActionActivity.this, LoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intent);
-                                sweetAlertDialog.dismiss();
-                            }
-                        });
+                        setSweetDailog(response.message(), "Sorry!!!", response.code());
                     } else {
                         Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
                     }
                 }
+
             }
 
             @Override
-            public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+            public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
                 dialog.dismiss();
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(MyActionActivity.this,"MyActionActivity","MyAssignmentList/SaveInvestigatorActionData", t.toString(),"API Exception");
-                apiCall.saveErrorLog();
-                Toast.makeText(MyActionActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
+                call.cancel();
             }
         });
+    }
+
+    private void setSweetDailog(String Content, String titleText, int responcecode) {
+        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+        sweetAlertDialog.setTitleText(titleText);
+        sweetAlertDialog.setCancelable(false);
+        sweetAlertDialog.setContentText(Content);
+        sweetAlertDialog.show();
+        sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (responcecode == 401) {
+                    PrefUtils.removeFromSharedPreferences(MyActionActivity.this, PrefUtils.Token);
+                    Intent intent = new Intent(MyActionActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    sweetAlertDialog.dismiss();
+                } else {
+                    sweetAlertDialog.dismiss();
+                    // finish();
+                }
+            }
+        });
+    }
+
+    private void postActionTypeData(String ServerID, ProgressDialog dialog, long insertPostInvestigatorActionData) {
+        if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+            if (arrayListSaveInvestigatorActionDataPhoto.get(count) != null) {
+                MultipartBody.Part body_action_image1 = null;
+                SaveInvestigatorAction.SaveInvestigatorActionData saveData = arrayListSaveInvestigatorActionDataPhoto.get(count);
+               /* ProgressDialog dialogNew = ProgressDialog.show(MyActionActivity.this, "Loading",
+                        "Please wait...", true);*/
+                apiService = ApiClient.getClient(this).create(ApiService.class);
+                Token = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.Token);
+                InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
+                Log.d("ServerID", ServerID);
+                if (saveData.getOriginalFileName() != null) {
+                    if (saveData.getOriginalFileName().contains("Pdf_")) {
+                        String uri = saveData.getOriginalFileName().split("Pdf_")[1];
+                        File file_action_image = new File(uri);
+                        if (file_action_image.exists() && file_action_image.canRead()) {
+                            RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
+                            body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                        }
+                    } else {
+                        File file_action_image = new File(saveData.getOriginalFileName());
+                        RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
+                        body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                    }
+                }
+                if (body_action_image1 != null) {
+                    Call<SaveInvestigatorAction> call2 = apiService.postInvestigatorActionDataPhoto("Bearer " + Token, body_action_image1, VisusServiceID, myAssignmentData.getInsuranceDataID().toString(), InvestigatorID, actionTypeID, "-1", myAssignmentData.getInvInsuranceRelID(), ServerID);
+                    call2.enqueue(new Callback<SaveInvestigatorAction>() {
+                        @Override
+                        public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
+                            if (response.body() != null) {
+                                final SaveInvestigatorAction saveInvestigatorAction = response.body();
+                                if (saveInvestigatorAction != null) {
+                                    VISUS_DataSource visus_dataSource1 = new VISUS_DataSource(getApplicationContext());
+                                    visus_dataSource1.open();
+                                    int abc = visus_dataSource1.updatePostInvestigatorActionDataPhotoTwoPra(String.valueOf(insertPostInvestigatorActionData), saveData.getCommon_ID());
+                                    visus_dataSource1.close();
+                                    Log.d("error1", saveInvestigatorAction.getStatusCode() + "");
+                                    if (saveInvestigatorAction.getStatusCode() == 200) {
+                                        count++;
+                                        if (arrayListSaveInvestigatorActionDataPhoto.size() == count) {
+                                            Log.d("countGreat", count + "");
+                                            if (dialog != null && dialog.isShowing()) {
+                                                dialog.dismiss();
+                                            }
+                                            count = 0;
+                                            arrayListSaveInvestigatorActionDataPhoto.clear();
+                                            actionBinding.llPhotoImgShow.removeAllViews();
+                                            actionBinding.pdf.setVisibility(View.GONE);
+                                            actionBinding.actionComments.getText().clear();
+                                            actionBinding.spinnerSelectActionType.setSelection(0);
+                                            setSweetDailog(saveInvestigatorAction.getMsg(), "Great!", 0);
+                                        } else {
+                                            Log.d("count", count + "");
+                                            postActionTypeData(ServerID, dialog, insertPostInvestigatorActionData);
+                                        }
+                                    } else {
+                                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
+                                        sweetAlertDialog.setTitleText("Sorry!!!");
+                                        sweetAlertDialog.setCancelable(false);
+                                        sweetAlertDialog.setContentText(saveInvestigatorAction.getMsg());
+                                        sweetAlertDialog.show();
+                                        sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                sweetAlertDialog.dismiss();
+                                            }
+                                        });
+                                    }
+                                }
+                            } else {
+                                if (response.code() == 401) {
+                                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
+                                    sweetAlertDialog.setTitleText("Sorry!!!");
+                                    sweetAlertDialog.setCancelable(false);
+                                    sweetAlertDialog.setContentText(response.message());
+                                    sweetAlertDialog.show();
+                                    sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            PrefUtils.removeFromSharedPreferences(MyActionActivity.this, PrefUtils.Token);
+                                            Intent intent = new Intent(MyActionActivity.this, LoginActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                            if (dialog != null && dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
+                            call.cancel();
+                        }
+                    });
+                } else {
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                }
+
+
+            }
+        }
     }
 
     private void callListener() {
@@ -374,13 +453,21 @@ public class MyActionActivity extends AppCompatActivity {
                 if (position != 0) {
                     actionType = String.valueOf(adapterView.getItemAtPosition(position));
                     actionTypeID = IDActionTypeList.get(position - 1);
-                    /*actionBinding.photoImg.setVisibility(View.GONE);*/
-                    openBottomSheetDialog();
+                    if (position == 19) {
+                        if (ContextCompat.checkSelfPermission(MyActionActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(MyActionActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ACTION_GET_CONTENT_PDF_WORD_REQUEST);
+                        } else {
+                            openPdfAndWordFile();
+                        }
+
+                    } else {
+                        openBottomSheetDialog();
+                    }
                 } else {
                     actionType = "Select Action Type";
                     actionTypeID = "";
-                    actionBinding.photoImg.setImageBitmap(null);
-                    actionBinding.photoImg.setVisibility(View.GONE);
+                    // actionBinding.photoImg.setImageBitmap(null);
+                    actionBinding.llPhotoImg.setVisibility(View.GONE);
                 }
             }
 
@@ -388,6 +475,53 @@ public class MyActionActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+
+        actionBinding.clickPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                            String fileName = "photo";
+                            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                            try {
+                                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+                                currentPhotoPath = imageFile.getAbsolutePath();
+                                Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                                startActivityForResult(intent, CAMERA_REQUEST);
+                            } catch (Exception ex) {
+                            }
+                        } else {
+                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
+                    }
+                }).check();
+            }
+        });
+
+      /*  actionBinding.claerPhotoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionType = "Select Action Type";
+                actionTypeID = "";
+                actionBinding.photoImg.setImageBitmap(null);
+                actionBinding.llPhotoImg.setVisibility(View.GONE);
+                if (body_action_image != null) {
+                    body_action_image = null;
+                }
+            }
+        });*/
 
         actionBinding.takeactionBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("MissingInflatedId")
@@ -434,6 +568,14 @@ public class MyActionActivity extends AppCompatActivity {
         });
     }
 
+    private void openPdfAndWordFile() {
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        galleryIntent.setType("application/pdf");
+        galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(galleryIntent, ACTION_GET_CONTENT_PDF_WORD);
+    }
+
     private void openBottomSheetDialog() {
         sheetDialog = new BottomSheetDialog(MyActionActivity.this, R.style.BottomSheetStyle);
         view1 = LayoutInflater.from(MyActionActivity.this).inflate(R.layout.bottomsheetdialog, findViewById(R.id.sheet_relative));
@@ -461,7 +603,7 @@ public class MyActionActivity extends AppCompatActivity {
                 }).check();
             }
         });
-        actionBinding.photoImg.setOnClickListener(new View.OnClickListener() {
+        /*actionBinding.photoImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
@@ -479,8 +621,6 @@ public class MyActionActivity extends AppCompatActivity {
                                 startActivityForResult(intent, CAMERA_REQUEST);
                             } catch (Exception ex) {
                             }
-                            /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
                         } else {
                             Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
                         }
@@ -493,7 +633,7 @@ public class MyActionActivity extends AppCompatActivity {
                     }
                 }).check();
             }
-        });
+        });*/
         camera_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -512,8 +652,6 @@ public class MyActionActivity extends AppCompatActivity {
                                 startActivityForResult(intent, CAMERA_REQUEST);
                             } catch (Exception ex) {
                             }
-                            /*Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(cameraIntent, CAMERA_REQUEST);*/
                         } else {
                             Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
                         }
@@ -528,6 +666,7 @@ public class MyActionActivity extends AppCompatActivity {
             }
         });
         sheetDialog.setContentView(view1);
+
         sheetDialog.show();
     }
 
@@ -540,33 +679,6 @@ public class MyActionActivity extends AppCompatActivity {
             IDActionTypeList.add(requreActionsData.getInvestigatorReqActivityID().toString());
         }
         visus_dataSource.close();
-        /*apiService = ApiClient.getClient(this).create(ApiService.class);
-        Token = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.Token);
-        Call<RequreActions> call2 = apiService.getMyReqActionList("Bearer " + Token);
-        call2.enqueue(new Callback<RequreActions>() {
-            @Override
-            public void onResponse(Call<RequreActions> call, Response<RequreActions> response) {
-                if (response.body() != null) {
-                    final RequreActions requreActions = response.body();
-                    if (requreActions != null) {
-                        if (requreActions.getStatus() != null && requreActions.getStatus().equalsIgnoreCase("success")) {
-                            actionTypeList.clear();
-                            resetActionType();
-                            for (RequreActions.RequreActionsData requreActionsData : requreActions.getData()) {
-                                actionTypeList.add(requreActionsData.getInvestigatorReqActivityText());
-                                IDActionTypeList.add(requreActionsData.getInvestigatorReqActivityID().toString());
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RequreActions> call, Throwable t) {
-                call.cancel();
-                Toast.makeText(MyActionActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });*/
     }
 
 
@@ -586,154 +698,148 @@ public class MyActionActivity extends AppCompatActivity {
         });
     }
 
-    private void method_geocoder() {
+    private String method_geocoder() {
         List<Address> addresses;
+        String addresslco = "";
         geocoder = new Geocoder(this, Locale.getDefault());
         try {
             if (currentLocation != null) {
                 addresses = geocoder.getFromLocation(currentLocation.getLatitude(), currentLocation.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                String add = addresses.get(0).getAddressLine(0);
+                addresslco = addresses.get(0).getAddressLine(0);
                 String feature = addresses.get(0).getFeatureName();
-                Log.i("geo", "method_geocoder: " + add);
+                Log.i("geo", "method_geocoder: " + addresslco);
 //            Toast.makeText(DashboardActivity.this, "addresss    "+add, Toast.LENGTH_SHORT).show();
-                actionBinding.textViewLocation.setText(add.trim());
+                actionBinding.textViewLocation.setText(addresslco.trim());
             } else {
                 actionBinding.textViewLocation.setText("Location Not Available");
             }
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+        return addresslco;
+
     }
+
 
     public void goBack(View view) {
         finish();
     }
 
-    /*private Bitmap writeTextBitmap(Bitmap bitmap, StringBuilder text) {
-        Typeface tf = Typeface.create("Times New Roman", Typeface.NORMAL);
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.BLACK);
-        paint.setTypeface(tf);
-        paint.setTextAlign(Paint.Align.LEFT);
-        paint.setTextSize(10);
-        Rect textRect = new Rect();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            paint.getTextBounds(text, 0, text.length(), textRect);
-        }
-        Canvas canvas = new Canvas(bitmap);
-        //If the text is bigger than the canvas , reduce the font size
-        // if (textRect.width() >= (canvas.getWidth() - 4))     //the padding on either sides is considered as 4, so as to appropriately fit in the text
-        //    paint.setTextSize(convertToPixels(MyActionActivity.this, 7));        //Scaling needs to be used for different dpi's
 
-        //Calculate the positions
-        int xPos = (canvas.getWidth() / 2) - 2;     //-2 is for regulating the x position offset
-
-        //"- ((paint.descent() + paint.ascent()) / 2)" is the distance from the baseline to the center.
-        int yPos = (int) ((canvas.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2));
-
-        //canvas.drawText(String.valueOf(text), xPos, yPos, paint);
-
-        int x = 5, y = 140;
-        for (String line : text.toString().split("\n")) {
-            canvas.drawText(line, x, y, paint);
-            canvas.drawText(line, 30f, bitmap.getHeight(), paint);
-            y += paint.descent() - paint.ascent();
-        }
-        return bitmap;
-    }*/
-
-//    private void addStampToImage(Bitmap originalBitmap, String s) {
-//        Log.d("TAG", "addStampToImage: "+s);
-//
-//        int extraHeight = (int) (originalBitmap.getHeight() * 0.30);
-//
-//        Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight() + extraHeight, Bitmap.Config.ARGB_8888);
-//
-//        Canvas canvas = new Canvas(newBitmap);
-//        canvas.drawColor(Color.BLUE);
-//        canvas.drawBitmap(originalBitmap, 0, 0, null);
-//
-//        Resources resources = getResources();
-//        float scale = resources.getDisplayMetrics().density;
-//
-//        int y = 4000;
-//        String[] lines = s.split("[!]");
-//        for (String text : lines) {
-//            Paint pText = new Paint();
-//            pText.setColor(Color.WHITE);
-//            setTextSizeForWidth(pText, (int) (originalBitmap.getHeight() * 0.10), text);
-//            Rect bounds = new Rect();
-//            pText.getTextBounds(text, 0, text.length(), bounds);
-//            Rect textHeightWidth = new Rect();
-//            pText.getTextBounds(text, 0, text.length(), textHeightWidth);
-//            canvas.drawText(text, 100, y, pText);
-//            //canvas.drawText(text, (canvas.getWidth() / 4) - (textHeightWidth.width() / 4), originalBitmap.getHeight() + (extraHeight / 4) + (textHeightWidth.height() / 4), pText);
-//        }
-//        actionBinding.photoImg.setImageBitmap(newBitmap);
-//        actionBinding.photoImg.setVisibility(View.VISIBLE);
-//        action_image_bitmap = newBitmap;
-//        Calendar c = Calendar.getInstance();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
-//        String formattedDate = df.format(c.getTime());
-//        persistImage(newBitmap, formattedDate, "action_photo");
-//    }
-
-    private void addStampToImage(Bitmap originalBitmap, String s) {
-        Log.d("TAG", "addStampToImage: " + s);
-
-        int extraHeight = (int) (originalBitmap.getHeight() * 0.22);
-
+    private void addStampToImage(Bitmap originalBitmap, String s, SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData) {
+        int extraHeight = (int) (originalBitmap.getHeight() * 0.30);
         Bitmap newBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight() + extraHeight, Bitmap.Config.ARGB_8888);
-
         Canvas canvas = new Canvas(newBitmap);
-
-        // Draw the original bitmap on the canvas
+        canvas.drawColor(Color.BLUE);
         canvas.drawBitmap(originalBitmap, 0, 0, null);
-
-        // Draw the blue background for the additional area
-        Paint bluePaint = new Paint();
-        bluePaint.setColor(Color.BLUE);
-        canvas.drawRect(0, originalBitmap.getHeight(), originalBitmap.getWidth(), originalBitmap.getHeight() + extraHeight, bluePaint);
-
         Resources resources = getResources();
         float scale = resources.getDisplayMetrics().density;
-
-        // Starting Y position for the text
-        int y = originalBitmap.getHeight() + (int) (extraHeight * 0.1);
-
+        int y = originalBitmap.getHeight();
+        int size = extraHeight / 8;
         String[] lines = s.split("[!]");
         for (String text : lines) {
             Paint pText = new Paint();
             pText.setColor(Color.WHITE);
-            setTextSizeForWidth(pText, (int) (originalBitmap.getHeight() * 0.10), text);
+            pText.setTextSize((float) (newBitmap.getHeight() * 0.001));
+            setTextSizeForWidth(pText, (int) (originalBitmap.getHeight() * 0.20), text);
             Rect bounds = new Rect();
             pText.getTextBounds(text, 0, text.length(), bounds);
-
-            // Draw the text
-            canvas.drawText(text, 40, y, pText);
-
-            // Increment Y position for next line of text
-            y += bounds.height() + 20; // Add some padding between lines
+            Rect textHeightWidth = new Rect();
+            pText.getTextBounds(text, 0, text.length(), textHeightWidth);
+            y = y + size;
+            canvas.drawText(text, 50, y, pText);
         }
+        //actionBinding.photoImg.setImageBitmap(newBitmap);
 
-        actionBinding.photoImg.setImageBitmap(newBitmap);
-        actionBinding.photoImg.setVisibility(View.VISIBLE);
+        actionBinding.llPhotoImg.setVisibility(View.VISIBLE);
         action_image_bitmap = newBitmap;
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
         String formattedDate = df.format(c.getTime());
-        persistImage(newBitmap, formattedDate, "action_photo");
+        persistImage(newBitmap, newBitmap, formattedDate, "action_photo", saveInvestigatorActionData);
+        // todo on photo work add arraryList
     }
 
+    private void setImageBitmapDynamic(Bitmap newBitmap, int tag) {
+        LinearLayout relativeLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams paramsrelativeLayout = new LinearLayout.LayoutParams(400, ViewGroup.LayoutParams.MATCH_PARENT);
+        relativeLayout.setLayoutParams(paramsrelativeLayout);
+        relativeLayout.getTag(tag);
+        paramsrelativeLayout.setMargins(10, 5, 10, 5);
+        relativeLayout.setOrientation(LinearLayout.VERTICAL);
+        actionBinding.llPhotoImgShow.addView(relativeLayout);
+
+        ImageView imageView = new ImageView(this);
+        LinearLayout.LayoutParams paramsClearImageView = new LinearLayout.LayoutParams(60, 60);
+        imageView.setLayoutParams(paramsClearImageView);
+        imageView.getTag(tag);
+        paramsClearImageView.gravity = Gravity.END;
+        imageView.setImageDrawable(getResources().getDrawable(R.drawable.baseline_clear_24));
+        relativeLayout.addView(imageView);
+
+        View v = new ImageView(getBaseContext());
+        ImageView imageViewImg;
+        imageViewImg = new ImageView(v.getContext());
+        LinearLayout.LayoutParams paramsClearIvageView = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        imageViewImg.setLayoutParams(paramsClearIvageView);
+        paramsClearIvageView.gravity = Gravity.START;
+        imageViewImg.setImageBitmap(newBitmap);
+        imageViewImg.getTag(tag);
+        relativeLayout.addView(imageViewImg);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                    arrayListSaveInvestigatorActionDataPhoto.remove(tag);
+                    actionBinding.llPhotoImgShow.removeViewAt(tag);
+                }
+            }
+        });
+
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                    showPhotoAlterDialog(arrayListSaveInvestigatorActionDataPhoto.get(tag).getActivityFilePath());
+
+                }
+            }
+        });
+    }
+
+    private void showPhotoAlterDialog(String path) {
+        Bitmap action_image_bitmap = BitmapFactory.decodeFile(path);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Photo");
+        final View customLayout = getLayoutInflater().inflate(R.layout.custom_layout_photo, null);
+        builder.setView(customLayout);
+        builder.setCancelable(false);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        ImageView imageView = customLayout.findViewById(R.id.clearImage);
+        ImageView imageViewForShow = customLayout.findViewById(R.id.imageView);
+        if (action_image_bitmap != null) {
+            imageViewForShow.setImageBitmap(action_image_bitmap);
+        }
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+    }
 
     private void setTextSizeForWidth(Paint paint, float desiredHeight, String text) {
-        final float testTextSize = 12f;
+        final float testTextSize = 10f;
         float textSize = paint.getTextSize();
         Rect bounds = new Rect();
         paint.getTextBounds(text, 0, text.length(), bounds);
         float desiredTextSize = testTextSize * desiredHeight / bounds.height();
-        paint.setTextSize(textSize * (9f));
+        paint.setTextSize(textSize * 10);
     }
 
     @Override
@@ -742,21 +848,36 @@ public class MyActionActivity extends AppCompatActivity {
         try {
             if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK /*&& data != null*/) {
                 action_image_bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+                int quality = 70; // You can adjust the quality (0-100)
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                action_image_bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
                 String INV_code = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.INV_code);
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(" ! !Investigator Code: " + INV_code + "!");
+                stringBuilder.append("Investigator Code: " + INV_code + "!");
+                stringBuilder.append("Action Type: " + actionType + "!");
                 if (myAssignmentData != null) {
                     stringBuilder.append("Claim Number: " + myAssignmentData.getClaimNumber() + "!");
                 }
                 if (currentLocation != null) {
-                    stringBuilder.append("Latitude: " + currentLocation.getLatitude() + "!");
+                    stringBuilder.append("Latitude: " + currentLocation.getLatitude() + " , Longitude: " + currentLocation.getLongitude() + "!");
                     stringBuilder.append("Longitude: " + currentLocation.getLongitude() + "!");
+                    stringBuilder.append("Address: " + method_geocoder() + "!");
                 }
                 stringBuilder.append("Submitted Date: " + getCurrentDateTime());
-                //Bitmap writeTextBitmap = writeTextBitmap(action_image_bitmap, stringBuilder);
                 if (action_image_bitmap != null) {
-                    //addStampToImage(action_image_bitmap, stringBuilder);
-                    addStampToImage(action_image_bitmap, String.valueOf(stringBuilder));
+                    SaveInvestigatorAction saveInvestigatorAction = new SaveInvestigatorAction();
+                    SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData = (saveInvestigatorAction).new SaveInvestigatorActionData();
+                    saveInvestigatorActionData.setVisusServicesID(VisusServiceID);
+                    saveInvestigatorActionData.setInvestigatorRequiredActivityID(actionTypeID);
+                    saveInvestigatorActionData.setLatitudeAtClickingPhoto(currentLocation != null ? currentLocation.getLatitude() + "" : "0.0");
+                    saveInvestigatorActionData.setLongitudeAtClickingPhoto(currentLocation != null ? currentLocation.getLongitude() + "" : "0.0");
+                    saveInvestigatorActionData.setInvestigatorCaseActivityCaseInsuranceID(myAssignmentData.getInsuranceDataID() != null ? myAssignmentData.getInsuranceDataID() + "" : "0.0");
+                    InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
+                    saveInvestigatorActionData.setInvestigatorCaseActivityInvID(InvestigatorID != null ? InvestigatorID + "" : "0");
+                    saveInvestigatorActionData.setInvInsuranceRelID(myAssignmentData.getInvInsuranceRelID() != null ? myAssignmentData.getInvInsuranceRelID() + "" : "0");
+                    saveInvestigatorActionData.setInvestigatorComments(actionBinding.actionComments.getText().toString().trim() != null ? actionBinding.actionComments.getText().toString().trim() : "0");
+                    saveInvestigatorActionData.setInsuranceAssignedOnDate(myAssignmentData.getInsuranceAssignedOnDate() != null ? myAssignmentData.getInsuranceAssignedOnDate() : "1900/10/01");
+                    addStampToImage(action_image_bitmap, String.valueOf(stringBuilder), saveInvestigatorActionData);
                 } else {
                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
                     sweetAlertDialog.setTitleText("ERROR!!!");
@@ -775,21 +896,39 @@ public class MyActionActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Sheet Dialog Is NULL-1", Toast.LENGTH_LONG).show();
                 }
-                // img_add.setVisibility(View.GONE);
-                // img_delete.setVisibility(View.VISIBLE);
             } else if (requestCode == PHOTO_CODE && resultCode == Activity.RESULT_OK && data != null) {
-//            img_action.setVisibility(View.VISIBLE);
-//            Uri uri = data.getData();
-//            img_action.setImageURI(uri);
+
                 try {
-//                InputStream inputStream = getContentResolver().openInputStream(uri);
-//                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//                img_action.setImageBitmap(bitmap);
-//                sheetDialog.dismiss();
-//                img_add.setVisibility(View.GONE);
-//                img_delete.setVisibility(View.VISIBLE);
-//                multipart_uploadfile(uri,PHOTO_CODE);
+
                 } catch (Exception exception) {
+                }
+            } else if (requestCode == ACTION_GET_CONTENT_PDF_WORD && resultCode == RESULT_OK) {
+                Uri uri = data.getData();
+                uriString = getFilePathFromContentUriNew(Uri.parse(data.getDataString()));
+                File myFile = new File(uriString);
+                //    myFile = tranferOnOntherFolder(myFile1);
+                if (myFile != null) {
+                    SaveInvestigatorAction saveInvestigatorAction = new SaveInvestigatorAction();
+                    SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData = (saveInvestigatorAction).new SaveInvestigatorActionData();
+                    saveInvestigatorActionData.setVisusServicesID(VisusServiceID);
+                    saveInvestigatorActionData.setInvestigatorRequiredActivityID(actionTypeID);
+                    saveInvestigatorActionData.setLatitudeAtClickingPhoto(currentLocation != null ? currentLocation.getLatitude() + "" : "0.0");
+                    saveInvestigatorActionData.setLongitudeAtClickingPhoto(currentLocation != null ? currentLocation.getLongitude() + "" : "0.0");
+                    saveInvestigatorActionData.setInvestigatorCaseActivityCaseInsuranceID(myAssignmentData.getInsuranceDataID() != null ? myAssignmentData.getInsuranceDataID() + "" : "0.0");
+                    InvestigatorID = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.InvestigatorID);
+                    saveInvestigatorActionData.setInvestigatorCaseActivityInvID(InvestigatorID != null ? InvestigatorID + "" : "0");
+                    saveInvestigatorActionData.setInvInsuranceRelID(myAssignmentData.getInvInsuranceRelID() != null ? myAssignmentData.getInvInsuranceRelID() + "" : "0");
+                    saveInvestigatorActionData.setInvestigatorComments(actionBinding.actionComments.getText().toString().trim() != null ? actionBinding.actionComments.getText().toString().trim() : "0");
+                    saveInvestigatorActionData.setInsuranceAssignedOnDate(myAssignmentData.getInsuranceAssignedOnDate() != null ? myAssignmentData.getInsuranceAssignedOnDate() : "1900/10/01");
+                    saveInvestigatorActionData.setActivityFilePath(myFile.getPath());
+                    saveInvestigatorActionData.setOriginalFileName("Pdf_" + myFile.getPath());
+                    saveInvestigatorActionData.setFileSubmittionOnDate(getCurrentDateTime());
+                    arrayListSaveInvestigatorActionDataPhoto.clear();
+                    arrayListSaveInvestigatorActionDataPhoto.add(saveInvestigatorActionData);
+                    actionBinding.pdf.setVisibility(View.VISIBLE);
+                    actionBinding.pdf.setText(myFile.getName() != null && !myFile.getName().equalsIgnoreCase("") ? myFile.getName() : "N?A");
+                } else {
+                    Toast.makeText(MyActionActivity.this, "File is not uploaded yet!...Try Again", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 if (sheetDialog != null) {
@@ -801,18 +940,106 @@ public class MyActionActivity extends AppCompatActivity {
             }
         } catch (Exception exception) {
             throw new RuntimeException("After onActivityResult ERROR : " + exception.toString());
-            /*SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.ERROR_TYPE);
-            sweetAlertDialog.setTitleText("ERROR!!!");
-            sweetAlertDialog.setCancelable(false);
-            sweetAlertDialog.setContentText("ON ACTIVITY RESULT ERROR");
-            sweetAlertDialog.show();
-            sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    sweetAlertDialog.dismiss();
-                }
-            });*/
         }
+    }
+
+    private void compressBitmap(Bitmap action_image_bitmap) {
+        int quality = 50; // You can adjust the quality (0-100)
+        // Convert Bitmap to InputStream
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        action_image_bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
+
+    }
+
+    private File tranferOnOntherFolder(File myFile) {
+        File destinationFile = null;
+        try {
+            File sourceFile = new File(myFile.getPath());
+            File destinationFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Visus");
+            if (!sourceFile.exists()) {
+                System.out.println("Source file does not exist.");
+                return null;
+            }
+            if (!destinationFolder.exists()) {
+                System.out.println("Destination folder does not exist.");
+                return null;
+            }
+
+            String destinationFilePath = destinationFolder + "/" + sourceFile.getName();
+            destinationFile = new File(destinationFilePath);
+            // Use file input stream and file output stream for copying the file
+            FileInputStream inStream = new FileInputStream(sourceFile);
+            FileOutputStream outStream = new FileOutputStream(destinationFile);
+            // Use file channels for efficient file copy
+            FileChannel inChannel = inStream.getChannel();
+            FileChannel outChannel = outStream.getChannel();
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+            inStream.close();
+            outStream.close();
+            Toast.makeText(this, "File copied to destination folder successfully.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return destinationFile;
+    }
+
+    public String getFilePathFromContentUriNew(Uri contentUri) {
+        String filePath = "", fileName = "";
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(contentUri);
+            Random random = new Random();
+            Random random1 = new Random();
+            int x = random1.nextInt(10000);
+            Cursor cursor = getContentResolver().query(contentUri, null, null, null, null);
+            cursor.moveToFirst();
+            fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            File desinationFile = new File(getFilesDir(), fileName);
+            if (desinationFile.exists()) {
+                desinationFile.delete();
+            }
+            OutputStream outputStream = new FileOutputStream(desinationFile);
+            byte[] buffer = new byte[1024];
+            int readByte = 0;
+            while ((readByte = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, readByte);
+
+            }
+            if (desinationFile.exists()) {
+                filePath = desinationFile.getPath();
+                fileName = desinationFile.getName();
+            }
+            inputStream.close();
+            outputStream.close();
+
+
+        } catch (Exception e) {
+            Log.e("FilePicker", "Error getting file path from content URI: " + e.getMessage());
+        }
+
+        return filePath;
+    }
+
+    public String getFilePathFromContentUri(Uri contentUri) {
+        ContentResolver contentResolver = getContentResolver();
+        String filePath = null;
+
+        String[] projection = {OpenableColumns.DISPLAY_NAME, OpenableColumns.SIZE};
+        Cursor cursor = contentResolver.query(contentUri, projection, null, null, null);
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                String fileName = cursor.getString(nameIndex);
+
+                // Assuming you want to save the file in the external storage directory
+                File externalDir = Environment.getExternalStorageDirectory();
+                File file = new File(externalDir, fileName);
+                filePath = file.getAbsolutePath();
+            }
+        } catch (Exception e) {
+            Log.e("FilePicker", "Error getting file path from content URI: " + e.getMessage());
+        }
+
+        return filePath;
     }
 
     public String getCurrentDateTime() {
@@ -820,7 +1047,25 @@ public class MyActionActivity extends AppCompatActivity {
         return sdf.format(new Date());
     }
 
-    private void persistImage(Bitmap photo, String formattedDate, String action_photo_type) {
+    public void openfile() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri contentUri = Uri.parse("content://" + uriString);
+        intent.setDataAndType(contentUri, "application/pdf");
+        try {
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                // Start the intent to open the PDF file
+                startActivity(intent);
+            } else {
+                // Handle the case where there's no PDF viewer app installed
+                // You can prompt the user to install a PDF viewer app in this case
+            }
+        } catch (Exception e) {
+            Toast.makeText(MyActionActivity.this, "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void persistImage(Bitmap newPhoto, Bitmap photo, String formattedDate, String action_photo_type, SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData) {
+
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/Visus");
         File filesDir = this.getFilesDir();
         try {
@@ -838,10 +1083,18 @@ public class MyActionActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
                 }
-
                 File file_action_image = new File(action_image_file.toString());
+                saveInvestigatorActionData.setActivityFilePath(file_action_image.getPath());
+                saveInvestigatorActionData.setOriginalFileName(action_image_file.toString());
+                saveInvestigatorActionData.setFileSubmittionOnDate(formattedDate);
+
                 RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
                 body_action_image = MultipartBody.Part.createFormData("OriginalFIleName", file_action_image.getName(), request_file_action_photo);
+                arrayListSaveInvestigatorActionDataPhoto.add(saveInvestigatorActionData);
+                if (arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                    setImageBitmapDynamic(newPhoto, arrayListSaveInvestigatorActionDataPhoto.size() - 1);
+                }
+
             }
         } catch (Exception e) {
             Log.i("ERROR ", e.toString());
@@ -858,7 +1111,6 @@ public class MyActionActivity extends AppCompatActivity {
             });
         }
     }
-
 
     private void resetActionType() {
         actionTypeList.clear();

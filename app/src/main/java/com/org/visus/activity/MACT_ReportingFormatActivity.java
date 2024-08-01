@@ -19,8 +19,8 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityMactReportingFormatBinding;
+import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.MACTInsuCheckList;
 import com.org.visus.models.MACTResponse;
 import com.org.visus.models.MyAssignment;
@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import kotlin.contracts.ConditionalEffect;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,8 +45,10 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
     ActivityMactReportingFormatBinding activityMactReportingFormatBinding;
     Bundle bundle;
     ArrayList<MACTInsuCheckList.MACTInsuCheckListData> mactInsuCheckListData;
-    String VisusService, VisusServiceID;
-    Boolean IsWhetherDeceasedAdmittedHospital = false, IsDisabilityCertificate = false, IsMeetingWithClaimant = false, IsMeetingWithInsured = false, IsDriverDL_of_TP_Vehicle = false, IsRC = false, IsDLWithParticulars = false, IsInsurancePolicy = false, IsFIR = false, IsPolicePanchnama = false, IsPMReport = false, IsChargeSheetReport = false, IsCaseDiary = false, IsChargeSheet_filed_against_TP_Vehicle = false;
+    String VisusService, VisusServiceID, AssessmentType;
+    Boolean IsWhetherDeceasedAdmittedHospital = false, IsDisabilityCertificate = false, IsMeetingWithClaimant = false, IsMeetingWithInsured = false,
+            IsDriverDL_of_TP_Vehicle = false, IsRC = false, IsDLWithParticulars = false, IsInsurancePolicy = false, IsFIR = false, IsPolicePanchnama = false,
+            IsPMReport = false, IsChargeSheetReport = false, IsCaseDiary = false, IsChargeSheet_filed_against_TP_Vehicle = false;
     ApiService apiService;
     String Token;
     MyAssignment.MyAssignmentData data;
@@ -64,6 +67,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
             data = (MyAssignment.MyAssignmentData) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
         }
 
         if (mactInsuCheckListData != null) {
@@ -313,8 +317,8 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mact.setMACTCheckListDataSaved(false);
                             mact.setExceptionIfAny("");
 
-                            //////////////////////////////////RadioButton/////////////////////////////////////////////
                             mactData1.setInvMACTCheckListId(-1);
+                            //////////////////////////////////RadioButton/////////////////////////////////////////////
                             mactData1.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData1.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData1.setInvestigatorSubmittionDateTime(getCurrentDateTime());
@@ -497,16 +501,18 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData3.setEntryByUserName("");
                             mactData3.setHoldCase(false);
 
+
                             mactData6.setInvMACTCheckListId(-1);
                             mactData6.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData6.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData6.setInvestigatorSubmittionDateTime(getCurrentDateTime());
                             mactData6.setInvMACTCheckListHeadID(mactInsuCheckListData.get(5).getInvMACTCheckListHeadID());
-                            mactData6.setInvMACTCheckListTextData("");
+                            mactData6.setInvMACTCheckListTextData(activityMactReportingFormatBinding.etCondtionOfTheInjured.getText().toString());
                             mactData6.setEntryOnDate(getCurrentDateTime());
                             mactData6.setEntryByUserID(-1);
                             mactData6.setEntryByUserName("");
                             mactData6.setHoldCase(false);
+
 
                             mactData10.setInvMACTCheckListId(-1);
                             mactData10.setInvMACTCheckListMactID(data.getInsuranceDataID());
@@ -628,7 +634,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData11.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData11.setInvestigatorSubmittionDateTime(getCurrentDateTime());
                             mactData11.setInvMACTCheckListHeadID(mactInsuCheckListData.get(10).getInvMACTCheckListHeadID());
-                            mactData11.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextRationCard.getText().toString().trim());
+                            mactData11.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextHighSchoolMarksheet.getText().toString().trim());
                             mactData11.setEntryOnDate(getCurrentDateTime());
                             mactData11.setEntryByUserID(-1);
                             mactData11.setEntryByUserName("");
@@ -639,7 +645,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData12.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData12.setInvestigatorSubmittionDateTime(getCurrentDateTime());
                             mactData12.setInvMACTCheckListHeadID(mactInsuCheckListData.get(11).getInvMACTCheckListHeadID());
-                            mactData12.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextVoterIDCard.getText().toString().trim());
+                            mactData12.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextRationCard.getText().toString().trim());
                             mactData12.setEntryOnDate(getCurrentDateTime());
                             mactData12.setEntryByUserID(-1);
                             mactData12.setEntryByUserName("");
@@ -650,7 +656,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData13.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData13.setInvestigatorSubmittionDateTime(getCurrentDateTime());
                             mactData13.setInvMACTCheckListHeadID(mactInsuCheckListData.get(12).getInvMACTCheckListHeadID());
-                            mactData13.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextPariwarRegister.getText().toString().trim());
+                            mactData13.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextVoterIDCard.getText().toString().trim());
                             mactData13.setEntryOnDate(getCurrentDateTime());
                             mactData13.setEntryByUserID(-1);
                             mactData13.setEntryByUserName("");
@@ -661,7 +667,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData14.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData14.setInvestigatorSubmittionDateTime(getCurrentDateTime());
                             mactData14.setInvMACTCheckListHeadID(mactInsuCheckListData.get(13).getInvMACTCheckListHeadID());
-                            mactData14.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextAadharCard.getText().toString().trim());
+                            mactData14.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextPariwarRegister.getText().toString().trim());
                             mactData14.setEntryOnDate(getCurrentDateTime());
                             mactData14.setEntryByUserID(-1);
                             mactData14.setEntryByUserName("");
@@ -705,7 +711,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData24.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData24.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData24.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData24.setInvMACTCheckListHeadID(mactInsuCheckListData.get(18).getInvMACTCheckListHeadID());
+                            mactData24.setInvMACTCheckListHeadID(mactInsuCheckListData.get(23).getInvMACTCheckListHeadID());
                             mactData24.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextPermit.getText().toString().trim());
                             mactData24.setEntryOnDate(getCurrentDateTime());
                             mactData24.setEntryByUserID(-1);
@@ -783,18 +789,22 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData40.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData40.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData40.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData40.setInvMACTCheckListHeadID(mactInsuCheckListData.get(38).getInvMACTCheckListHeadID());
+                            mactData40.setInvMACTCheckListHeadID(mactInsuCheckListData.get(39).getInvMACTCheckListHeadID());
                             mactData40.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutDriverVisit.getText().toString().trim());
                             mactData40.setEntryOnDate(getCurrentDateTime());
                             mactData40.setEntryByUserID(-1);
                             mactData40.setEntryByUserName("");
-                            mactData40.setHoldCase(false);
-
+                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("")
+                                    && AssessmentType.equalsIgnoreCase("Hold")) {
+                                mactData40.setHoldCase(true);
+                            } else {
+                                mactData40.setHoldCase(false);
+                            }
                             mactData41.setInvMACTCheckListId(-1);
                             mactData41.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData41.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData41.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData41.setInvMACTCheckListHeadID(mactInsuCheckListData.get(39).getInvMACTCheckListHeadID());
+                            mactData41.setInvMACTCheckListHeadID(mactInsuCheckListData.get(40).getInvMACTCheckListHeadID());
                             mactData41.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutAccidentalSpotVisit.getText().toString().trim());
                             mactData41.setEntryOnDate(getCurrentDateTime());
                             mactData41.setEntryByUserID(-1);
@@ -805,7 +815,7 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                             mactData42.setInvMACTCheckListMactID(data.getInsuranceDataID());
                             mactData42.setInvMACTCheckListInvID(data.getInvestigatorObj().getInvId());
                             mactData42.setInvestigatorSubmittionDateTime(getCurrentDateTime());
-                            mactData42.setInvMACTCheckListHeadID(mactInsuCheckListData.get(40).getInvMACTCheckListHeadID());
+                            mactData42.setInvMACTCheckListHeadID(mactInsuCheckListData.get(41).getInvMACTCheckListHeadID());
                             mactData42.setInvMACTCheckListTextData(activityMactReportingFormatBinding.editTextWriteAboutHospitalVisit.getText().toString().trim());
                             mactData42.setEntryOnDate(getCurrentDateTime());
                             mactData42.setEntryByUserID(-1);
@@ -902,6 +912,228 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                 }
             }
         });
+
+
+        activityMactReportingFormatBinding.rgMeetingWithClaimant.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_MeetingWithClaimantYes:
+                        IsMeetingWithClaimant = true;
+                        break;
+                    case R.id.rb_MeetingWithClaimantNo:
+                        IsMeetingWithClaimant = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgMeetingWithInsured.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rg_MeetingWithInsuredYes:
+                        IsMeetingWithInsured = true;
+                        break;
+                    case R.id.rg_MeetingWithInsuredNo:
+                        IsMeetingWithInsured = false;
+                        break;
+                }
+            }
+        });
+
+
+        activityMactReportingFormatBinding.rgDriverDLOfTPVehicle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_Driver_DL_of_TP_Vehicle_Yes:
+                        IsDriverDL_of_TP_Vehicle = true;
+                        break;
+                    case R.id.rb_Driver_DL_of_TP_Vehicle_No:
+                        IsDriverDL_of_TP_Vehicle = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgRC.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_RC_Yes:
+                        IsRC = true;
+                        break;
+                    case R.id.rb_RC_No:
+                        IsRC = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgDLwithParticulars.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_DLwithParticularsYes:
+                        IsDLWithParticulars = true;
+                        break;
+                    case R.id.rb_DLwithParticulars_No:
+                        IsDLWithParticulars = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgInsurancePolicy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_InsurancePolicy_Yes:
+                        IsInsurancePolicy = true;
+                        break;
+                    case R.id.rb_InsurancePolicy_No:
+                        IsInsurancePolicy = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgFIR.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_FIR_Yes:
+                        IsFIR = true;
+                        break;
+                    case R.id.rb_FIR_No:
+                        IsFIR = false;
+                        break;
+                }
+            }
+        });
+
+
+        activityMactReportingFormatBinding.rgPolicePanchnama.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_PolicePanchnama_Yes:
+                        IsPolicePanchnama = true;
+                        break;
+                    case R.id.rb_PolicePanchnama_No:
+                        IsPolicePanchnama = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgPMReport.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_PMReport_Yes:
+                        IsPMReport = true;
+                        break;
+                    case R.id.rb_PMReport_No:
+                        IsPMReport = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgChargeSheetReport.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_ChargeSheetReport_Yes:
+                        IsChargeSheetReport = true;
+                        break;
+                    case R.id.rb_ChargeSheetReport_No:
+                        IsChargeSheetReport = false;
+                        break;
+                }
+            }
+        });
+
+
+        activityMactReportingFormatBinding.rgCaseDiary.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_CaseDiary_Yes:
+                        IsCaseDiary = true;
+                        break;
+                    case R.id.rb_CaseDiary_No:
+                        IsCaseDiary = false;
+                        break;
+                }
+            }
+        });
+
+        activityMactReportingFormatBinding.rgChargeSheetAgainst.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_ChargeSheetAgainst_Yes:
+                        IsChargeSheet_filed_against_TP_Vehicle = true;
+                        break;
+                    case R.id.rb_ChargeSheetAgainst_No:
+                        IsChargeSheet_filed_against_TP_Vehicle = false;
+                        break;
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public void goBack(View view) {
@@ -932,7 +1164,13 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             sweetAlertDialog.dismiss();
-                                            Intent intent = new Intent(MACT_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+
+                                            Intent intent = null;
+                                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                                intent = new Intent(MACT_ReportingFormatActivity.this, FinalSubmissionAssignmentHoldActivity.class);
+                                            } else {
+                                                intent = new Intent(MACT_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                            }
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -962,8 +1200,6 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
-                        ErrorLogAPICall apiCall= new ErrorLogAPICall(MACT_ReportingFormatActivity.this,"MACT_ReportingFormatActivity","InvMACTCheckList/saveMACTCheckListData", response.message()+" "+response.code(),"API Exception");
-                        apiCall.saveErrorLog();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -971,8 +1207,6 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<MACTResponse> call, Throwable t) {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(MACT_ReportingFormatActivity.this,"MACT_ReportingFormatActivity","InvMACTCheckList/saveMACTCheckListData", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

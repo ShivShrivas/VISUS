@@ -54,18 +54,23 @@ public class SaveInvestigatorAction implements Serializable {
     }
 
     public class SaveInvestigatorActionData {
+
+
+        @SerializedName("InvestigatorCaseActivityPhotoServerID")
+        @Expose
+        private String InvestigatorCaseActivityPhotoServerID;
         @SerializedName("InvestigatorCaseActivity_ID")
         @Expose
         private Integer investigatorCaseActivityID;
         @SerializedName("InvestigatorCaseActivity_CaseInsuranceID")
         @Expose
-        private Integer investigatorCaseActivityCaseInsuranceID;
+        private String investigatorCaseActivityCaseInsuranceID;
         @SerializedName("InvestigatorCaseActivity_InvID")
         @Expose
-        private Integer investigatorCaseActivityInvID;
+        private String investigatorCaseActivityInvID;
         @SerializedName("InvestigatorRequiredActivityID")
         @Expose
-        private Integer investigatorRequiredActivityID;
+        private String investigatorRequiredActivityID;
         @SerializedName("ObjInvReqActivity")
         @Expose
         private String objInvReqActivity;
@@ -83,7 +88,7 @@ public class SaveInvestigatorAction implements Serializable {
         private String fileSubmittionOnDate;
         @SerializedName("VisusServicesID")
         @Expose
-        private Integer visusServicesID;
+        private String visusServicesID;
         @SerializedName("VisusServicesText")
         @Expose
         private String visusServicesText;
@@ -127,6 +132,37 @@ public class SaveInvestigatorAction implements Serializable {
         @Expose
         private String addressAtClickingPhoto;
 
+        //todo new
+        @SerializedName("InvInsuranceRelID")
+        @Expose
+        public String InvInsuranceRelID;
+
+        public String common_ID;
+
+        public String getCommon_ID() {
+            return common_ID;
+        }
+
+        public void setCommon_ID(String common_ID) {
+            this.common_ID = common_ID;
+        }
+
+        public String getInvestigatorCaseActivityPhotoServerID() {
+            return InvestigatorCaseActivityPhotoServerID;
+        }
+
+        public void setInvestigatorCaseActivityPhotoServerID(String investigatorCaseActivityPhotoServerID) {
+            InvestigatorCaseActivityPhotoServerID = investigatorCaseActivityPhotoServerID;
+        }
+
+        public String getInvInsuranceRelID() {
+            return InvInsuranceRelID;
+        }
+
+        public void setInvInsuranceRelID(String invInsuranceRelID) {
+            InvInsuranceRelID = invInsuranceRelID;
+        }
+
         public String getInvestigatorCaseActivity_ClientD() {
             return InvestigatorCaseActivity_ClientD;
         }
@@ -147,27 +183,27 @@ public class SaveInvestigatorAction implements Serializable {
             this.investigatorCaseActivityID = investigatorCaseActivityID;
         }
 
-        public Integer getInvestigatorCaseActivityCaseInsuranceID() {
+        public String getInvestigatorCaseActivityCaseInsuranceID() {
             return investigatorCaseActivityCaseInsuranceID;
         }
 
-        public void setInvestigatorCaseActivityCaseInsuranceID(Integer investigatorCaseActivityCaseInsuranceID) {
+        public void setInvestigatorCaseActivityCaseInsuranceID(String investigatorCaseActivityCaseInsuranceID) {
             this.investigatorCaseActivityCaseInsuranceID = investigatorCaseActivityCaseInsuranceID;
         }
 
-        public Integer getInvestigatorCaseActivityInvID() {
+        public String getInvestigatorCaseActivityInvID() {
             return investigatorCaseActivityInvID;
         }
 
-        public void setInvestigatorCaseActivityInvID(Integer investigatorCaseActivityInvID) {
+        public void setInvestigatorCaseActivityInvID(String investigatorCaseActivityInvID) {
             this.investigatorCaseActivityInvID = investigatorCaseActivityInvID;
         }
 
-        public Integer getInvestigatorRequiredActivityID() {
+        public String getInvestigatorRequiredActivityID() {
             return investigatorRequiredActivityID;
         }
 
-        public void setInvestigatorRequiredActivityID(Integer investigatorRequiredActivityID) {
+        public void setInvestigatorRequiredActivityID(String investigatorRequiredActivityID) {
             this.investigatorRequiredActivityID = investigatorRequiredActivityID;
         }
 
@@ -211,11 +247,11 @@ public class SaveInvestigatorAction implements Serializable {
             this.fileSubmittionOnDate = fileSubmittionOnDate;
         }
 
-        public Integer getVisusServicesID() {
+        public String getVisusServicesID() {
             return visusServicesID;
         }
 
-        public void setVisusServicesID(Integer visusServicesID) {
+        public void setVisusServicesID(String visusServicesID) {
             this.visusServicesID = visusServicesID;
         }
 
@@ -331,4 +367,6 @@ public class SaveInvestigatorAction implements Serializable {
             this.addressAtClickingPhoto = addressAtClickingPhoto;
         }
     }
+
+
 }

@@ -17,8 +17,8 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiPaReportingFormatBinding;
+import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.GI_PAResponse;
 import com.org.visus.models.GiPAInsuCheckList;
 import com.org.visus.models.MyAssignment;
@@ -45,7 +45,7 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
     ActivityGiPaReportingFormatBinding activityGiPaReportingFormatBinding;
     Bundle bundle;
     ArrayList<MyAssignment.MyAssignmentData> data;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType;
     ArrayList<GiPAInsuCheckList.GiPAInsuCheckListData> giPAInsuCheckListData;
     Boolean IsDulyFilledClaimForm = false, AttestedDeathCertificate = false, AttestedPostMortem = false, CancelledChequeWithClaimant = false, RegistrationCopyOfVehicle = false, /*DrivingLicenseOfDriver = false,*/
             IndemnityCumDeclarationBond = false, AMLDocuments = false, NomineeDeclarationDocuments = false, CaseSpecificDocuments = false, PoliceFinalChargeSheetCourtFinalOrder = false, MedicalCauseDeathCertificateIssued = false, HospitalizationPaperTreatmentPaper = false, PastConsultationPaper = false, NeighbourStatementAlongWithKYC = false, ContactNumberOfPersonWhoMeetDuringSpotVisit = false, IVPhotosAlongWithEngineChassisNumber = false, SpotVerificationDetail = false, IONumberAndName = false, ReasonForNoFIRN0PMRPanchnama = false, DulyFilledClaimFormInjured = false, DisabilityCertificateStatingPercentageDisablement = false, FIRMLC = false, IndemnityCumDeclarationBondRs100StampPaper = false, RegistrationCopyVehicle = false, DrivingLicenseDriverInjured = false, HospitalTreatmentPapersEssentialConfirmation = false, ColorPhotographInjuredReflectingDisability = false, PhotoIDProofInjured = false, CancelledChequePayeeName = false, AMLDocumentsInjured = false;
@@ -62,10 +62,9 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
             data = (ArrayList<MyAssignment.MyAssignmentData>) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
         }
-        if (giPAInsuCheckListData != null) {
 
-        }
         callListener();
     }
 
@@ -94,7 +93,6 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
                         lstGi_paDataList.clear();
                         for (int i = 0; i < giPAInsuCheckListData.size(); i++) {
                             gi_paData = new GI_PA.GI_PAData();
-
                             gi_paData.setInvGiPACheckListID(-1);
                             gi_paData.setInvGiPACheckListHeadID(giPAInsuCheckListData.get(i).getInvGiPACheckListHeadID());
                             gi_paData.setInvGiPACheckListInvID(data.get(0).getInvestigatorObj().getInvId());
@@ -102,9 +100,11 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
                             gi_paData.setInvGiPACheckListSubmittedOnDateTime(getCurrentDateTime());
                             gi_paData.setEntryByUserID(-1);
                             gi_paData.setEntryOnDate(getCurrentDateTime());
-                            gi_paData.setHoldCase(false);
-
-
+                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                gi_paData.setHoldCase(true);
+                            } else {
+                                gi_paData.setHoldCase(false);
+                            }
                             if (giPAInsuCheckListData.get(i).getInvGiPACheckListHeadID() == 1) {
                                 gi_paData.setInvGiPACheckListRemark(activityGiPaReportingFormatBinding.editTextDulyFilledClaimForm.getText().toString().trim() != null ? activityGiPaReportingFormatBinding.editTextDulyFilledClaimForm.getText().toString().trim() : "");
                                 gi_paData.setCheckListHeadDataAvailable(IsDulyFilledClaimForm);
@@ -259,6 +259,7 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
                             lstGi_paDataList.add(gi_paData);
                         }
                         gi_pa.setLstInvGiPACheckList(lstGi_paDataList);
+
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -740,7 +741,13 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         sweetAlertDialog.dismiss();
-                                        Intent intent = new Intent(GI_PA_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                        Intent intent = null;
+                                        if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                            intent = new Intent(GI_PA_ReportingFormatActivity.this, FinalSubmissionAssignmentHoldActivity.class);
+
+                                        } else {
+                                            intent = new Intent(GI_PA_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                        }
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -768,8 +775,6 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
-                        ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_PA_ReportingFormatActivity.this,"GI_PA_ReportingFormatActivity","giPACheckList/saveGeneralInsuPACheckListData", response.message()+" "+response.code(),"API Exception");
-                        apiCall.saveErrorLog();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -777,8 +782,6 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_PAResponse> call, Throwable t) {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_PA_ReportingFormatActivity.this,"GI_PA_ReportingFormatActivity","giPACheckList/saveGeneralInsuPACheckListData", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

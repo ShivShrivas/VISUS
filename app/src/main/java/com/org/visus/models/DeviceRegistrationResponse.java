@@ -21,6 +21,7 @@ public class DeviceRegistrationResponse implements Serializable {
     @Expose
     private List<DeviceInfo> data = new ArrayList<>();
 
+
     public Integer getStatusCode() {
         return statusCode;
     }

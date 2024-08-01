@@ -9,10 +9,17 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
     private static final String dbName = "visus.db";
     public static String tblMyService = "tblMyService";
     public static String tblTotalCases = "tblTotalCases";
+    public static String tblTotalCases_Hold = "tblTotalCases_Hold";
+
+
     public static String tblMyAssignmentData = "tblMyAssignmentData";
+    public static String tblMyAssignmentData_Hold = "tblMyAssignmentData_Hold";
+
+
     public static String tblInvestigatorObj = "tblInvestigatorObj";
     public static String tblRequreActionsData = "tblRequreActionsData";
     public static String tblPostInvestigatorActionData = "tblPostInvestigatorActionData";
+    public static String tblPostInvestigatorActionDataPhoto = "tblPostInvestigatorActionDataPhoto";
 
 
     public static String common_id = "common_id";
@@ -90,26 +97,108 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
     public static String CellAddress = "CellAddress";
     public static String InvInsuranceRelID_SAVING = "InvInsuranceRelID_SAVING";
     public static String isSyncedRequreActionsData = "isSyncedRequreActionsData";
-    public static String imageFIle = "imageFile";
+
+    public static String InsuredOrClaimentName = "InsuredOrClaimentName";
+    public static String FileAttachmentCountByInvestigator = "FileAttachmentCountByInvestigator";
 
 
-    private final String create_tblPostInvestigatorActionData = "create table " + tblPostInvestigatorActionData + " (" + common_id + " integer primary key autoincrement ," + OriginalFileName + " text," + ServiceTypeID + " text," + ServiceID + " text," + InvID + " text," + Comments + " text," + ActionID + " text," + Latitude + " text," + Longitude + " text," + CellAddress + " text," +
-            Token + " text," +
-            InvInsuranceRelID_SAVING + " text," +
-            isSyncedRequreActionsData + " text, " +
-            imageFIle + " BLOB " +
-            ");";
+    private final String create_tblPostInvestigatorActionData = "create table " + tblPostInvestigatorActionData + " (" + common_id + " integer primary key autoincrement ," + OriginalFileName + " text," + ServiceTypeID + " text," + ServiceID + " text," + InvID + " text," + Comments + " text," + ActionID + " text," + Latitude + " text," + Longitude + " text," + CellAddress + " text," + Token + " text," + InvInsuranceRelID_SAVING + " text," + isSyncedRequreActionsData + " text );";
 
     private final String create_tblRequreActionsData = "create table " + tblRequreActionsData + " (" + common_id + " integer primary key autoincrement ," + InvestigatorReqActivity_ID + " text," + InsuranceClaimTypeID + " text," + InsuranceClaimTypeText + " text," + InvestigatorReqActivity_Text + " text," + IsSelfieRequired + " text," + IsCompulsory + " text," + IsPhotoRequired + " text," + MinimumPhotoRequired + " text," + MaximumPhotoRequired + " text," + IsVedioFileRequired + " text," + MinumumVedioFileRequired + " text," + MaximumVedioFileRequired + " text," + MaxmumSizeOfVedioFileInMB + " text," + IsActiveInvestigatorReqActivity + " text );";
 
 
-    private final String create_tblMyAssignmentData = "create table " + tblMyAssignmentData + " (" + common_id + " integer primary key autoincrement ," + InsuranceDataID + " text," + VisusServicesId + " text," + VisusServicesText_My_AssignMent + " text," + InsuranceAssignedOnDate + " text," + InsuranceSubmittedOnDate + " text," + TATForInvestigator + " text," + ClaimNumber + " text," + PolicyNumber + " text," + InsuranceCompanyName + " text," + CompanyName + " text," + ProductID + " text," + ProductName + " text," + CaseTitle + " text," + DateOfAccident + " text," + InvInsuranceRelID + " text," + ProductSubCategory + " text );";
+    private final String create_tblMyAssignmentData = "create table " + tblMyAssignmentData + " (" + common_id + " integer primary key autoincrement ," + InsuranceDataID + " text," + VisusServicesId + " text," + VisusServicesText_My_AssignMent + " text," + InsuranceAssignedOnDate + " text," + InsuranceSubmittedOnDate + " text," + TATForInvestigator + " text," + ClaimNumber + " text," + PolicyNumber + " text," + InsuranceCompanyName + " text," + CompanyName + " text," + ProductID + " text," + ProductName + " text," + CaseTitle + " text," + DateOfAccident + " text," + InvInsuranceRelID + " text," + ProductSubCategory + " text," + InsuredOrClaimentName + " text," + FileAttachmentCountByInvestigator + " text );";
+
+
+    private final String create_tblMyAssignmentData_Hold = "create table " + tblMyAssignmentData_Hold + " (" + common_id + " integer primary key autoincrement ," + InsuranceDataID + " text," + VisusServicesId + " text," + VisusServicesText_My_AssignMent + " text," + InsuranceAssignedOnDate + " text," + InsuranceSubmittedOnDate + " text," + TATForInvestigator + " text," + ClaimNumber + " text," + PolicyNumber + " text," + InsuranceCompanyName + " text," + CompanyName + " text," + ProductID + " text," + ProductName + " text," + CaseTitle + " text," + DateOfAccident + " text," + InvInsuranceRelID + " text," + ProductSubCategory + " text," + InsuredOrClaimentName + " text," + FileAttachmentCountByInvestigator + " text );";
+
 
     private final String create_tblInvestigatorObj = "create table " + tblInvestigatorObj + " (" + common_id + " integer primary key autoincrement ," + INV_ID + " text," + INV_Name + " text," + ISActive + " text," + INV_Father_Name + " text," + INV_Contact_Number1 + " text," + INV_Contact_Number2 + " text," + INV_code + " text," + JoiningDate + " text," + ReliveDate + " text," + DOB + " text," + Email + " text," + PAN_Number + " text );";
 
     private final String create_tblMyServices = "create table " + tblMyService + " (" + common_id + " integer primary key autoincrement ," + VisusServicesID + " integer," + VisusServicesText + " text," + VisusServicesDesc + " text," + IsVisusActiveServices + " boolean );";
 
     private final String create_tblMyTotalCase = "create table " + tblTotalCases + " (" + common_id + " integer primary key autoincrement ," + InvestigationUsedForID + " integer," + InvestigationUsedForText + " text," + IsActiveInvestigationUsedFor + " text," + InsvestigatorID + " text," + InsvestigatorCode + " text," + InsvestigatorName + " text," + TotalCase + " text," + TotalSubmittedCases + " text," + TotalPendingCases + " text );";
+
+
+    private final String create_tblMyTotalCase_Hold = "create table " + tblTotalCases_Hold + " (" + common_id + " integer primary key autoincrement ," + InvestigationUsedForID + " integer," + InvestigationUsedForText + " text," + IsActiveInvestigationUsedFor + " text," + InsvestigatorID + " text," + InsvestigatorCode + " text," + InsvestigatorName + " text," + TotalCase + " text," + TotalSubmittedCases + " text," + TotalPendingCases + " text );";
+
+    public static String InvestigatorCaseActivityPhotoServerID = "InvestigatorCaseActivityPhotoServerID";
+    public static String InvestigatorCaseActivity_ID = "InvestigatorCaseActivity_ID";
+    public static String InvestigatorCaseActivity_CaseInsuranceID = "InvestigatorCaseActivity_CaseInsuranceID";
+    public static String InvestigatorCaseActivity_InvID = "InvestigatorCaseActivity_InvID";
+    public static String InvestigatorRequiredActivityID = "InvestigatorRequiredActivityID";
+    public static String ObjInvReqActivity = "ObjInvReqActivity";
+    public static String UniqueFileName = "UniqueFileName";
+    public static String ActivityFilePath = "ActivityFilePath";
+    public static String FileSubmittionOnDate = "FileSubmittionOnDate";
+    public static String InvestigatorObj = "InvestigatorObj";
+    public static String ExceptionIfAny = "ExceptionIfAny";
+    public static String InvestigatorComments = "InvestigatorComments";
+    public static String LatitudeAtClickingPhoto = "LatitudeAtClickingPhoto";
+    public static String LongitudeAtClickingPhoto = "LongitudeAtClickingPhoto";
+    public static String AddressAtClickingPhoto = "AddressAtClickingPhoto";
+    public static String InvestigatorCaseActivity_ClientD = "InvestigatorCaseActivity_ClientD";
+
+
+    private final String create_tblPostInvestigatorActionDataPhoto = "create table " + tblPostInvestigatorActionDataPhoto + " (" + common_id + " integer primary key autoincrement ,"
+            + InvestigatorCaseActivity_ClientD + " text,"
+            + InvestigatorCaseActivityPhotoServerID + " text,"
+            + InvestigatorCaseActivity_ID + " text,"
+            + InvestigatorCaseActivity_CaseInsuranceID + " text,"
+            + InvestigatorCaseActivity_InvID + " text,"
+            + InvestigatorRequiredActivityID + " text,"
+            + ObjInvReqActivity + " text,"
+            + OriginalFileName + " text,"
+            + UniqueFileName + " text,"
+            + ActivityFilePath + " text,"
+            + FileSubmittionOnDate + " text,"
+            + VisusServicesID + " text,"
+            + VisusServicesText + " text,"
+            + InvestigatorObj + " text,"
+            + InsuranceAssignedOnDate + " text,"
+            + InsuranceSubmittedOnDate + " text,"
+            + TATForInvestigator + " text,"
+            + ClaimNumber + " text,"
+            + PolicyNumber + " text,"
+            + InsuranceCompanyName + " text,"
+            + CompanyName + " text,"
+            + ExceptionIfAny + " text,"
+            + InvestigatorComments + " " + "text,"
+            + LatitudeAtClickingPhoto + " text,"
+            + LongitudeAtClickingPhoto + " text,"
+            + AddressAtClickingPhoto + " text,"
+            + InvInsuranceRelID + " text,"
+            + Token + " text,"
+            + isSyncedRequreActionsData + " text );";
+
+
+    public static String DeviceLocation_ID = "DeviceLocation_ID";
+    public static String DeviceLocation_DeviceID = "DeviceLocation_DeviceID";
+    public static String DeviceLocation_InvID = "DeviceLocation_InvID";
+    public static String DeviceLocation_Latitude = "DeviceLocation_Latitude";
+    public static String DeviceLocation_Longitude = "DeviceLocation_Longitude";
+    public static String DeviceLocation_GeoAddress = "DeviceLocation_GeoAddress";
+    public static String DeviceLocation_SaveOnDate = "DeviceLocation_SaveOnDate";
+    public static String IsLatestDeviceLocation = "IsLatestDeviceLocation";
+
+    public static String IsSavedDeviceLocation = "IsSavedDeviceLocation";
+
+    public static String tbl_DeviceInvLocation = "tbl_DeviceInvLocation";
+    public static String isSyncedDeviceInvLocation = "isSyncedDeviceInvLocation";
+
+
+    private final String create_tbl_DeviceInvLocation = "create table " + tbl_DeviceInvLocation + " (" + common_id + " integer primary key autoincrement ," +
+            DeviceLocation_ID + " text,"
+            + DeviceLocation_DeviceID + " text,"
+            + DeviceLocation_InvID + " text,"
+            + DeviceLocation_Latitude + " text,"
+            + DeviceLocation_Longitude + " text,"
+            + DeviceLocation_GeoAddress + " text,"
+            + DeviceLocation_SaveOnDate + " text,"
+            + IsLatestDeviceLocation + " text,"
+            + IsSavedDeviceLocation + " text,"
+            + ExceptionIfAny + " text,"
+            + isSyncedDeviceInvLocation + " text );";
 
 
     public VISUS_SQLiteHelper(Context context) {
@@ -124,6 +213,11 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(create_tblInvestigatorObj);
         sqLiteDatabase.execSQL(create_tblRequreActionsData);
         sqLiteDatabase.execSQL(create_tblPostInvestigatorActionData);
+        sqLiteDatabase.execSQL(create_tbl_DeviceInvLocation);
+        sqLiteDatabase.execSQL(create_tblMyAssignmentData_Hold);
+        sqLiteDatabase.execSQL(create_tblMyTotalCase_Hold);
+        sqLiteDatabase.execSQL(create_tblPostInvestigatorActionDataPhoto);
+
     }
 
     @Override

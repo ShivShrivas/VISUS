@@ -19,8 +19,8 @@ public class ProfileActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_profile);
         activityProfileBinding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(activityProfileBinding.getRoot());
-        String INV_code = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.INV_name);
-        String INV_name = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.INV_code);
+        String INV_code = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.INV_code);
+        String INV_name = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.INV_name);
         String ContactNumber = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.ContactNumber);
         String ContactNumber2 = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.ContactNumber2);
         String Email = PrefUtils.getFromPrefs(ProfileActivity.this, PrefUtils.Email);

@@ -193,6 +193,18 @@ public class LifeInsuranceCheckList implements Serializable {
         @Expose
         private Integer Li_InvInsuranceRelID;
 
+        @SerializedName("isHoldCase")
+        @Expose
+        private Boolean isHoldCase;
+
+        public Boolean getHoldCase() {
+            return isHoldCase;
+        }
+
+        public void setHoldCase(Boolean holdCase) {
+            isHoldCase = holdCase;
+        }
+
         public Integer getLi_InvInsuranceRelID() {
             return Li_InvInsuranceRelID;
         }

@@ -75,13 +75,13 @@ public class TotalCases implements Serializable {
         private String insvestigatorName;
         @SerializedName("TotalCases")
         @Expose
-        private Integer totalCases;
+        private int totalCases;
         @SerializedName("TotalSubmittedCases")
         @Expose
-        private Integer totalSubmittedCases;
+        private int totalSubmittedCases;
         @SerializedName("TotalPendingCases")
         @Expose
-        private Integer totalPendingCases;
+        private int totalPendingCases;
 
         public Integer getInvestigationUsedForID() {
             return investigationUsedForID;
@@ -131,27 +131,27 @@ public class TotalCases implements Serializable {
             this.insvestigatorName = insvestigatorName;
         }
 
-        public Integer getTotalCases() {
+        public int getTotalCases() {
             return totalCases;
         }
 
-        public void setTotalCases(Integer totalCases) {
+        public void setTotalCases(int totalCases) {
             this.totalCases = totalCases;
         }
 
-        public Integer getTotalSubmittedCases() {
+        public int getTotalSubmittedCases() {
             return totalSubmittedCases;
         }
 
-        public void setTotalSubmittedCases(Integer totalSubmittedCases) {
+        public void setTotalSubmittedCases(int totalSubmittedCases) {
             this.totalSubmittedCases = totalSubmittedCases;
         }
 
-        public Integer getTotalPendingCases() {
+        public int getTotalPendingCases() {
             return totalPendingCases;
         }
 
-        public void setTotalPendingCases(Integer totalPendingCases) {
+        public void setTotalPendingCases(int totalPendingCases) {
             this.totalPendingCases = totalPendingCases;
         }
     }

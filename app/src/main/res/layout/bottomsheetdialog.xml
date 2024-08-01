@@ -7,7 +7,7 @@
     android:background="@drawable/sheet_bg"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">
-    5
+
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -278,17 +278,57 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-
-            <ImageView
-                android:id="@+id/photo_img"
+            <LinearLayout
+                android:id="@+id/ll_photo_img"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginStart="20dp"
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/click_Photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableEnd="@drawable/ic_photo_camera"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:text="Click Photo"
+                    android:textColor="@color/black" />
+
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:foregroundGravity="center_vertical">
+                    <!-- child view -->
+                    <LinearLayout
+                        android:id="@+id/ll_Photo_Img_Show"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:foregroundGravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal"></LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/pdf"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:drawableEnd="@drawable/baseline_attachment_24"
+                android:gravity="center_vertical"
+                android:padding="5dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo"
+                android:text="N?A.pdf"
                 android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout

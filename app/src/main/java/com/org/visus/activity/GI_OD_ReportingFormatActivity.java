@@ -17,8 +17,8 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiOdReportingFormatBinding;
+import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.GI_ODResponse;
 import com.org.visus.models.GiODInsuCheckList;
 import com.org.visus.models.MyAssignment;
@@ -46,7 +46,7 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
     ActivityGiOdReportingFormatBinding activityGiOdReportingFormatBinding;
     Bundle bundle;
     ArrayList<MyAssignment.MyAssignmentData> data;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType;
     ArrayList<GiODInsuCheckList.GiODInsuCheckListData> giODInsuCheckListData;
 
     GI_OD.GI_ODData gi_odData0, gi_odData1, gi_odData2, gi_odData3, gi_odData4, gi_odData5, gi_odData6, gi_odData7, gi_odData8, gi_odData9, gi_odData10;
@@ -66,6 +66,7 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
             data = (ArrayList<MyAssignment.MyAssignmentData>) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
         }
         if (giODInsuCheckListData != null) {
             gi_odData0 = new GI_OD.GI_ODData();
@@ -616,6 +617,15 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
                             gi_odData.setInvestigatorGiODCheckListSubmittedOnDate(getCurrentDateTime());
                             gi_odData.setInvestigatorGiODCheckListSubmittedByUserID(-1);
                             gi_odData.setInvestigatorGiODCheckListEntryOnDate(getCurrentDateTime());
+
+
+
+                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                gi_odData.setHoldCase(true);
+                            } else {
+                                gi_odData.setHoldCase(false);
+                            }
+
                             if (giODInsuCheckListData.get(i).getInvestigatorODVisitDocumentID() == 1) {
                                 gi_odData.setGIInvCheckListStatus(IsWrittenStatementWithKYC);
                                 gi_odData.setGiInvCheckListReason(activityGiOdReportingFormatBinding.editTextWrittenStatementWithKYC.getText().toString().trim() != null ? activityGiOdReportingFormatBinding.editTextWrittenStatementWithKYC.getText().toString().trim() : "");
@@ -714,7 +724,7 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
                                 gi_odData.setGiInvCheckListReason(activityGiOdReportingFormatBinding.editTextPayableNotPayable.getText().toString().trim() != null ? activityGiOdReportingFormatBinding.editTextPayableNotPayable.getText().toString().trim() : "");
                             } else if (giODInsuCheckListData.get(i).getInvestigatorODVisitDocumentID() == 33) {
                                 gi_odData.setGIInvCheckListStatus(false);////Label
-                                gi_odData.setGiInvCheckListReason("");////Label
+                                gi_odData.setGiInvCheckListReason(activityGiOdReportingFormatBinding.tvInvestigatorOfFinding.getText().toString().trim());////Label
                             }
                             lstInvGiODCheckList.add(gi_odData);
                         }
@@ -922,7 +932,12 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         sweetAlertDialog.dismiss();
-                                        Intent intent = new Intent(GI_OD_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                        Intent intent = null;
+                                        if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                            intent = new Intent(GI_OD_ReportingFormatActivity.this, FinalSubmissionAssignmentHoldActivity.class);
+                                        } else {
+                                            intent = new Intent(GI_OD_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                        }
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -950,8 +965,6 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
-                        ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_OD_ReportingFormatActivity.this,"GI_OD_ReportingFormatActivity","giODCheckList/saveGeneralInsuODCheckListData", response.message()+" "+response.code(),"API Exception");
-                        apiCall.saveErrorLog();
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -959,8 +972,6 @@ public class GI_OD_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_ODResponse> call, Throwable t) {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_OD_ReportingFormatActivity.this,"GI_OD_ReportingFormatActivity","giODCheckList/saveGeneralInsuODCheckListData", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

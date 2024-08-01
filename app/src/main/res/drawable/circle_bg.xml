@@ -2,7 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
 
-<gradient android:startColor="@color/app_orange"
-    android:endColor="@color/app_red"/>
+    <gradient
+        android:startColor="@color/app_orange"
+        android:endColor="@color/app_red" />
 
 </shape>

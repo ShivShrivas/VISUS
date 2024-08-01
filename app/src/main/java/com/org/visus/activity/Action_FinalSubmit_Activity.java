@@ -7,9 +7,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.org.visus.adapters.FinalSubmissionAction_Adapter;
+import com.org.visus.adapters.FinalSubmissionAssignment_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityActionFinalSubmitBinding;
 import com.org.visus.models.InvReqActivityFile;
 import com.org.visus.models.MyAssignment;
@@ -25,7 +25,7 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
     ApiService apiService;
     String Token, InvestigatorID;
     Bundle bundle;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType = "";
     MyAssignment.MyAssignmentData myPendingAssignmentData;
 
     @Override
@@ -38,6 +38,9 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
             myPendingAssignmentData = (MyAssignment.MyAssignmentData) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
+
+
         }
         if (ConnectionUtility.isConnected(Action_FinalSubmit_Activity.this)) {
             getMyPendingAssignment(VisusServiceID);
@@ -66,14 +69,11 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
                                 submissionAssignmentBinding.actionRecycler.setVisibility(View.VISIBLE);
                                 submissionAssignmentBinding.textViewNoRecord.setVisibility(View.GONE);
                                 submissionAssignmentBinding.actionRecycler.setHasFixedSize(true);
-                                submissionAssignmentBinding.actionRecycler.setAdapter(new FinalSubmissionAction_Adapter(Action_FinalSubmit_Activity.this, invReqActivityFile.getData(), myPendingAssignmentData));
+                                submissionAssignmentBinding.actionRecycler.setAdapter(new FinalSubmissionAction_Adapter(Action_FinalSubmit_Activity.this, invReqActivityFile.getData(), myPendingAssignmentData, Action_FinalSubmit_Activity.this));
                             }
                         } else {
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(Action_FinalSubmit_Activity.this,"FinalSubmissionAssignment_Adapter","myUploadedFile/getInvReqActivityFile", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 

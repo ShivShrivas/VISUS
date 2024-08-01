@@ -108,6 +108,30 @@ public class MyAssignment implements Serializable {
         @Expose
         private String ProductSubCategory;
 
+        @SerializedName("InsuredOrClaimentName")
+        @Expose
+        private String InsuredOrClaimentName;
+
+        @SerializedName("FileAttachmentCountByInvestigator")
+        @Expose
+        private String FileAttachmentCountByInvestigator;
+
+        public String getFileAttachmentCountByInvestigator() {
+            return FileAttachmentCountByInvestigator;
+        }
+
+        public void setFileAttachmentCountByInvestigator(String fileAttachmentCountByInvestigator) {
+            FileAttachmentCountByInvestigator = fileAttachmentCountByInvestigator;
+        }
+
+        public String getInsuredOrClaimentName() {
+            return InsuredOrClaimentName;
+        }
+
+        public void setInsuredOrClaimentName(String insuredOrClaimentName) {
+            InsuredOrClaimentName = insuredOrClaimentName;
+        }
+
         public String getInvInsuranceRelID() {
             return InvInsuranceRelID;
         }
@@ -123,7 +147,6 @@ public class MyAssignment implements Serializable {
         public void setProductSubCategory(String productSubCategory) {
             ProductSubCategory = productSubCategory;
         }
-
 
 
         public String getCaseTitle() {

@@ -18,8 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityLifeInsuranceReportingFormatBinding;
+import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.LifeInsuranceCheckList;
 import com.org.visus.utility.ConnectionUtility;
 import com.org.visus.utility.PrefUtils;
@@ -43,7 +43,7 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
     Bundle bundle;
     ApiService apiService;
     String Token;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType;
     LifeInsuranceCheckList.LifeInsuranceCheckListData LifeInsuranceCheckListData;
     LayoutInflater layoutInflaterDetails;
     Map<String, String> mapNeighbourDetails = new HashMap<String, String>();
@@ -63,6 +63,7 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
             LifeInsuranceCheckListData = (LifeInsuranceCheckList.LifeInsuranceCheckListData) getIntent().getSerializableExtra("LifeInsuranceCheckListData");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
         }
 
         if (LifeInsuranceCheckListData != null) {
@@ -254,6 +255,13 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
                             } else {
                                 LifeInsuranceCheckListData.setInsuredAge(Integer.parseInt(activityLifeInsuranceReportingFormatBinding.editTextInsuredAge.getText().toString().trim()));
                             }
+
+                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                LifeInsuranceCheckListData.setHoldCase(true);
+                            } else {
+                                LifeInsuranceCheckListData.setHoldCase(false);
+                            }
+
 
                             LifeInsuranceCheckListData.setInsuredCompany(activityLifeInsuranceReportingFormatBinding.editTextInsuredCompany.getText().toString().trim());
                             LifeInsuranceCheckListData.setClaimantName(activityLifeInsuranceReportingFormatBinding.editTextClaimantName.getText().toString().trim());
@@ -516,7 +524,12 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
                                         @Override
                                         public void onClick(View v) {
                                             sweetAlertDialog.dismiss();
-                                            Intent intent = new Intent(LifeInsuranceReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                            Intent intent = null;
+                                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                                intent = new Intent(LifeInsuranceReportingFormatActivity.this, FinalSubmissionAssignmentHoldActivity.class);
+                                            } else {
+                                                intent = new Intent(LifeInsuranceReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                            }
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -546,16 +559,12 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
-                        ErrorLogAPICall apiCall= new ErrorLogAPICall(LifeInsuranceReportingFormatActivity.this,"LifeInsuranceReportingFormatActivity","LiCheckList/saveLifeInsuCheckListData", response.message()+" "+response.code(),"API Exception");
-                        apiCall.saveErrorLog();
                         Toast.makeText(getApplicationContext(), "" + response.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LifeInsuranceCheckList> call, Throwable t) {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(LifeInsuranceReportingFormatActivity.this,"LifeInsuranceReportingFormatActivity","LiCheckList/saveLifeInsuCheckListData", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
                 }
             });

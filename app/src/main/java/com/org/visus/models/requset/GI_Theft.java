@@ -128,6 +128,18 @@ public class GI_Theft implements Serializable {
         @Expose
         private String entryByUserName;
 
+        @SerializedName("isHoldCase")
+        @Expose
+        private Boolean isHoldCase;
+
+        public Boolean getHoldCase() {
+            return isHoldCase;
+        }
+
+        public void setHoldCase(Boolean holdCase) {
+            isHoldCase = holdCase;
+        }
+
         public Integer getInvGiTheftCheckListID() {
             return invGiTheftCheckListID;
         }

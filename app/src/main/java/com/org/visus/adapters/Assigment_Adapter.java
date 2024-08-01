@@ -1,5 +1,6 @@
 package com.org.visus.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Assigment_Adapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Assigment_Adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if (data != null) {
             if (data.get(position).getClaimNumber() != null) {
                 holder.textViewClaimNumber.setText(data.get(position).getClaimNumber());
@@ -51,6 +52,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
                 holder.textViewAssignedDate.setText(data.get(position).getInsuranceAssignedOnDate());
                 holder.textViewProductSubCategory.setText(data.get(position).getProductSubCategory());
                 holder.textViewTATForInvestigation.setText(data.get(position).gettATForInvestigator().toString());
+                holder.textViewInsuredOrClaimentName.setText(data.get(position).getInsuredOrClaimentName() != null ? data.get(position).getInsuredOrClaimentName() : "N/A");
 
                 holder.take_action.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -59,6 +61,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
                         intent.putExtra("Data", data.get(position));
                         intent.putExtra("VisusService", visusService);
                         intent.putExtra("VisusServiceID", visusServiceID);
+                        intent.putExtra("AssessmentType", "");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }
@@ -78,7 +81,7 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, textViewProductSubCategory;
+        TextView textViewClaimNumber, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, textViewProductSubCategory, textViewInsuredOrClaimentName;
         Button take_action;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -90,6 +93,8 @@ public class Assigment_Adapter extends RecyclerView.Adapter<Assigment_Adapter.My
             textViewTATForInvestigation = itemView.findViewById(R.id.textViewTATForInvestigation);
             textViewProductSubCategory = itemView.findViewById(R.id.textViewProductSubCategory);
             take_action = itemView.findViewById(R.id.take_action);
+            textViewInsuredOrClaimentName = itemView.findViewById(R.id.textViewInsuredOrClaimentName);
+
         }
     }
 }

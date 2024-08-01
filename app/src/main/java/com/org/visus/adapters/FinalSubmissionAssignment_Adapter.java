@@ -26,7 +26,6 @@ import com.org.visus.activity.LifeInsuranceReportingFormatActivity;
 import com.org.visus.activity.MACT_ReportingFormatActivity;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.GiODInsuCheckList;
 import com.org.visus.models.GiPAInsuCheckList;
 import com.org.visus.models.GiTheftInsuCheckList;
@@ -82,6 +81,9 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                 holder.textViewInsuranceCompany.setText(data.get(position).getInsuranceCompanyName());
                 holder.textViewAssignedDate.setText(data.get(position).getInsuranceAssignedOnDate());
                 holder.textViewTATForInvestigation.setText(data.get(position).gettATForInvestigator().toString());
+                holder.InsuredOrClaimentName.setText(data.get(position).getInsuredOrClaimentName() != null ? data.get(position).getInsuredOrClaimentName() : "N/A");
+                holder.FileAttachmentCountByInvestigator.setText(data.get(position).getFileAttachmentCountByInvestigator() != null ? data.get(position).getFileAttachmentCountByInvestigator() : "N/A");
+
 
                 holder.view_action.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -91,6 +93,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                             intent.putExtra("Data", data.get(position));
                             intent.putExtra("VisusService", visusService);
                             intent.putExtra("VisusServiceID", visusServiceID);
+                            intent.putExtra("AssessmentType", "");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.getApplicationContext().startActivity(intent);
                         } else {
@@ -127,44 +130,6 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                         }
                     }
                 });
-
-                /*holder.finalsubmit.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(finalSubmissionAssignment_activity);
-                        builder.setTitle("Final Submit Alert!");
-                        builder.setMessage("Are you sure want to Final Submit ?");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String getCurrentDate = getCurrentDate();
-                                String insuranceAssignedOnDate = data.get(position).getInsuranceAssignedOnDate();
-                                Date currentDate = null;
-                                Date insuranceAssignedDate = null;
-                                try {
-                                    currentDate = new SimpleDateFormat("dd/MM/yyyy").parse(getCurrentDate);
-                                    insuranceAssignedDate = new SimpleDateFormat("dd/MM/yyyy").parse(insuranceAssignedOnDate);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                Calendar c = Calendar.getInstance();
-                                c.setTime(currentDate);
-                                // int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
-
-                                long diff = currentDate.getTime() - insuranceAssignedDate.getTime();
-                                postFinalSubmit(data.get(position).getInsuranceDataID().toString(), TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-                            }
-                        });
-                        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        builder.show();
-                    }
-                });*/
             }
         }
     }
@@ -180,7 +145,7 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewClaimNumber, textViewProductSubCategory, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation;
+        TextView textViewClaimNumber, textViewProductSubCategory, textViewPolicyNumber, textViewInsuranceCompany, textViewAssignedDate, textViewTATForInvestigation, InsuredOrClaimentName, FileAttachmentCountByInvestigator;
         Button view_action, finalsubmit;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -193,6 +158,10 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
             textViewTATForInvestigation = itemView.findViewById(R.id.textViewTATForInvestigation);
             view_action = itemView.findViewById(R.id.view_action);
             finalsubmit = itemView.findViewById(R.id.finalsubmit);
+            InsuredOrClaimentName = itemView.findViewById(R.id.InsuredOrClaimentName);
+
+            FileAttachmentCountByInvestigator = itemView.findViewById(R.id.FileAttachmentCountByInvestigator);
+
         }
     }
 
@@ -227,22 +196,18 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 intent.putExtra("LifeInsuranceCheckListData", lifeInsuranceCheckList.getData().get(0));
                                 intent.putExtra("VisusService", visusService);
                                 intent.putExtra("VisusServiceID", visusServiceID);
+                                intent.putExtra("AssessmentType", "");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }
                         } else {
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","LiCheckList/getLifeInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<LifeInsuranceCheckList> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","LiCheckList/getLifeInsuCheckList", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -272,70 +237,18 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 intent.putExtra("Data", (Serializable) data);
                                 intent.putExtra("VisusService", visusService);
                                 intent.putExtra("VisusServiceID", visusServiceID);
+                                intent.putExtra("AssessmentType", "");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.getApplicationContext().startActivity(intent);
                             }
                         } else {
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giODCheckList/getGiODInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GiODInsuCheckList> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giODCheckList/getGiODInsuCheckList", t.getMessage()
-                        ,"API Exception");
-                apiCall.saveErrorLog();
-                dialog.dismiss();
-                call.cancel();
-                Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    private void getGiTheftInsuCheckList(String InsuranceDataID) {
-        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
-        apiService = ApiClient.getClient(context).create(ApiService.class);
-        Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
-        InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
-        Call<GiTheftInsuCheckList> call2 = apiService.getGiTheftInsuCheckList("Bearer " + Token);
-        call2.enqueue(new Callback<GiTheftInsuCheckList>() {
-            @Override
-            public void onResponse(Call<GiTheftInsuCheckList> call, Response<GiTheftInsuCheckList> response) {
-                dialog.dismiss();
-                if (response.body() != null) {
-                    GiTheftInsuCheckList giTheftInsuCheckList = response.body();
-                    if (giTheftInsuCheckList != null) {
-                        if (giTheftInsuCheckList.getStatus() != null && giTheftInsuCheckList.getStatus().equalsIgnoreCase("success")) {
-                            if (giTheftInsuCheckList.getData().size() == 0) {
-
-                            } else {
-                                Intent intent = new Intent(context, GI_Theft_ReportingFormatActivity.class);
-                                intent.putExtra("GiTheftCheckListData", (Serializable) giTheftInsuCheckList.getData());
-                                intent.putExtra("Data", (Serializable) data);
-                                intent.putExtra("VisusService", visusService);
-                                intent.putExtra("VisusServiceID", visusServiceID);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(intent);
-                            }
-                        } else {
-                            ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                            apiCall.saveErrorLog();
-                        }
-                    }
-                }else {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GiTheftInsuCheckList> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giTheftCheckList/getGiTheftInsuCheckList", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -365,23 +278,59 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 intent.putExtra("Data", (Serializable) data);
                                 intent.putExtra("VisusService", visusService);
                                 intent.putExtra("VisusServiceID", visusServiceID);
+                                intent.putExtra("AssessmentType", "");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }
                         } else {
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giPACheckList/getGiPAInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<GiPAInsuCheckList> call, Throwable t) {
+                dialog.dismiss();
+                call.cancel();
+                Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","giPACheckList/getGiPAInsuCheckList", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
+    private void getGiTheftInsuCheckList(String InsuranceDataID) {
+        ProgressDialog dialog = ProgressDialog.show(context, "Loading", "Please wait...", true);
+        apiService = ApiClient.getClient(context).create(ApiService.class);
+        Token = PrefUtils.getFromPrefs(context, PrefUtils.Token);
+        InvestigatorID = PrefUtils.getFromPrefs(context, PrefUtils.InvestigatorID);
+        Call<GiTheftInsuCheckList> call2 = apiService.getGiTheftInsuCheckList("Bearer " + Token);
+        call2.enqueue(new Callback<GiTheftInsuCheckList>() {
+            @Override
+            public void onResponse(Call<GiTheftInsuCheckList> call, Response<GiTheftInsuCheckList> response) {
+                dialog.dismiss();
+                if (response.body() != null) {
+                    GiTheftInsuCheckList giTheftInsuCheckList = response.body();
+                    if (giTheftInsuCheckList != null) {
+                        if (giTheftInsuCheckList.getStatus() != null && giTheftInsuCheckList.getStatus().equalsIgnoreCase("success")) {
+                            if (giTheftInsuCheckList.getData().size() == 0) {
+
+                            } else {
+                                Intent intent = new Intent(context, GI_Theft_ReportingFormatActivity.class);
+                                intent.putExtra("GiTheftCheckListData", (Serializable) giTheftInsuCheckList.getData());
+                                intent.putExtra("Data", (Serializable) data);
+                                intent.putExtra("VisusService", visusService);
+                                intent.putExtra("VisusServiceID", visusServiceID);
+                                intent.putExtra("AssessmentType", "");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                            }
+                        } else {
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GiTheftInsuCheckList> call, Throwable t) {
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -412,22 +361,18 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                                 intent.putExtra("Data", data);
                                 intent.putExtra("VisusService", visusService);
                                 intent.putExtra("VisusServiceID", visusServiceID);
+                                intent.putExtra("AssessmentType", "");
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
                             }
                         } else {
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","InvMACTCheckList/getMACTInsuCheckList", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<MACTInsuCheckList> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","InvMACTCheckList/getMACTInsuCheckList", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
                 Toast.makeText(context, "fail " + t, Toast.LENGTH_LONG).show();
@@ -479,17 +424,12 @@ public class FinalSubmissionAssignment_Adapter extends RecyclerView.Adapter<Fina
                             });
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","MyPendingAssignment/SubmitMyAssignment", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
 
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(context,"FinalSubmissionAssignment_Adapter","MyPendingAssignment/SubmitMyAssignment", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(finalSubmissionAssignment_activity, "fail " + t, Toast.LENGTH_LONG).show();
             }

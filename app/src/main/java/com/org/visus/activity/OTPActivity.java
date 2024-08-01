@@ -14,7 +14,6 @@ import com.chaos.view.PinView;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.SMSAsOTP;
 import com.org.visus.utility.PrefUtils;
 
@@ -30,7 +29,7 @@ public class OTPActivity extends AppCompatActivity {
     Bundle bundle;
     String insCode;
     String Token, DEVICEServerID;
-    TextView setmobile, verify_otp,counterTimer;
+    TextView setmobile, verify_otp, counterTimer;
     PinView otp_view;
     String API_OTP;
     CountDownTimer countDownTimer;
@@ -119,7 +118,7 @@ public class OTPActivity extends AppCompatActivity {
             public void onResponse(Call<SMSAsOTP> call, Response<SMSAsOTP> response) {
 
                 if (response.body() != null) {
-                    Log.i("response", "onResponse: "+response.body());
+                    Log.i("response", "onResponse: " + response.body());
                     final SMSAsOTP smsAsOTP = response.body();
                     if (smsAsOTP != null) {
                         if (smsAsOTP.getStatus() != null && smsAsOTP.getStatus().equalsIgnoreCase("success")) {
@@ -128,17 +127,12 @@ public class OTPActivity extends AppCompatActivity {
                             API_OTP = smsAsOTP.getData().get(0).getOtp();
                         }
                     }
-                }else {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(OTPActivity.this,"OTPActivity","sms/getsmsAsOtp", response.message(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
 
             }
 
             @Override
             public void onFailure(Call<SMSAsOTP> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(OTPActivity.this,"OTPActivity","sms/getsmsAsOtp", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(OTPActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }

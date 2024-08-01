@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,12 +15,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.adapters.FinalSubmissionAssignment_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityFinalSubmissionAssignmentBinding;
 import com.org.visus.models.GetServices;
 import com.org.visus.models.MyAssignment;
@@ -41,11 +42,11 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
     List<TotalCases.TotalCasesData> totalCase;
     ActivityFinalSubmissionAssignmentBinding assignmentBinding;
     List<String> visusServiceList = new ArrayList<>();
+    String visusServiceID = "";
     List<String> IDsVisusServiceList = new ArrayList<>();
     String visusService = "Select Service";
-    String visusServiceID = "";
     String Token, InvestigatorID;
-    Integer TotalPendingCases = 0, TotalSubmittedCases = 0;
+
     Bundle bundle;
     String VisusService = "", VisusServiceID = "";
 
@@ -56,8 +57,6 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
         setContentView(assignmentBinding.getRoot());
         resetService();
         getServices();
-        TotalPendingCases = 0;
-        TotalSubmittedCases = 0;
         if (ConnectionUtility.isConnected(FinalSubmissionAssignment_Activity.this)) {
             getTotalCases();
         } else {
@@ -70,58 +69,16 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
             if (!VisusServiceID.isEmpty()) {
-                /*if (VisusService.equalsIgnoreCase("Life Insurance")) {
-
-                }*/
-                TotalPendingCases = 0;
-                TotalSubmittedCases = 0;
                 if (ConnectionUtility.isConnected(FinalSubmissionAssignment_Activity.this)) {
                     getTotalCases();
                     getMyAssignment(visusServiceID);
                 } else {
                     ConnectionUtility.AlertDialogForNoConnectionAvaialble(FinalSubmissionAssignment_Activity.this);
                 }
-
                 //getMyAssignmentAccordingTOServiceID(visusServiceID);
             }
         }
     }
-
-    /*private void getServices() {
-        ApiService apiService;
-        apiService = ApiClient.getClient(this).create(ApiService.class);
-        Token = PrefUtils.getFromPrefs(FinalSubmissionAssignment_Activity.this, PrefUtils.Token);
-        Call<GetServices> call2 = apiService.getServices("Bearer " + Token);
-        call2.enqueue(new Callback<GetServices>() {
-            @Override
-            public void onResponse(Call<GetServices> call, Response<GetServices> response) {
-                if (response.body() != null) {
-//                    Log.i("response", "onResponse: " + response.body());
-                    final GetServices getServices = response.body();
-                    if (getServices != null) {
-                        if (getServices.getStatus() != null && getServices.getStatus().equalsIgnoreCase("success")) {
-                            visusServiceList.clear();
-                            resetService();
-                            for (GetServices.GetServicesData servicesData : getServices.getData()) {
-                                visusServiceList.add(servicesData.getVisusServicesText());
-                                IDsVisusServiceList.add(servicesData.getVisusServicesID().toString());
-                            }
-                            if (!VisusServiceID.equalsIgnoreCase("")) {
-                                addSpinnerAdapter(assignmentBinding.spinnerSelectVisusService, visusServiceList);
-                                assignmentBinding.spinnerSelectVisusService.setSelection(Integer.parseInt(VisusServiceID));
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetServices> call, Throwable t) {
-                call.cancel();
-                Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
 
     private void getServices() {
         VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
@@ -151,28 +108,27 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<TotalCases> call, Response<TotalCases> response) {
                 if (response.body() != null) {
+
+                    int TotalPendingCases = 0, TotalSubmittedCases = 0;
                     totalCases = response.body();
+
                     if (totalCases != null) {
                         if (totalCases.getStatus() != null && totalCases.getStatus().equalsIgnoreCase("success")) {
+                            int i = 0;
                             for (TotalCases.TotalCasesData totalCasesData : totalCases.getData()) {
                                 TotalPendingCases = TotalPendingCases + totalCasesData.getTotalPendingCases();
-                                TotalSubmittedCases = TotalSubmittedCases + totalCasesData.getTotalSubmittedCases();
-                                assignmentBinding.textViewTotalSubmittedCases.setText(TotalSubmittedCases.toString());
-                                assignmentBinding.textViewTotalPendingCases.setText(TotalPendingCases.toString());
+                                TotalSubmittedCases = TotalSubmittedCases + totalCasesData.getTotalCases();
                             }
+                            assignmentBinding.textViewTotalSubmittedCases.setText(TotalSubmittedCases + "");
+                            assignmentBinding.textViewTotalPendingCases.setText(TotalPendingCases + "");
 
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","investigationUsedFor/gettotalCases", response.message(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             }
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","investigationUsedFor/gettotalCases", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -188,102 +144,68 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
         call2.enqueue(new Callback<MyAssignment>() {
             @Override
             public void onResponse(Call<MyAssignment> call, Response<MyAssignment> response) {
-                if (response.body() != null) {
-                    MyAssignment myAssignment = response.body();
-                    if (myAssignment != null) {
-                        if (myAssignment.getStatus() != null && myAssignment.getStatus().equalsIgnoreCase("success")) {
-                            if (myAssignment.getData().size() == 0) {
-                                assignmentBinding.recylerViewMyAssignment.setVisibility(View.GONE);
-                                assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.VISIBLE);
-                            } else {
-                                assignmentBinding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
-                                assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
-                                assignmentBinding.recylerViewMyAssignment.setHasFixedSize(true);
-                                assignmentBinding.recylerViewMyAssignment.setAdapter(new FinalSubmissionAssignment_Adapter(FinalSubmissionAssignment_Activity.this, myAssignment.getData(), FinalSubmissionAssignment_Activity.this, visusService, visusServiceID));
+                if(response.isSuccessful() && response.code()==200){
+                    if (response.body() != null) {
+                        MyAssignment myAssignment = response.body();
+                        if (myAssignment != null) {
+                            if (myAssignment.getStatus() != null && myAssignment.getStatus().equalsIgnoreCase("success")) {
+                                if (myAssignment.getData().size() == 0) {
+                                    assignmentBinding.recylerViewMyAssignment.setVisibility(View.GONE);
+                                    assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.VISIBLE);
+                                    assignmentBinding.textViewTotalSubmittedCases.setText("0");
+                                    assignmentBinding.textViewTotalPendingCases.setText("0");
+
+                                } else {
+                                    assignmentBinding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
+                                    assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
+                                    assignmentBinding.recylerViewMyAssignment.setHasFixedSize(true);
+                                    assignmentBinding.recylerViewMyAssignment.setAdapter(new FinalSubmissionAssignment_Adapter(FinalSubmissionAssignment_Activity.this, myAssignment.getData(), FinalSubmissionAssignment_Activity.this, visusService, visusServiceID));
 //                            assignmentBinding.recylerViewMyAssignment.setAdapter(new Assigment_Adapter(FinalSubmissionAssignment_Activity.this, myAssignment.getData(), getApplicationContext(), visusService, visusServiceID));
-                                for (String iDsVisusServiceList : IDsVisusServiceList) {
-                                    if (visusServiceID.equals(iDsVisusServiceList)) {
-                                        assignmentBinding.textViewTotalSubmittedCases.setText(totalCases.getData().get((Integer.parseInt(visusServiceID) - 1)).getTotalSubmittedCases().toString());
-                                        assignmentBinding.textViewTotalPendingCases.setText(totalCases.getData().get(Integer.parseInt(visusServiceID) - 1).getTotalPendingCases().toString());
-                                        break;
+                                    for (String iDsVisusServiceList : IDsVisusServiceList) {
+                                        if (visusServiceID.equals(iDsVisusServiceList)) {
+                                            assignmentBinding.textViewTotalSubmittedCases.setText(totalCases.getData().get((Integer.parseInt(visusServiceID) - 1)).getTotalCases() + "");
+                                            assignmentBinding.textViewTotalPendingCases.setText(totalCases.getData().get(Integer.parseInt(visusServiceID) - 1).getTotalPendingCases() + "");
+                                            break;
+                                        }
                                     }
                                 }
-                            }
 
-                        } else {
+                            } else {
+                            }
                         }
                     }
-                } else {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","MyPendingAssignment/getMyAssignment", response.message()+" "+response.code(),"API Exception");
-                    apiCall.saveErrorLog();
-                    TotalPendingCases = 0;
-                    TotalSubmittedCases = 0;
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FinalSubmissionAssignment_Activity.this, SweetAlertDialog.ERROR_TYPE);
-                    sweetAlertDialog.setTitleText("SORRY!!!!");
-                    sweetAlertDialog.setCancelable(false);
-                    sweetAlertDialog.setContentText(response.message());
-                    sweetAlertDialog.show();
-                    sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            sweetAlertDialog.dismiss();
-                        }
-                    });
+                    else {
+                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FinalSubmissionAssignment_Activity.this, SweetAlertDialog.ERROR_TYPE);
+                        sweetAlertDialog.setTitleText("SORRY!!!!");
+                        sweetAlertDialog.setCancelable(false);
+                        sweetAlertDialog.setContentText(response.message());
+                        sweetAlertDialog.show();
+                        sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                sweetAlertDialog.dismiss();
+                            }
+                        });
+                    }
                 }
             }
-
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
-
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,"FinalSubmissionAssignment_Activity","MyPendingAssignment/getMyAssignment", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
-
-
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    /*private void getMyAssignmentAccordingTOServiceID(String visusServiceID) {
-        VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-        visus_dataSource.open();
-        List<MyAssignment.MyAssignmentData> getDataMyAssignment = visus_dataSource.getDataMyAssignment(visusServiceID);
-        visus_dataSource.close();
-        getToalCasesAccordingToServiceID(visusServiceID);
-        if (getDataMyAssignment.size() == 0) {
-            assignmentBinding.recylerViewMyAssignment.setVisibility(View.GONE);
-            assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.VISIBLE);
-        } else {
-            assignmentBinding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
-            assignmentBinding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
-            assignmentBinding.recylerViewMyAssignment.setHasFixedSize(true);
-            assignmentBinding.recylerViewMyAssignment.setAdapter(new FinalSubmissionAssignment_Adapter(FinalSubmissionAssignment_Activity.this, getDataMyAssignment, FinalSubmissionAssignment_Activity.this, visusService, visusServiceID));
-        }
-    }*/
-
-    /*private void getTotalCases() {
-        VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-        visus_dataSource.open();
-        totalCase = visus_dataSource.getToalCases();
-        for (TotalCases.TotalCasesData totalCasesData : totalCase) {
-            TotalPendingCases = TotalPendingCases + totalCasesData.getTotalPendingCases();
-            TotalSubmittedCases = TotalSubmittedCases + totalCasesData.getTotalSubmittedCases();
-        }
-        assignmentBinding.textViewTotalSubmittedCases.setText(String.valueOf(TotalSubmittedCases));
-        assignmentBinding.textViewTotalPendingCases.setText(String.valueOf(TotalPendingCases));
-        visus_dataSource.close();
-    }*/
 
     private void getToalCasesAccordingToServiceID(String visusServiceID) {
-        TotalPendingCases = 0;
-        TotalSubmittedCases = 0;
+        int TotalPendingCases = 0, TotalSubmittedCases = 0;
         VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
         visus_dataSource.open();
         totalCase = visus_dataSource.getToalCasesAccordingToServiceID(visusServiceID);
         for (TotalCases.TotalCasesData totalCasesData : totalCase) {
             TotalPendingCases = TotalPendingCases + totalCasesData.getTotalPendingCases();
-            TotalSubmittedCases = TotalSubmittedCases + totalCasesData.getTotalSubmittedCases();
+            TotalSubmittedCases = TotalSubmittedCases + totalCasesData.getTotalCases();
         }
         assignmentBinding.textViewTotalSubmittedCases.setText(String.valueOf(TotalSubmittedCases));
         assignmentBinding.textViewTotalPendingCases.setText(String.valueOf(TotalPendingCases));
@@ -312,6 +234,7 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
                             });
                             Toast.makeText(FinalSubmissionAssignment_Activity.this, "Work in progress...", Toast.LENGTH_SHORT).show();
                         } else {
+
                             getMyAssignment(visusServiceID);
                         }
                     } else {
@@ -321,8 +244,6 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
                 } else {
                     visusService = "Select Service";
                     visusServiceID = "";
-                    TotalPendingCases = 0;
-                    TotalSubmittedCases = 0;
                     if (ConnectionUtility.isConnected(FinalSubmissionAssignment_Activity.this)) {
                         getTotalCases();
                     } else {

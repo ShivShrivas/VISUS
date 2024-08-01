@@ -49,7 +49,7 @@ public class ErrorLogAPICall {
    public void saveErrorLog() {
 
         ApiService apiService;
-        apiService = ApiClient.getClientUAT(context).create(ApiService.class);
+        apiService = ApiClient.getClient(context).create(ApiService.class);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         //String JSONObject = gson.toJson(getHardwareAndSoftwareInfoList);
@@ -79,51 +79,51 @@ public class ErrorLogAPICall {
     }
 
     private void sendErrorDetailsToServer(String accessToken) {
-        ApiService apiService;
-        apiService = ApiClient.getClientUAT(context).create(ApiService.class);
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-
-
-        Date now = new Date();
-
-        // Define the date-time formatter
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-        // Format the current date and time
-        String formattedDateTime = formatter.format(now);
-
-
-
-        ExceptionInfoRequest request = new ExceptionInfoRequest();
-        request.setAppException_ID(-1);
-        request.setAppException_OnServerDate("");
-        request.setAppException_OnAppDate(formattedDateTime);
-        request.setAppException_DeviceID(1);
-        request.setAppException_InvID(2);
-        request.setAppException_ActivityClassName(AppException_ActivityClassName);
-        request.setAppException_MethodName(AppException_MethodName);
-        request.setAppException_ExceptionText(AppException_ExceptionText);
-        request.setDeveloperComment("");
-        request.setIfAnyApiException(null);
-        request.setExceptionDataSaved(false);
-
-        Call<JsonObject> call = apiService.sendExceptionInfo("Bearer " + accessToken, request);
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.isSuccessful()) {
-                    Log.d("API_CALL", "Success: " + new Gson().toJson(response.message()));
-                } else {
-                    Log.d("API_CALL", "Error: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                Log.d("API_CALL", "Failure: " + t.getMessage());
-            }
-        });
+//        ApiService apiService;
+//        apiService = ApiClient.getClientUAT(context).create(ApiService.class);
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        Gson gson = gsonBuilder.create();
+//
+//
+//        Date now = new Date();
+//
+//        // Define the date-time formatter
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//
+//        // Format the current date and time
+//        String formattedDateTime = formatter.format(now);
+//
+//
+//
+//        ExceptionInfoRequest request = new ExceptionInfoRequest();
+//        request.setAppException_ID(-1);
+//        request.setAppException_OnServerDate("");
+//        request.setAppException_OnAppDate(formattedDateTime);
+//        request.setAppException_DeviceID(1);
+//        request.setAppException_InvID(2);
+//        request.setAppException_ActivityClassName(AppException_ActivityClassName);
+//        request.setAppException_MethodName(AppException_MethodName);
+//        request.setAppException_ExceptionText(AppException_ExceptionText);
+//        request.setDeveloperComment("");
+//        request.setIfAnyApiException(null);
+//        request.setExceptionDataSaved(false);
+//
+//        Call<JsonObject> call = apiService.sendExceptionInfo("Bearer " + accessToken, request);
+//        call.enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d("API_CALL", "Success: " + new Gson().toJson(response.message()));
+//                } else {
+//                    Log.d("API_CALL", "Error: " + response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                Log.d("API_CALL", "Failure: " + t.getMessage());
+//            }
+//        });
 
     }
 }

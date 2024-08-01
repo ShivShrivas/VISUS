@@ -1,9 +1,10 @@
 package com.org.visus.apis;
 
-import com.google.gson.JsonObject;
 import com.org.visus.models.DeviceInfo;
+import com.org.visus.models.DeviceInvLocation;
+import com.org.visus.models.DeviceOfInvStatus;
 import com.org.visus.models.DeviceRegistrationResponse;
-import com.org.visus.models.ExceptionInfoRequest;
+import com.org.visus.models.DeviceStatusResponse;
 import com.org.visus.models.GI_ODResponse;
 import com.org.visus.models.GI_PAResponse;
 import com.org.visus.models.GI_TheftResponse;
@@ -13,6 +14,7 @@ import com.org.visus.models.GiPAInsuCheckList;
 import com.org.visus.models.GiTheftInsuCheckList;
 import com.org.visus.models.InvReqActivityFile;
 import com.org.visus.models.Investigator;
+
 import com.org.visus.models.LifeInsuranceCheckList;
 import com.org.visus.models.MACTInsuCheckList;
 import com.org.visus.models.MACTResponse;
@@ -20,6 +22,7 @@ import com.org.visus.models.MyAssignment;
 import com.org.visus.models.RequreActions;
 import com.org.visus.models.SMSAsOTP;
 import com.org.visus.models.SaveInvestigatorAction;
+import com.org.visus.models.SaveInvestigatorActionOnlyData;
 import com.org.visus.models.TokenResponse;
 import com.org.visus.models.TotalCases;
 import com.org.visus.models.requset.GI_OD;
@@ -65,13 +68,44 @@ public interface ApiService {
 
     @GET("api/MyAssignmentList/getMyAssignmentAll")
     Call<MyAssignment> getMyPendingAssignmentAll(@Header("Authorization") String Authorization, @Query("InvID") String InvID);
+    /*api/MyAssignmentList/getMyAssignment
+    api/MyPendingAssignment/getMyAssignment*/
+
+
+    @GET("api/MyHoldAssignmentList/getMyAssignmentAll")
+    Call<MyAssignment> getMyHoldAssignmentAll(@Header("Authorization") String Authorization, @Query("InvID") String InvID);
+
 
     @GET("api/MyAssignmentList/getMyReqActionList")
     Call<RequreActions> getMyReqActionList(@Header("Authorization") String Authorization);
 
     @Multipart
     @POST("api/MyAssignmentList/SaveInvestigatorActionData")
-    Call<SaveInvestigatorAction> postInvestigatorActionData(@Header("Authorization") String Authorization, @Part MultipartBody.Part OriginalFileName, @Query("ServiceTypeID") String ServiceTypeID, @Query("ServiceID") String ServiceID, @Query("InvID") String InvID, @Query("Comments") String Comments, @Query("ActionID") String ActionID, @Query("Latitude") String Latitude, @Query("Longitude") String Longitude, @Query("CellAddress") String CellAddress, @Query("ClientID") String ClientID, @Query("InvInsuranceRelID") String InvInsuranceRelID);
+    Call<SaveInvestigatorAction> postInvestigatorActionData(@Header("Authorization") String Authorization,
+                                                            @Part MultipartBody.Part OriginalFileName,
+                                                            @Query("ServiceTypeID") String ServiceTypeID,
+                                                            @Query("ServiceID") String ServiceID,
+                                                            @Query("InvID") String InvID,
+                                                            @Query("Comments") String Comments,
+                                                            @Query("ActionID") String ActionID,
+                                                            @Query("Latitude") String Latitude,
+                                                            @Query("Longitude") String Longitude,
+                                                            @Query("CellAddress") String CellAddress,
+                                                            @Query("ClientID") String ClientID, @Query("InvInsuranceRelID")
+                                                            String InvInsuranceRelID);
+
+    @Multipart
+    @POST("api/invActionPhoto/SaveInvestigatorActionPhotoData")
+    Call<SaveInvestigatorAction> postInvestigatorActionDataPhoto(@Header("Authorization") String Authorization,
+                                                                 @Part MultipartBody.Part OriginalFileName,
+                                                                 @Query("ServiceTypeID") String ServiceTypeID,
+                                                                 @Query("ServiceID") String ServiceID,
+                                                                 @Query("InvID") String InvID,
+                                                                 @Query("ActionID") String ActionID,
+                                                                 @Query("ClientID") String ClientID,
+                                                                 @Query("InvInsuranceRelID") String InvInsuranceRelID,
+                                                                 @Query("InvestigatorServiceCaseAction_ID") String InvestigatorServiceCaseAction_ID);
+
 
     @GET("api/MyPendingAssignment/getMyAssignment")
     Call<MyAssignment> getMyPendingAssignment(@Header("Authorization") String Authorization, @Query("ServicesID") String ServicesID, @Query("InvID") String InvID);
@@ -113,8 +147,25 @@ public interface ApiService {
     @POST("api/InvMACTCheckList/saveMACTCheckListData")
     Call<MACTResponse> postMACT(@Header("Authorization") String Authorization, @Body MACT value);
 
-    @POST("api/app/exceptionInfoData")
-    Call<JsonObject> sendExceptionInfo(@Header("Authorization") String Authorization,@Body ExceptionInfoRequest request);
 
+    @POST("api/deviceLocation/SaveDeviceLocation")
+    Call<DeviceInvLocation> postDeviceInvLocation(@Header("Authorization") String Authorization, @Body DeviceInvLocation value);
+/*
+    {"DeviceLocation_ID":-1,"DeviceLocation_DeviceID":2,"DeviceLocation_InvID":11,"DeviceLocation_Latitude": "38.897676","DeviceLocation_Longitude":"77.036530","DeviceLocation_GeoAddress":"Khalilabad Sant kabir nagar","DeviceLocation_SaveOnDate":"","IsLatestDeviceLocation":true,"IsSavedDeviceLocation":false,"ExceptionIfAny":""}
+*/
+
+    @GET("api/device/deviceStatus")
+    Call<DeviceStatusResponse> getDeviceOfInvStatus(@Header("Authorization") String Authorization, @Query("InvID") String InvID, @Query("deviceID") String deviceID);
+
+    @GET("api/MyPendingHoldAssignment/getHoldMyAssignment")
+    Call<MyAssignment> getMyPendingAssignment_Hold(@Header("Authorization") String Authorization, @Query("ServicesID") String ServicesID, @Query("InvID") String InvID);
+
+
+    @GET("api/investigationUsedForHold/gettotalCases")
+    Call<TotalCases> getTotalCases_Hold(@Header("Authorization") String Authorization, @Query("InsID") String InsID);
+
+
+    @POST("api/invActionPhoto/SaveInvestigatorActionDataOnly")
+    Call<SaveInvestigatorActionOnlyData> postInvestigatorActionDataNew(@Header("Authorization") String Authorization, @Body SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData);
 
 }

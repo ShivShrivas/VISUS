@@ -19,7 +19,6 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceRegistrationResponse;
 import com.org.visus.models.TokenResponse;
@@ -124,6 +123,7 @@ public class SplashActivity extends AppCompatActivity {
                         // Toast.makeText(SplashActivity.this, "Token " + tokenReponse.getAccessToken().toString(), Toast.LENGTH_LONG).show();
                         PrefUtils.saveToPrefs(SplashActivity.this, PrefUtils.Token, tokenReponse.getAccessToken() != null ? tokenReponse.getAccessToken() : "");
                         postDeviceRegistration();
+                        //   updateUI();
                     }
                 }
 
@@ -188,24 +188,20 @@ public class SplashActivity extends AppCompatActivity {
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         String hardwareAndSoftwareInfoJSONObject = gson.toJson(getHardwareAndSoftwareInfoList);
-        //Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
-        //String prettyJsonForLogin = prettyGson.toJson(JSONObject);
         if (ConnectionUtility.isConnected(SplashActivity.this)) {
             Token = PrefUtils.getFromPrefs(SplashActivity.this, PrefUtils.Token);
             Call<DeviceRegistrationResponse> deviceRegistration = apiService.deviceRegistration("Bearer " + Token, getHardwareAndSoftwareInfoList);
             deviceRegistration.enqueue(new Callback<DeviceRegistrationResponse>() {
                 @Override
                 public void onResponse(Call<DeviceRegistrationResponse> call, Response<DeviceRegistrationResponse> response) {
-                    Log.d("TAG", "onResponse: "+new Gson().toJson(response.body()));
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(SplashActivity.this,"SplashActivity","postDeviceRegistration", response.body().getMsg(),"API Exception");
-                    apiCall.saveErrorLog();
                     if (response.isSuccessful()) {
                         if (response.body() != null) {
                             DeviceRegistrationResponse deviceInfo = response.body();
-                            //Toast.makeText(getApplicationContext(), "" + deviceInfo.getData().get(0).getMODEL(), Toast.LENGTH_LONG).show();
                             PrefUtils.saveToPrefs(SplashActivity.this, PrefUtils.IsDeviceVerified, deviceInfo.getData().get(0).getDeviceVerified() != null ? String.valueOf(deviceInfo.getData().get(0).getDeviceVerified()) : "");
                             PrefUtils.saveToPrefs(SplashActivity.this, PrefUtils.DEVICEServerID, deviceInfo.getData().get(0).getDEVICE_ServerID() != null ? deviceInfo.getData().get(0).getDEVICE_ServerID() : "");
-                            if (deviceInfo.getData().get(0).getDeviceVerified() == true) {
+                            updateUI();
+                            //Todo by neeraj
+                           /* if (deviceInfo.getData().get(0).getDeviceVerified() == true ) {
                                 updateUI();
                             } else {
                                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(SplashActivity.this, SweetAlertDialog.WARNING_TYPE);
@@ -220,30 +216,7 @@ public class SplashActivity extends AppCompatActivity {
                                         finish();
                                     }
                                 });
-                            }
-                            /*DeviceRegistrationResponse deviceInfo = response.body();
-                            SharedPreferences sharedPreferences = getSharedPreferences("SocietyDeviceInfo", MODE_PRIVATE);
-                            SharedPreferences.Editor deviceInfoEditor = sharedPreferences.edit();
-                            deviceInfoEditor.putString("DeviceID", deviceInfo.getDEVICE_ServerID());
-                            deviceInfoEditor.commit();
-                            ///GO to Login Page Accroding to Type
-                            final Intent intentLoginActivity = new Intent(SplashActivity.this, MobileRegistrationActivity.class);
-                            intentLoginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            intentLoginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intentLoginActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            Thread timer = new Thread() {
-                                public void run() {
-                                    try {
-                                        sleep(5000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    } finally {
-                                        getApplicationContext().startActivity(intentLoginActivity);
-                                        finish();
-                                    }
-                                }
-                            };
-                            timer.start();*/
+                            }*/
 
                         } else {
 
@@ -256,9 +229,6 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<DeviceRegistrationResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
-                    call.cancel();
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(SplashActivity.this,"SplashActivity","postDeviceRegistration", t.toString(),"API Exception");
-                    apiCall.saveErrorLog();
                 }
             });
         } else {

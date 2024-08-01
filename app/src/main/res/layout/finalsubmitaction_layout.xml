@@ -623,60 +623,85 @@
                 android:textSize="12sp"
                 android:textStyle="normal" />
         </LinearLayout>
-
+        <!--photo-->
         <LinearLayout
+            android:id="@+id/ll_photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="10"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="3.5"
-                android:gravity="left"
-                android:padding="2dp"
+                android:layout_marginEnd="5dp"
                 android:text="Photo"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp">
+                <!-- child view -->
+                <LinearLayout
+                    android:id="@+id/ll_PhotoShow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+
+        </LinearLayout>
+
+        <!--document-->
+        <LinearLayout
+            android:id="@+id/ll_Pdf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_margin="5dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="left"
+                android:padding="2dp"
+                android:text="Document"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_pdf"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="5dp"
-                android:layout_weight=".5"
-                android:gravity="left"
-                android:padding="2dp"
+                android:drawableRight="@drawable/baseline_attachment_24"
+                android:gravity="left|center_vertical"
+                android:padding="5dp"
                 android:text=":"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
-
-            <ImageView
-                android:id="@+id/imageViewPhoto"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="6"
-                android:gravity="left"
-                android:padding="2dp"
-                android:text="N/A"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="normal" />
         </LinearLayout>
 
     </LinearLayout>

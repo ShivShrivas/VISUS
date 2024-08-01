@@ -10,19 +10,27 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.adapters.Assigment_Adapter;
+import com.org.visus.apis.ApiClient;
+import com.org.visus.apis.ApiService;
 import com.org.visus.databinding.ActivityMyAssigmentWorkBinding;
 import com.org.visus.models.GetServices;
 import com.org.visus.models.MyAssignment;
 import com.org.visus.models.TotalCases;
+import com.org.visus.utility.PrefUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyAssigmentWork_Activity extends AppCompatActivity {
     TotalCases totalCases;
@@ -33,15 +41,13 @@ public class MyAssigmentWork_Activity extends AppCompatActivity {
     String visusService = "Select Service";
     String visusServiceID = "";
     String Token, InvestigatorID;
-    Integer TotalPendingCases = 0, TotalSubmittedCases = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMyAssigmentWorkBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        TotalPendingCases = 0;
-        TotalSubmittedCases = 0;
         getTotalCases();
         resetService();
         addSpinnerAdapter(binding.spinnerSelectVisusService, visusServiceList);
@@ -61,8 +67,6 @@ public class MyAssigmentWork_Activity extends AppCompatActivity {
                 } else {
                     visusService = "Select Service";
                     visusServiceID = "";
-                    TotalPendingCases = 0;
-                    TotalSubmittedCases = 0;
                     getTotalCases();
                     binding.recylerViewMyAssignment.setVisibility(View.GONE);
                 }
@@ -131,6 +135,7 @@ public class MyAssigmentWork_Activity extends AppCompatActivity {
     private void getTotalCases() {
         VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
         visus_dataSource.open();
+        int TotalPendingCases = 0, TotalSubmittedCases = 0;
         totalCase = visus_dataSource.getToalCases();
         for (TotalCases.TotalCasesData totalCasesData : totalCase) {
             TotalPendingCases = TotalPendingCases + totalCasesData.getTotalPendingCases();
@@ -142,8 +147,7 @@ public class MyAssigmentWork_Activity extends AppCompatActivity {
     }
 
     private void getToalCasesAccordingToServiceID(String visusServiceID) {
-        TotalPendingCases = 0;
-        TotalSubmittedCases = 0;
+        int TotalPendingCases = 0, TotalSubmittedCases = 0;
         VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
         visus_dataSource.open();
         totalCase = visus_dataSource.getToalCasesAccordingToServiceID(visusServiceID);
@@ -169,68 +173,11 @@ public class MyAssigmentWork_Activity extends AppCompatActivity {
             binding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
             binding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
             binding.recylerViewMyAssignment.setHasFixedSize(true);
-            binding.recylerViewMyAssignment.setAdapter(new Assigment_Adapter(MyAssigmentWork_Activity.this, getDataMyAssignment, getApplicationContext(), visusService, visusServiceID));
+            binding.recylerViewMyAssignment.setAdapter(new Assigment_Adapter(
+                    MyAssigmentWork_Activity.this, getDataMyAssignment, getApplicationContext(), visusService,
+                    visusServiceID));
         }
     }
 
-   /* private void getMyAssignment(String visusServiceID) {
-        ApiService apiService;
-        apiService = ApiClient.getClient(this).create(ApiService.class);
-        Token = PrefUtils.getFromPrefs(MyAssigmentWork_Activity.this, PrefUtils.Token);
-        InvestigatorID = PrefUtils.getFromPrefs(MyAssigmentWork_Activity.this, PrefUtils.InvestigatorID);
-        Call<MyAssignment> call2 = apiService.getMyAssignment("Bearer " + Token, visusServiceID, InvestigatorID);
-        call2.enqueue(new Callback<MyAssignment>() {
-            @Override
-            public void onResponse(Call<MyAssignment> call, Response<MyAssignment> response) {
-                if (response.body() != null) {
-                    MyAssignment myAssignment = response.body();
-                    if (myAssignment != null) {
-                        if (myAssignment.getStatus() != null && myAssignment.getStatus().equalsIgnoreCase("success")) {
-                            VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-                            visus_dataSource.open();
-                            visus_dataSource.delete_tblMyAssignmentData();
-                            visus_dataSource.delete_tblInvestigatorObj();
-                            for (MyAssignment.MyAssignmentData myAssignmentData : myAssignment.getData()) {
-                                visus_dataSource.inserttblMyAssignmentData(myAssignmentData);
-                            }
-                            List<MyAssignment.MyAssignmentData> getDataMyAssignment = visus_dataSource.getDataMyAssignment();
-                            visus_dataSource.close();
-                            if (getDataMyAssignment.size() == 0) {
-                                binding.textViewNoRecordMyAssignment.setVisibility(View.VISIBLE);
-                                binding.recylerViewMyAssignment.setVisibility(View.GONE);
-                            } else {
-                                binding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
-                                binding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
-                                binding.recylerViewMyAssignment.setHasFixedSize(true);
-                                binding.recylerViewMyAssignment.setAdapter(new Assigment_Adapter(MyAssigmentWork_Activity.this, getDataMyAssignment, getApplicationContext(), visusService, visusServiceID));
-                            }
-                            if (myAssignment.getData().size() == 0) {
-                                binding.textViewNoRecordMyAssignment.setVisibility(View.VISIBLE);
-                                binding.recylerViewMyAssignment.setVisibility(View.GONE);
-                            } else {
-                                binding.textViewNoRecordMyAssignment.setVisibility(View.GONE);
-                                binding.recylerViewMyAssignment.setVisibility(View.VISIBLE);
-                                binding.recylerViewMyAssignment.setHasFixedSize(true);
-                                binding.recylerViewMyAssignment.setAdapter(new Assigment_Adapter(MyAssigmentWork_Activity.this, myAssignment.getData(), getApplicationContext(), visusService, visusServiceID));
-                            }
-                            for (String iDsVisusServiceList : IDsVisusServiceList) {
-                                if (visusServiceID.equals(iDsVisusServiceList)) {
-                                    binding.textViewTotalSubmittedCases.setText(totalCases.getData().get((Integer.parseInt(visusServiceID) - 1)).getTotalSubmittedCases().toString());
-                                    binding.textViewTotalPendingCases.setText(totalCases.getData().get(Integer.parseInt(visusServiceID) - 1).getTotalPendingCases().toString());
-                                    break;
-                                }
-                            }
-                        } else {
-                        }
-                    }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<MyAssignment> call, Throwable t) {
-                call.cancel();
-                Toast.makeText(MyAssigmentWork_Activity.this, "fail " + t, Toast.LENGTH_LONG).show();
-            }
-        });
-    }*/
 }

@@ -14,8 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiTheftReportingFormatBinding;
+import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.GI_TheftResponse;
 import com.org.visus.models.GiTheftInsuCheckList;
 import com.org.visus.models.MyAssignment;
@@ -39,7 +39,7 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
     Bundle bundle;
     ArrayList<GiTheftInsuCheckList.GiTheftInsuCheckListData> giTheftInsuCheckListData;
     ArrayList<MyAssignment.MyAssignmentData> data;
-    String VisusService, VisusServiceID;
+    String VisusService, VisusServiceID, AssessmentType;
     List<GI_Theft.GI_TheftData> lstGi_theftDataList = new ArrayList<>();
     String Token;
     ApiService apiService;
@@ -55,6 +55,7 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
             data = (ArrayList<MyAssignment.MyAssignmentData>) getIntent().getSerializableExtra("Data");
             VisusService = bundle.getString("VisusService", "");
             VisusServiceID = bundle.getString("VisusServiceID", "");
+            AssessmentType = bundle.getString("AssessmentType", "");
         }
         CallListener();
     }
@@ -91,6 +92,12 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
                             gi_theftData.setEntryByUserID(-1);
                             gi_theftData.setEntryOnDate(getCurrentDateTime());
 
+                            if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("")
+                                    && AssessmentType.equalsIgnoreCase("Hold")) {
+                                gi_theftData.setHoldCase(true);
+                            } else {
+                                gi_theftData.setHoldCase(false);
+                            }
 
                             if (giTheftInsuCheckListData.get(i).getInvGiTheftCheckListHeadID() == 1) {
                                 gi_theftData.setInvestigatorRemark(activityGiTheftReportingFormatBinding.editTextEClaimFormFilled.getText().toString().trim() != null ? activityGiTheftReportingFormatBinding.editTextEClaimFormFilled.getText().toString().trim() : "");
@@ -164,6 +171,7 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
                                 gi_theftData.setInvestigatorRemark(activityGiTheftReportingFormatBinding.editTextInvestigatorsFindings.getText().toString().trim() != null ? activityGiTheftReportingFormatBinding.editTextInvestigatorsFindings.getText().toString().trim() : "");
                             }
 
+
                             lstGi_theftDataList.add(gi_theftData);
                         }
                         gi_theft.setLstInvGiTheftCheckList(lstGi_theftDataList);
@@ -211,7 +219,13 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         sweetAlertDialog.dismiss();
-                                        Intent intent = new Intent(GI_Theft_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+
+                                        Intent intent = null;
+                                        if (AssessmentType != null && !AssessmentType.equalsIgnoreCase("") && AssessmentType.equalsIgnoreCase("Hold")) {
+                                            intent = new Intent(GI_Theft_ReportingFormatActivity.this, FinalSubmissionAssignmentHoldActivity.class);
+                                        } else {
+                                            intent = new Intent(GI_Theft_ReportingFormatActivity.this, FinalSubmissionAssignment_Activity.class);
+                                        }
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -239,10 +253,6 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
 
                         }
                     } else {
-
-                            ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_Theft_ReportingFormatActivity.this,"GI_Theft_ReportingFormatActivity","giTheftCheckList/saveGeneralInsuTheftCheckListData", response.message()+" "+response.code(),"API Exception");
-                            apiCall.saveErrorLog();
-
                         dialog.dismiss();
                         Toast.makeText(getApplicationContext(), "" + response, Toast.LENGTH_LONG).show();
                     }
@@ -250,8 +260,6 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_TheftResponse> call, Throwable t) {
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(GI_Theft_ReportingFormatActivity.this,"GI_Theft_ReportingFormatActivity","giTheftCheckList/saveGeneralInsuTheftCheckListData", t.getMessage(),"API Exception");
-                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

@@ -15,8 +15,6 @@
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
@@ -26,10 +24,24 @@
         android:theme="@style/Theme.VISUS"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon"
-        tools:targetApi="31">
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true">
+        <activity
+            android:name=".activity.ShowPhotoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".holdgassessment.actvity.MyHoldAssessmentActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ProfileActivity"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -37,7 +49,7 @@
         <activity
             android:name=".activity.GI_PA_ReportingFormatActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.GI_OD_ReportingFormatActivity"
             android:exported="true"
@@ -93,7 +105,8 @@
         <activity
             android:name=".activity.DashboardActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

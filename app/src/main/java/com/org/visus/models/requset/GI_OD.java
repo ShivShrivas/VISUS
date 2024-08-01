@@ -132,6 +132,18 @@ public class GI_OD implements Serializable {
         @Expose
         private Boolean GiOD_InvInsuranceRelID;
 
+        @SerializedName("isHoldCase")
+        @Expose
+        private Boolean isHoldCase;
+
+        public Boolean getHoldCase() {
+            return isHoldCase;
+        }
+
+        public void setHoldCase(Boolean holdCase) {
+            isHoldCase = holdCase;
+        }
+
         public Boolean getGiOD_InvInsuranceRelID() {
             return GiOD_InvInsuranceRelID;
         }

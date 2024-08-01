@@ -9,7 +9,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:background="@drawable/visuswave"/>
+        android:background="@drawable/visuswave" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,14 +106,15 @@
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:text="Your Code will be display within  "
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/counterTimer"
                 android:layout_width="wrap_content"
@@ -122,18 +123,15 @@
                 android:textStyle="bold"
                 android:text="00:00"
                 android:textColor="@color/purple_700"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" seconds"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
         </LinearLayout>
-
-
 
 
     </LinearLayout>
@@ -143,6 +141,6 @@
         android:layout_height="200dp"
         android:rotation="180"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/visuswave"/>
+        android:background="@drawable/visuswave" />
 
 </RelativeLayout>

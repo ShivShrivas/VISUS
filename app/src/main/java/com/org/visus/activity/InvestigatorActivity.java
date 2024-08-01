@@ -12,7 +12,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
-import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.Investigator;
 import com.org.visus.utility.PrefUtils;
 
@@ -43,7 +42,13 @@ public class InvestigatorActivity extends AppCompatActivity {
                     Toast.makeText(InvestigatorActivity.this, "Enter Investigator Code", Toast.LENGTH_LONG).show();
                     return;
                 } else {
-                    getInvestigatorInfoAccordingToInvestigatorID(text);
+                    try {
+                        getInvestigatorInfoAccordingToInvestigatorID(text);
+                       // Toast.makeText(InvestigatorActivity.this, "Click Ok", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e){
+                        Toast.makeText(InvestigatorActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
@@ -56,6 +61,8 @@ public class InvestigatorActivity extends AppCompatActivity {
     }
 
     private void getInvestigatorInfoAccordingToInvestigatorID(String insCode) {
+
+       // Toast.makeText(InvestigatorActivity.this, "api call", Toast.LENGTH_SHORT).show();
         ApiService apiService;
         apiService = ApiClient.getClient(this).create(ApiService.class);
         String Token = PrefUtils.getFromPrefs(InvestigatorActivity.this, PrefUtils.Token);
@@ -65,6 +72,7 @@ public class InvestigatorActivity extends AppCompatActivity {
             public void onResponse(Call<Investigator> call, Response<Investigator> response) {
 
                 if (response.body() != null) {
+                  //  Toast.makeText(InvestigatorActivity.this, "response body ok", Toast.LENGTH_SHORT).show();
                     final Investigator investigator = response.body();
                     if (investigator != null) {
                         if (investigator.getStatus() != null && investigator.getStatus().equalsIgnoreCase("success")) {
@@ -84,7 +92,7 @@ public class InvestigatorActivity extends AppCompatActivity {
                                 if (investigator.getData().get(0).getiSActive() != null && investigator.getData().get(0).getiSActive().equalsIgnoreCase("yes")) {
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_code, investigator.getData().get(0).getiNVCode());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_name, investigator.getData().get(0).getiNVName());
-                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_name, investigator.getData().get(0).getiNVFatherName());
+                                    PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.INV_FatherName, investigator.getData().get(0).getiNVFatherName());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.ContactNumber, investigator.getData().get(0).getiNVContactNumber1());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.ContactNumber2, investigator.getData().get(0).getiNVContactNumber2());
                                     PrefUtils.saveToPrefs(InvestigatorActivity.this, PrefUtils.Email, investigator.getData().get(0).getEmail());
@@ -113,17 +121,14 @@ public class InvestigatorActivity extends AppCompatActivity {
                             }
                         }
                     }
-                }else{
-                    ErrorLogAPICall apiCall= new ErrorLogAPICall(InvestigatorActivity.this,"InvestigatorActivity","ins/findValidIns", response.message(),"API Exception");
-                    apiCall.saveErrorLog();
-                }
 
+
+                }
+                //Toast.makeText(InvestigatorActivity.this, "response body null", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Investigator> call, Throwable t) {
-                ErrorLogAPICall apiCall= new ErrorLogAPICall(InvestigatorActivity.this,"InvestigatorActivity","ins/findValidIns", t.getMessage(),"API Exception");
-                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(InvestigatorActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
