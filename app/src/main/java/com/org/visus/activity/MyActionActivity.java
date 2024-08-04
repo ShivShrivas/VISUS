@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -32,6 +33,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -42,6 +44,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -231,11 +234,8 @@ public class MyActionActivity extends AppCompatActivity {
                                 Toast.makeText(MyActionActivity.this, "Something Went to Wrong", Toast.LENGTH_SHORT).show();
                             }
                             if (ConnectionUtility.isConnected(MyActionActivity.this)) {
-                                try {
-                                    postActionTypeDataNew(investigatorActionData, insertPostInvestigatorActionData);
-                                } catch (Exception e) {
-                                    e.getMessage();
-                                }
+                                openEsignPopup(investigatorActionData, insertPostInvestigatorActionData);
+
                             } else {
                                 count = 0;
                                 arrayListSaveInvestigatorActionDataPhoto.clear();
@@ -261,7 +261,45 @@ public class MyActionActivity extends AppCompatActivity {
             }
         });
     }
+    private void openEsignPopup(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData, long insertPostInvestigatorActionData) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.option_popup);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        CardView btnSaveOnline = dialog.findViewById(R.id.btnSaveOnline);
+        CardView saveDataOffline = dialog.findViewById(R.id.saveDataOffline);
 
+
+
+        btnSaveOnline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+                try {
+                         postActionTypeDataNew(investigatorActionData, insertPostInvestigatorActionData);
+                    } catch (Exception e) {
+                         e.getMessage();
+                    }
+            }
+        });
+
+        saveDataOffline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                count = 0;
+                arrayListSaveInvestigatorActionDataPhoto.clear();
+                actionBinding.llPhotoImgShow.removeAllViews();
+                actionBinding.pdf.setVisibility(View.GONE);
+                actionBinding.actionComments.getText().clear();
+                actionBinding.spinnerSelectActionType.setSelection(0);
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
     private void postActionTypeDataNew(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData, long insertPostInvestigatorActionData) {
         ProgressDialog dialog = ProgressDialog.show(MyActionActivity.this, "Loading", "Please wait...", true);
         Token = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.Token);

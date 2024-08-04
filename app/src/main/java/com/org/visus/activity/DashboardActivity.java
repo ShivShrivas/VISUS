@@ -85,7 +85,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (ConnectionUtility.isConnected(DashboardActivity.this)) {
-                    getToken();
+                    Intent intent=new Intent(DashboardActivity.this,DataSyncActivity.class);
+                    startActivity(intent);
+
                 } else {
                     ConnectionUtility.AlertDialogForNoConnectionAvaialble(DashboardActivity.this);
                 }
