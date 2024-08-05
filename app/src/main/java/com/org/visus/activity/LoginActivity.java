@@ -479,7 +479,7 @@ public class LoginActivity extends AppCompatActivity {
         postDeviceInvLocation.enqueue(new Callback<DeviceInvLocation>() {
             @Override
             public void onResponse(Call<DeviceInvLocation> call, Response<DeviceInvLocation> response) {
-                if (response.isSuccessful()) {
+                if  (response.isSuccessful()) {
                     intentDashBoard();
                  // getDeviceOfInvStatus();
                 } else {
@@ -585,6 +585,7 @@ public class LoginActivity extends AppCompatActivity {
         Token = PrefUtils.getFromPrefs(LoginActivity.this, PrefUtils.Token);
         InvestigatorID = PrefUtils.getFromPrefs(LoginActivity.this, PrefUtils.InvestigatorID);
         DEVICEServerID = PrefUtils.getFromPrefs(LoginActivity.this, PrefUtils.DEVICEServerID);
+        //  Log.d("TAG", "getDeviceOfInvStatus: "+InvestigatorID+"//"+DEVICEServerID);
         Call<DeviceStatusResponse> deviceOfInvStatus = apiService.getDeviceOfInvStatus("Bearer " + Token, InvestigatorID != null ? InvestigatorID : "11", DEVICEServerID != null ? DEVICEServerID : "2");
         deviceOfInvStatus.enqueue(new Callback<DeviceStatusResponse>() {
             @Override

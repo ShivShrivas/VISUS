@@ -2,6 +2,7 @@ package com.org.visus.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -45,15 +46,16 @@ public class DataSyncActivity extends AppCompatActivity {
     int  uploadedDataDetailsCountForPrint=0;
     int  uploadedImageDetailsCountForPrint=0;
 
-    int  uploadedDataDetailsCount=1;
+    int  uploadedDataDetailsCount=0;
     int  uploadedImageDetailsCount=0;
+    VISUS_DataSource visus_dataSource;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityDataSyncBinding = ActivityDataSyncBinding.inflate(getLayoutInflater());
         setContentView(activityDataSyncBinding.getRoot());
      //  setContentView(R.layout.activity_data_sync);
-        VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
+        visus_dataSource = new VISUS_DataSource(getApplicationContext());
         visus_dataSource.open();
 
         activityDataSyncBinding.pendingCountValue.setText(visus_dataSource.getPostInvestigatorActionData().size() + "");
@@ -63,6 +65,9 @@ public class DataSyncActivity extends AppCompatActivity {
         activityDataSyncBinding.syncDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                visus_dataSource.open();
+                uploadedDataDetailsCount=0;
+                uploadedImageDetailsCount=0;
                 getToken();
             }
         });
@@ -89,8 +94,6 @@ public class DataSyncActivity extends AppCompatActivity {
                     final TokenResponse tokenReponse = response.body();
                     if (tokenReponse != null) {
                         PrefUtils.saveToPrefs(DataSyncActivity.this, PrefUtils.Token, tokenReponse.getAccessToken() != null ? tokenReponse.getAccessToken() : "");
-                        VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-                        visus_dataSource.open();
                         String Token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
                         ProgressDialog dialog = ProgressDialog.show(DataSyncActivity.this, "Synchronization", "Please wait...", true);
                         List<DeviceInvLocation> deviceInvLocationList = visus_dataSource.getDeviceInvLocation();
@@ -104,7 +107,7 @@ public class DataSyncActivity extends AppCompatActivity {
                         } else {
                             saveData(Token, dialog);
                         }
-                        visus_dataSource.close();
+
                     }
                 }
             }
@@ -118,6 +121,7 @@ public class DataSyncActivity extends AppCompatActivity {
     }
 
     private void postDeviceInvLocation(DeviceInvLocation deviceInvLocation, ProgressDialog dialog) {
+        Log.d("TAG", "postDeviceInvLocation: ");
         ApiService apiService = ApiClient.getClient(DataSyncActivity.this).create(ApiService.class);
         String Token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
         Call<DeviceInvLocation> postDeviceInvLocation = apiService.postDeviceInvLocation("Bearer " + Token, deviceInvLocation);
@@ -125,15 +129,13 @@ public class DataSyncActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DeviceInvLocation> call, Response<DeviceInvLocation> response) {
                 if (response.isSuccessful()) {
-                    VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-                    visus_dataSource.open();
                     visus_dataSource.delete_tblDeviceInvLocation(deviceInvLocation.getDeviceLocation_SaveOnDate());
                     int count = visus_dataSource.count_tblDeviceInvLocation();
                     if (count <= 0) {
                         saveData(Token, dialog);
                     } else {
                     }
-                    visus_dataSource.close();
+
                 } else {
                 }
             }
@@ -148,35 +150,33 @@ public class DataSyncActivity extends AppCompatActivity {
     }
 
     private void saveData(String Token, ProgressDialog dialog) {
-        VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
-        visus_dataSource.open();
         int updatetblPostInvestigatorActionDataToken = visus_dataSource.updatetblPostInvestigatorActionDataToken(Token);
         int updatetblPostInvestigatorActionDataPhotoToken = visus_dataSource.updatetblPostInvestigatorActionDataPhotoToken(Token);
         if (updatetblPostInvestigatorActionDataToken > 0) {
             List<SaveInvestigatorActionOnlyData.InvestigatorActionData> getPostInvestigatorActionData = visus_dataSource.getPostInvestigatorActionData();
-            visus_dataSource.close();
+
             if (getPostInvestigatorActionData != null && getPostInvestigatorActionData.size() > 0) {
                 for (SaveInvestigatorActionOnlyData.InvestigatorActionData postInvestigatorActionData : getPostInvestigatorActionData) {
-                    if (uploadedDataDetailsCount<=3){
+                    if (uploadedDataDetailsCount<3){
+                        uploadedDataDetailsCount+=1;
                         postActionTypeDataNew(postInvestigatorActionData, dialog);
-                        uploadedDataDetailsCount++;
-                        visus_dataSource.open();
+
                         activityDataSyncBinding.pendingCountValue.setText((visus_dataSource.getPostInvestigatorActionData()==null?0:visus_dataSource.getPostInvestigatorActionData().size()) + "");
                         activityDataSyncBinding.pendingImageCountValue.setText((visus_dataSource.getPostInvestigatorActionDataPhoto()==null?0:visus_dataSource.getPostInvestigatorActionDataPhoto().size())+"");
                         activityDataSyncBinding.uploadedCountValue.setText((uploadedDataDetailsCountForPrint+uploadedDataDetailsCount)+"");
                         activityDataSyncBinding.uploadedImageCountValue.setText((uploadedImageDetailsCountForPrint+uploadedImageDetailsCount)+"");
-                        visus_dataSource.open();
+
                     }else {
-                        visus_dataSource.open();
+
                         activityDataSyncBinding.pendingCountValue.setText((visus_dataSource.getPostInvestigatorActionData()==null?0:visus_dataSource.getPostInvestigatorActionData().size() ) + "");
                         activityDataSyncBinding.pendingImageCountValue.setText((visus_dataSource.getPostInvestigatorActionDataPhoto()==null?0:visus_dataSource.getPostInvestigatorActionDataPhoto().size())+"");
                         activityDataSyncBinding.uploadedCountValue.setText((uploadedDataDetailsCountForPrint+uploadedDataDetailsCount)+"");
                         activityDataSyncBinding.uploadedImageCountValue.setText((uploadedImageDetailsCountForPrint+uploadedImageDetailsCount)+"");
-                        visus_dataSource.open();
+                        setSweetDailog("Please check data has been synced...", "Great!");
                         if (dialog != null && dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        uploadedDataDetailsCount=0;
+                     //   uploadedDataDetailsCount=0;
                     }
 
                 }
@@ -191,11 +191,10 @@ public class DataSyncActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
             if (updatetblPostInvestigatorActionDataPhotoToken > 0) {
-                VISUS_DataSource visus_dataSourceNew = new VISUS_DataSource(getApplicationContext());
-                visus_dataSourceNew.open();
+
                 arrayListSaveInvestigatorActionDataPhoto.clear();
                 arrayListSaveInvestigatorActionDataPhoto = visus_dataSource.getPostInvestigatorActionDataPhoto();
-                visus_dataSourceNew.close();
+
                 if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
                     postActionTypeData();
                 } else {
@@ -204,6 +203,7 @@ public class DataSyncActivity extends AppCompatActivity {
                     }
                 }
             } else {
+                visus_dataSource.close();
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
@@ -237,17 +237,16 @@ public class DataSyncActivity extends AppCompatActivity {
                     if (investigatorActionData != null) {
                         Log.d("error1", saveInvestigatorActionData.getStatusCode() + "");
                         if (saveInvestigatorActionData.getStatusCode() == 200) {
-                            VISUS_DataSource visus_dataSource1 = new VISUS_DataSource(getApplicationContext());
-                            visus_dataSource1.open();
+
                             long valMainData =
-                                    visus_dataSource1.delete_tblPostInvestigatorActionData(saveInvestigatorActionData.getData().get(0).getClientID());
+                                    visus_dataSource.delete_tblPostInvestigatorActionData(saveInvestigatorActionData.getData().get(0).getClientID());
                             long val =
-                                    visus_dataSource1.update_tblPostInvestigatorActionDataPhoto(saveInvestigatorActionData.getData().get(0)
+                                    visus_dataSource.update_tblPostInvestigatorActionDataPhoto(saveInvestigatorActionData.getData().get(0)
                                             .getInvestigatorActionDataServerID(), saveInvestigatorActionData.getData().get(0).getClientID());
-                            if (val > 0) {
+                            if (val > 0 && uploadedDataDetailsCount==2) {
                                 arrayListSaveInvestigatorActionDataPhoto.clear();
-                                arrayListSaveInvestigatorActionDataPhoto = visus_dataSource1.getPostInvestigatorActionDataPhoto();
-                                visus_dataSource1.close();
+                                arrayListSaveInvestigatorActionDataPhoto = visus_dataSource.getPostInvestigatorActionDataPhoto();
+
                                 if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
                                     postActionTypeData();
                                 }
@@ -268,78 +267,114 @@ public class DataSyncActivity extends AppCompatActivity {
     }
 
     private void postActionTypeData() {
-        if (arrayListSaveInvestigatorActionDataPhoto!= null && arrayListSaveInvestigatorActionDataPhoto.size()>0) {
-            if(arrayListSaveInvestigatorActionDataPhoto.get(count)!=null){
-                SaveInvestigatorAction.SaveInvestigatorActionData saveData = arrayListSaveInvestigatorActionDataPhoto.get(count);
-                ProgressDialog dialog = ProgressDialog.show(DataSyncActivity.this, "Loading", "Please wait...", true);
-                ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
-                String Token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
-                MultipartBody.Part body_action_image1 =null;
-                if(saveData.getOriginalFileName()!=null){
-                    if(saveData.getOriginalFileName().contains("Pdf_")){
-                        String uri= saveData.getOriginalFileName().split("Pdf_")[1];
-                        File file_action_image = new File(uri);
-                        RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), uri.toString());
-                        body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
-                    }else {
-                        File file_action_image = new File(saveData.getOriginalFileName());
-                        RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
-                        body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
-                    }
-                }
-                if(body_action_image1!=null){
-                    Call<SaveInvestigatorAction> call2 = apiService.postInvestigatorActionDataPhoto("Bearer " + Token, body_action_image1, saveData.getVisusServicesID(), saveData.getInvestigatorCaseActivityCaseInsuranceID(), saveData.getInvestigatorCaseActivityInvID(), saveData.getInvestigatorRequiredActivityID(), saveData.getInvestigatorCaseActivity_ClientD(), saveData.getInvInsuranceRelID(), saveData.getInvestigatorCaseActivityPhotoServerID());
-                    call2.enqueue(new Callback<SaveInvestigatorAction>() {
-                        @Override
-                        public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
-                            if (dialog != null && dialog.isShowing()) {
-                                dialog.dismiss();
-                            }
-                            if (response.body() != null) {
-                                final SaveInvestigatorAction saveInvestigatorAction = response.body();
-                                if (saveInvestigatorAction != null) {
-                                    Log.d("error1", saveInvestigatorAction.getStatusCode() + "");
-                                    if (saveInvestigatorAction.getStatusCode() == 200) {
-                                        VISUS_DataSource visus_dataSource1 = new VISUS_DataSource(getApplicationContext());
-                                        visus_dataSource1.open();
-                                        int abc = visus_dataSource1.updatePostInvestigatorActionDataPhoto(saveInvestigatorAction.getData().get(0).getInvestigatorCaseActivityID().toString());
-                                        visus_dataSource1.close();
-                                        count++;
-                                        if (count == arrayListSaveInvestigatorActionDataPhoto.size() || count==2) {
+        if (arrayListSaveInvestigatorActionDataPhoto!= null && arrayListSaveInvestigatorActionDataPhoto.size()>0 && count<=arrayListSaveInvestigatorActionDataPhoto.size()) {
+            for (SaveInvestigatorAction. SaveInvestigatorActionData saveData : arrayListSaveInvestigatorActionDataPhoto) {
 
-                                            Log.d("countGreat",count+"");
-                                            setSweetDailog(saveInvestigatorAction.getMsg(), "Great!");
+                if (uploadedImageDetailsCount<3) {
+                    ProgressDialog dialog = ProgressDialog.show(DataSyncActivity.this, "Loading", "Please wait...", true);
+                    ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
+                    String Token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
+                    MultipartBody.Part body_action_image1 = null;
+                    if (saveData.getOriginalFileName() != null) {
+                        if (saveData.getOriginalFileName().contains("Pdf_")) {
+                            String uri = saveData.getOriginalFileName().split("Pdf_")[1];
+                            File file_action_image = new File(uri);
+                            RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), uri.toString());
+                            body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                        } else {
+                            File file_action_image = new File(saveData.getOriginalFileName());
+                            RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
+                            body_action_image1 = MultipartBody.Part.createFormData("OriginalFIleName", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                        }
+                    }
+                    if (body_action_image1 != null) {
+                        Call<SaveInvestigatorAction> call2 = apiService.postInvestigatorActionDataPhoto("Bearer " + Token, body_action_image1, saveData.getVisusServicesID(), saveData.getInvestigatorCaseActivityCaseInsuranceID(), saveData.getInvestigatorCaseActivityInvID(), saveData.getInvestigatorRequiredActivityID(), saveData.getInvestigatorCaseActivity_ClientD(), saveData.getInvInsuranceRelID(), saveData.getInvestigatorCaseActivityPhotoServerID());
+                        call2.enqueue(new Callback<SaveInvestigatorAction>() {
+                            @Override
+                            public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
+                                if (dialog != null && dialog.isShowing()) {
+                                    dialog.dismiss();
+                                }
+                                if (response.body() != null) {
+                                    final SaveInvestigatorAction saveInvestigatorAction = response.body();
+                                    if (saveInvestigatorAction != null) {
+                                        Log.d("error1", saveInvestigatorAction.getStatusCode() + "");
+                                        if (saveInvestigatorAction.getStatusCode() == 200) {
+
+                                            int abc = visus_dataSource.updatePostInvestigatorActionDataPhoto(saveInvestigatorAction.getData().get(0).getInvestigatorCaseActivityID().toString());
+
+                                            count++;
+
+                                            try {
+                                                activityDataSyncBinding.pendingCountValue.setText((visus_dataSource.getPostInvestigatorActionData() == null ? 0 : visus_dataSource.getPostInvestigatorActionData().size()) + "");
+                                                activityDataSyncBinding.pendingImageCountValue.setText((visus_dataSource.getPostInvestigatorActionDataPhoto() == null ? 0 : visus_dataSource.getPostInvestigatorActionDataPhoto().size()) + "");
+
+
+                                            } catch (Exception e) {
+                                                activityDataSyncBinding.pendingCountValue.setText("0");
+                                                activityDataSyncBinding.pendingImageCountValue.setText("0");
+
+                                            } finally {
+                                                activityDataSyncBinding.uploadedCountValue.setText((uploadedDataDetailsCountForPrint + uploadedDataDetailsCount) + "");
+                                                activityDataSyncBinding.uploadedImageCountValue.setText((uploadedImageDetailsCountForPrint + (count)) + "");
+
+                                            }
+//                                            new Handler().postDelayed(new Runnable() {
+//                                                @Override
+//                                                public void run() {
+//                                                    if (count == 2 || count == arrayListSaveInvestigatorActionDataPhoto.size()) {
+//
+//                                                        Log.d("countGreat", count + "");
+//                                                        setSweetDailog(saveInvestigatorAction.getMsg(), "Great!");
+//
+//                                                    } else {
+//                                                        Log.d("count", count + "");
+//                                                        postActionTypeData();
+//                                                    }
+//                                                }
+//                                            }, 2000);
+
+
                                         } else {
-                                            Log.d("count",count+"");
-                                            postActionTypeData();
+                                            setSweetDailog(saveInvestigatorAction.getMsg(), "Sorry!!!");
                                         }
-                                        VISUS_DataSource visus_dataSource2 = new VISUS_DataSource(getApplicationContext());
-                                        activityDataSyncBinding.pendingCountValue.setText((visus_dataSource2.getPostInvestigatorActionData()==null?0:visus_dataSource2.getPostInvestigatorActionData().size() )+ "");
-                                        activityDataSyncBinding.pendingImageCountValue.setText((visus_dataSource2.getPostInvestigatorActionDataPhoto()==null?0:visus_dataSource2.getPostInvestigatorActionDataPhoto().size())+"");
-                                        activityDataSyncBinding.uploadedCountValue.setText((uploadedDataDetailsCountForPrint+uploadedDataDetailsCount)+"");
-                                        activityDataSyncBinding.uploadedImageCountValue.setText((uploadedImageDetailsCountForPrint+(count+1))+"");
-                                        visus_dataSource2.close();
                                     } else {
                                         setSweetDailog(saveInvestigatorAction.getMsg(), "Sorry!!!");
                                     }
                                 } else {
-                                    setSweetDailog(saveInvestigatorAction.getMsg(), "Sorry!!!");
+                                    setSweetDailog(response.message(), "Sorry!!!");
                                 }
-                            } else {
-                                setSweetDailog(response.message(), "Sorry!!!");
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
-                            setSweetDailog(t.getMessage(), "Sorry!!!");
-                            if (dialog != null && dialog.isShowing()) {
-                                dialog.dismiss();
+                            @Override
+                            public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                                setSweetDailog(t.getMessage(), "Sorry!!!");
+                                if (dialog != null && dialog.isShowing()) {
+                                    dialog.dismiss();
+                                }
+                                call.cancel();
                             }
-                            call.cancel();
-                        }
-                    });
+                        });
+                    }
+                    uploadedImageDetailsCount += 1;
+                }else{
+                    try {
+                        activityDataSyncBinding.pendingCountValue.setText((visus_dataSource.getPostInvestigatorActionData() == null ? 0 : visus_dataSource.getPostInvestigatorActionData().size()) + "");
+                        activityDataSyncBinding.pendingImageCountValue.setText((visus_dataSource.getPostInvestigatorActionDataPhoto() == null ? 0 : visus_dataSource.getPostInvestigatorActionDataPhoto().size()) + "");
+
+
+                    } catch (Exception e) {
+                        activityDataSyncBinding.pendingCountValue.setText("0");
+                        activityDataSyncBinding.pendingImageCountValue.setText("0");
+
+                    } finally {
+                        activityDataSyncBinding.uploadedCountValue.setText((uploadedDataDetailsCountForPrint + uploadedDataDetailsCount) + "");
+                        activityDataSyncBinding.uploadedImageCountValue.setText((uploadedImageDetailsCountForPrint + (count)) + "");
+
+                    }
+                    setSweetDailog("Please check data has been synced...", "Great!");
                 }
+
 
             }
 
@@ -349,6 +384,7 @@ public class DataSyncActivity extends AppCompatActivity {
 
 
     private void setSweetDailog(String Content, String titleText) {
+        //visus_dataSource.close();
         SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DataSyncActivity.this, SweetAlertDialog.SUCCESS_TYPE);
         sweetAlertDialog.setTitleText(titleText);
         sweetAlertDialog.setCancelable(false);

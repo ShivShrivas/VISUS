@@ -166,7 +166,8 @@ public class MyActionActivity extends AppCompatActivity {
         callListener();
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MyActionActivity.this);
 
-        Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+//        Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+        Dexter.withContext(getApplicationContext()).withPermissions( Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                 if (multiplePermissionsReport.areAllPermissionsGranted()) {
@@ -519,7 +520,8 @@ public class MyActionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+                Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                         if (multiplePermissionsReport.areAllPermissionsGranted()) {
@@ -622,23 +624,25 @@ public class MyActionActivity extends AppCompatActivity {
         photo_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            startActivityForResult(intent, PHOTO_CODE);
-                        } else {
-                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
-                    }
-                }).check();
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, PHOTO_CODE);
+//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE).withListener(new MultiplePermissionsListener() {
+//                    @Override
+//                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+//                            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                            startActivityForResult(intent, PHOTO_CODE);
+//                        } else {
+//                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                        permissionToken.continuePermissionRequest();
+//                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).check();
             }
         });
         /*actionBinding.photoImg.setOnClickListener(new View.OnClickListener() {
@@ -675,32 +679,43 @@ public class MyActionActivity extends AppCompatActivity {
         camera_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                            String fileName = "photo";
-                            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                            try {
-                                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
-                                currentPhotoPath = imageFile.getAbsolutePath();
-                                Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                                startActivityForResult(intent, CAMERA_REQUEST);
-                            } catch (Exception ex) {
-                            }
-                        } else {
-                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
-                    }
-                }).check();
+                String fileName = "photo";
+                File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                try {
+                    File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+                    currentPhotoPath = imageFile.getAbsolutePath();
+                    Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, CAMERA_REQUEST);
+                } catch (Exception ex) {
+                }
+//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+//                    @Override
+//                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+//                            String fileName = "photo";
+//                            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//                            try {
+//                                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+//                                currentPhotoPath = imageFile.getAbsolutePath();
+//                                Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
+//                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                                startActivityForResult(intent, CAMERA_REQUEST);
+//                            } catch (Exception ex) {
+//                            }
+//                        } else {
+//                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                        permissionToken.continuePermissionRequest();
+//                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).check();
             }
         });
         sheetDialog.setContentView(view1);
