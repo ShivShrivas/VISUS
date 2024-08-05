@@ -481,7 +481,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<DeviceInvLocation> call, Response<DeviceInvLocation> response) {
                 if  (response.isSuccessful()) {
                     intentDashBoard();
-                 // getDeviceOfInvStatus();
+                  getDeviceOfInvStatus();
                 } else {
 
                 }
