@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
@@ -153,47 +154,88 @@ public class DataSyncActivity extends AppCompatActivity {
     private void saveData(String Token, ProgressDialog dialog) {
         int updatetblPostInvestigatorActionDataToken = visus_dataSource.updatetblPostInvestigatorActionDataToken(Token);
         int updatetblPostInvestigatorActionDataPhotoToken = visus_dataSource.updatetblPostInvestigatorActionDataPhotoToken(Token);
+        List<SaveInvestigatorActionOnlyData.InvestigatorActionData> getPostInvestigatorActionData = visus_dataSource.getPostInvestigatorActionData();
+
         if (updatetblPostInvestigatorActionDataToken > 0) {
-            List<SaveInvestigatorActionOnlyData.InvestigatorActionData> getPostInvestigatorActionData = visus_dataSource.getPostInvestigatorActionData();
-
-            if (getPostInvestigatorActionData != null && getPostInvestigatorActionData.size() > 0) {
-                for (SaveInvestigatorActionOnlyData.InvestigatorActionData postInvestigatorActionData : getPostInvestigatorActionData) {
-                    uploadedDataDetailsCount++;
-                    Log.d("TAG", "saveData: "+uploadedDataDetailsCount);
-                    if(uploadedDataDetailsCount<=3)
-                    {
-                        dialog.show();
-                        postActionTypeDataNew(postInvestigatorActionData, dialog,getPostInvestigatorActionData.size());
-                    }else{
-                        break;
-                    }
-
-                }
-            } else {
-                if (dialog != null && dialog.isShowing()) {
-                    dialog.dismiss();
-                }
-            }
-
-        }
-            if (updatetblPostInvestigatorActionDataPhotoToken > 0) {
-
-                arrayListSaveInvestigatorActionDataPhoto.clear();
+            Log.d("TAG", "saveData: " + new Gson().toJson(getPostInvestigatorActionData));
+            for (SaveInvestigatorActionOnlyData.InvestigatorActionData mainData : getPostInvestigatorActionData) {
                 arrayListSaveInvestigatorActionDataPhoto = visus_dataSource.getPostInvestigatorActionDataPhoto();
+                Log.d("TAG", "saveData image: " + new Gson().toJson(arrayListSaveInvestigatorActionDataPhoto));
+                if (arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
+                    ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
+                    String token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
+                    List<MultipartBody.Part> imageParts = new ArrayList<>();
+                    int count = 0;
+                    String VisusServicesID = "";
+                    String InvestigatorCaseActivityCaseInsuranceID = "";
+                    String InvestigatorCaseActivityInvID = "";
+                    String InvestigatorRequiredActivityID = "";
+                    String InvestigatorCaseActivity_ClientD = "";
+                    String InvInsuranceRelID = "";
+                    String InvestigatorCaseActivityPhotoServerID = "";
+                    for (SaveInvestigatorAction.SaveInvestigatorActionData imagedata : arrayListSaveInvestigatorActionDataPhoto) {
+                        if (imagedata.InvInsuranceRelID.equals(mainData.getInvInsuranceRelID()) && imagedata.getInvestigatorCaseActivityCaseInsuranceID().equals(mainData.getServiceID())) {
+                            count++;
+                            VisusServicesID = imagedata.getVisusServicesID();
+                            InvestigatorCaseActivityCaseInsuranceID = imagedata.getInvestigatorCaseActivityCaseInsuranceID();
+                            InvestigatorCaseActivityInvID = imagedata.getInvestigatorCaseActivityInvID();
+                            InvestigatorRequiredActivityID = imagedata.getInvestigatorRequiredActivityID();
+                            InvestigatorCaseActivity_ClientD = imagedata.getInvestigatorCaseActivity_ClientD();
+                            InvInsuranceRelID = imagedata.getInvInsuranceRelID();
+                            InvestigatorCaseActivityPhotoServerID = (imagedata.getInvestigatorCaseActivityPhotoServerID() == null || imagedata.getInvestigatorCaseActivityPhotoServerID().isEmpty()) ? "0" : imagedata.getInvestigatorCaseActivityPhotoServerID();
+                            MultipartBody.Part body_action_image1 = null;
+                            if (imagedata.getOriginalFileName() != null) {
+                                if (imagedata.getOriginalFileName().contains("Pdf_")) {
+                                    String uri = imagedata.getOriginalFileName().split("Pdf_")[1];
+                                    File file_action_image = new File(uri);
+                                    RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), uri.toString());
+                                    body_action_image1 = MultipartBody.Part.createFormData(count + "", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                                    imageParts.add(body_action_image1);
+                                } else {
+                                    File file_action_image = new File(imagedata.getOriginalFileName());
+                                    RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
+                                    body_action_image1 = MultipartBody.Part.createFormData(count + "", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
+                                    imageParts.add(body_action_image1);
 
-                if (arrayListSaveInvestigatorActionDataPhoto != null && arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
-                    dialog.show();
+                                }
+                            }
 
-                    postActionTypeData(dialog);
-                } else {
-                    if (dialog != null && dialog.isShowing()) {
-                        dialog.dismiss();
+
+                        }
+
                     }
+                    if (count > 0) {
+
+                        Call<JsonObject> call2 = apiService.saveInvestigatorActionlstPhotoData("Bearer " + token, imageParts, VisusServicesID, InvestigatorCaseActivityCaseInsuranceID, InvestigatorCaseActivityInvID, InvestigatorRequiredActivityID, InvestigatorCaseActivity_ClientD, InvInsuranceRelID, InvestigatorCaseActivityPhotoServerID);
+                        call2.enqueue(new Callback<JsonObject>() {
+                            @Override
+                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                            }
+                        });
+                    }
+
+
                 }
+
             }
-
-
-            if (updatetblPostInvestigatorActionDataPhotoToken<=0 && updatetblPostInvestigatorActionDataToken<=0){
+            if (getPostInvestigatorActionData.size() > 0) {
+                postActionTypeDataListNew(getPostInvestigatorActionData, dialog, getPostInvestigatorActionData.size());
+            }
+        }else {
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
+            if (updatetblPostInvestigatorActionDataPhotoToken > 0) {
+                if (getPostInvestigatorActionData.size() > 0) {
+                    postActionTypeDataListNew(getPostInvestigatorActionData, dialog, getPostInvestigatorActionData.size());
+                }
+            }else{
                 visus_dataSource.close();
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
@@ -210,6 +252,10 @@ public class DataSyncActivity extends AppCompatActivity {
                     }
                 });
             }
+        }
+
+
+
 
 
 
@@ -253,6 +299,42 @@ public class DataSyncActivity extends AppCompatActivity {
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
+                call.cancel();
+            }
+        });
+    }
+
+
+    private void postActionTypeDataListNew(List<SaveInvestigatorActionOnlyData.InvestigatorActionData> investigatorActionData, ProgressDialog dialog,int listSize) {
+        String Token = PrefUtils.getFromPrefs(DataSyncActivity.this, PrefUtils.Token);
+        ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
+        Call<SaveInvestigatorActionOnlyData> call2 = apiService.SaveInvestigatorActionListDataOnly("Bearer " + Token, investigatorActionData);
+        call2.enqueue(new Callback<SaveInvestigatorActionOnlyData>() {
+            @Override
+            public void onResponse(Call<SaveInvestigatorActionOnlyData> call, Response<SaveInvestigatorActionOnlyData> response) {
+                if (response.isSuccessful() && response.code()==200){
+                    if (dialog != null && dialog.isShowing()) {
+                        dialog.dismiss();
+                    }
+                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DataSyncActivity.this, SweetAlertDialog.WARNING_TYPE);
+                    sweetAlertDialog.setTitleText("Great!!");
+                    sweetAlertDialog.setCancelable(false);
+                    sweetAlertDialog.setContentText("All data have been sync successfully!!");
+                    sweetAlertDialog.show();
+                    sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            sweetAlertDialog.dismiss();
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+                Log.d("TAG", "onFailure data: "+t.getMessage());
                 call.cancel();
             }
         });

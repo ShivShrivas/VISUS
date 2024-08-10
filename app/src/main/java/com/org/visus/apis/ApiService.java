@@ -1,5 +1,6 @@
 package com.org.visus.apis;
 
+import com.google.gson.JsonObject;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceInvLocation;
 import com.org.visus.models.DeviceOfInvStatus;
@@ -29,6 +30,8 @@ import com.org.visus.models.requset.GI_OD;
 import com.org.visus.models.requset.GI_PA;
 import com.org.visus.models.requset.GI_Theft;
 import com.org.visus.models.requset.MACT;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -105,6 +108,17 @@ public interface ApiService {
                                                                  @Query("ClientID") String ClientID,
                                                                  @Query("InvInsuranceRelID") String InvInsuranceRelID,
                                                                  @Query("InvestigatorServiceCaseAction_ID") String InvestigatorServiceCaseAction_ID);
+    @Multipart
+    @POST("api/invActionPhoto/SaveInvestigatorActionlstPhotoData")
+    Call<JsonObject> saveInvestigatorActionlstPhotoData(@Header("Authorization") String Authorization,
+                                                        @Part List<MultipartBody.Part> OriginalFileName,
+                                                        @Query("ServiceTypeID") String ServiceTypeID,
+                                                        @Query("ServiceID") String ServiceID,
+                                                        @Query("InvID") String InvID,
+                                                        @Query("ActionID") String ActionID,
+                                                        @Query("ClientID") String ClientID,
+                                                        @Query("InvInsuranceRelID") String InvInsuranceRelID,
+                                                        @Query("InvestigatorServiceCaseAction_ID") String InvestigatorServiceCaseAction_ID);
 
 
     @GET("api/MyPendingAssignment/getMyAssignment")
@@ -167,5 +181,9 @@ public interface ApiService {
 
     @POST("api/invActionPhoto/SaveInvestigatorActionDataOnly")
     Call<SaveInvestigatorActionOnlyData> postInvestigatorActionDataNew(@Header("Authorization") String Authorization, @Body SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData);
+
+
+    @POST("api/invActionPhoto/SaveInvestigatorActionListDataOnly")
+    Call<SaveInvestigatorActionOnlyData> SaveInvestigatorActionListDataOnly(@Header("Authorization") String Authorization, @Body List<SaveInvestigatorActionOnlyData.InvestigatorActionData> investigatorActionData);
 
 }

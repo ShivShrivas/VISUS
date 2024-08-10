@@ -166,8 +166,8 @@ public class MyActionActivity extends AppCompatActivity {
         callListener();
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MyActionActivity.this);
 
-//        Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
-        Dexter.withContext(getApplicationContext()).withPermissions( Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+       Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+//        Dexter.withContext(getApplicationContext()).withPermissions( Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                 if (multiplePermissionsReport.areAllPermissionsGranted()) {
@@ -520,8 +520,8 @@ public class MyActionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
-                Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+//                Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                         if (multiplePermissionsReport.areAllPermissionsGranted()) {
@@ -901,7 +901,7 @@ public class MyActionActivity extends AppCompatActivity {
         try {
             if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK /*&& data != null*/) {
                 action_image_bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-                int quality = 70; // You can adjust the quality (0-100)
+                int quality = 50; // You can adjust the quality (0-100)
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 action_image_bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
                 String INV_code = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.INV_code);
