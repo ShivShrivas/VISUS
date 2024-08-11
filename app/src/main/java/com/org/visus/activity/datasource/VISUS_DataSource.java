@@ -24,7 +24,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import com.google.gson.Gson;
 import com.org.visus.activity.sqlite.VISUS_SQLiteHelper;
 import com.org.visus.models.DeviceInvLocation;
 import com.org.visus.models.GetServices;
@@ -471,6 +473,7 @@ public class VISUS_DataSource {
     }
 
     public long insertPostInvestigatorActionDataNew(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData) {
+        Log.d("TAG", "insertPostInvestigatorActionDataNew: "+new Gson().toJson(investigatorActionData));
         long i = 0;
         ContentValues values = new ContentValues();
         values.put(VISUS_SQLiteHelper.Token, "");
@@ -657,6 +660,13 @@ public class VISUS_DataSource {
         String[] whereArgs = {investigatorCaseActivityPhotoServerID};
         return sqLiteDatabase.delete(VISUS_SQLiteHelper.tblPostInvestigatorActionDataPhoto, whereClause, whereArgs);
     }
+
+    public int updatePostInvestigatorActionDataPhotoNEW(String InvestigatorCaseActivity_ClientD) {
+        String whereClause = VISUS_SQLiteHelper.InvestigatorCaseActivity_ClientD + "=?";
+        String[] whereArgs = {InvestigatorCaseActivity_ClientD};
+        return sqLiteDatabase.delete(VISUS_SQLiteHelper.tblPostInvestigatorActionDataPhoto, whereClause, whereArgs);
+    }
+
 
 
 

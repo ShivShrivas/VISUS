@@ -206,15 +206,15 @@ public class DataSyncActivity extends AppCompatActivity {
                     }
                     if (count > 0) {
 
-                        Call<JsonObject> call2 = apiService.saveInvestigatorActionlstPhotoData("Bearer " + token, imageParts, VisusServicesID, InvestigatorCaseActivityCaseInsuranceID, InvestigatorCaseActivityInvID, InvestigatorRequiredActivityID, InvestigatorCaseActivity_ClientD, InvInsuranceRelID, InvestigatorCaseActivityPhotoServerID);
-                        call2.enqueue(new Callback<JsonObject>() {
+                        Call<SaveInvestigatorAction> call2 = apiService.saveInvestigatorActionlstPhotoData("Bearer " + token, imageParts, VisusServicesID, InvestigatorCaseActivityCaseInsuranceID, InvestigatorCaseActivityInvID, InvestigatorRequiredActivityID, InvestigatorCaseActivity_ClientD, InvInsuranceRelID, InvestigatorCaseActivityPhotoServerID);
+                        call2.enqueue(new Callback<SaveInvestigatorAction>() {
                             @Override
-                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            public void onResponse(Call<SaveInvestigatorAction> call, Response<SaveInvestigatorAction> response) {
 
                             }
 
                             @Override
-                            public void onFailure(Call<JsonObject> call, Throwable t) {
+                            public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
 
                             }
                         });

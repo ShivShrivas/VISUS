@@ -78,25 +78,55 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(LoginActivity.this);
-        Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
-            @Override
-            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                    getCurrentLocation();
-                } else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
-                    PrefUtils.showSettingsDialog(LoginActivity.this);
-                } else {
-                    Toast.makeText(LoginActivity.this, "Allow Permission First", Toast.LENGTH_SHORT).show();
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S) { // Check if the Android version is 12 or lower
+            Dexter.withContext(getApplicationContext())
+                    .withPermissions(
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+                    .withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                            if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                                getCurrentLocation();
 
-                }
-            }
+                            } else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+                                PrefUtils.showSettingsDialog(LoginActivity.this);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Allow Permission First", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-            @Override
-            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                permissionToken.continuePermissionRequest();
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
+        } else {
+            // For Android versions 13 and higher, handle permissions differently if needed
+            Dexter.withContext(getApplicationContext())
+                    .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION) // Storage permissions are not needed for Android 13+
+                    .withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                            if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                                getCurrentLocation();
+                            } else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()) {
+                                PrefUtils.showSettingsDialog(LoginActivity.this);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Allow Permission First", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-            }
-        }).check();
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                            permissionToken.continuePermissionRequest();
+                        }
+                    })
+                    .check();
+        }
         if (ConnectionUtility.isConnected(LoginActivity.this)) {
             String getToken = PrefUtils.getToken(LoginActivity.this);
             getRequreActionsData();
@@ -480,7 +510,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DeviceInvLocation> call, Response<DeviceInvLocation> response) {
                 if  (response.isSuccessful()) {
-                   // intentDashBoard();
+//                    intentDashBoard();
                   getDeviceOfInvStatus();
                 } else {
 

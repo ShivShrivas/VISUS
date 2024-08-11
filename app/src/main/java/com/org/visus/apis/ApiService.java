@@ -110,7 +110,7 @@ public interface ApiService {
                                                                  @Query("InvestigatorServiceCaseAction_ID") String InvestigatorServiceCaseAction_ID);
     @Multipart
     @POST("api/invActionPhoto/SaveInvestigatorActionlstPhotoData")
-    Call<JsonObject> saveInvestigatorActionlstPhotoData(@Header("Authorization") String Authorization,
+    Call<SaveInvestigatorAction> saveInvestigatorActionlstPhotoData(@Header("Authorization") String Authorization,
                                                         @Part List<MultipartBody.Part> OriginalFileName,
                                                         @Query("ServiceTypeID") String ServiceTypeID,
                                                         @Query("ServiceID") String ServiceID,

@@ -22,6 +22,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -166,14 +167,14 @@ public class MyActionActivity extends AppCompatActivity {
         callListener();
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MyActionActivity.this);
 
-       Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
-//        Dexter.withContext(getApplicationContext()).withPermissions( Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+//       Dexter.withContext(getApplicationContext()).withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
+        Dexter.withContext(getApplicationContext()).withPermissions( Manifest.permission.ACCESS_FINE_LOCATION).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
                 if (multiplePermissionsReport.areAllPermissionsGranted()) {
                     getCurrentLocation();
                 } else {
-                    Toast.makeText(MyActionActivity.this, "Allow Permission First", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyActionActivity.this, "Allow Location Permission First", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -296,6 +297,17 @@ public class MyActionActivity extends AppCompatActivity {
                 actionBinding.actionComments.getText().clear();
                 actionBinding.spinnerSelectActionType.setSelection(0);
                 dialog.cancel();
+                SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(MyActionActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                sweetAlertDialog.setTitleText("Great!!");
+                sweetAlertDialog.setCancelable(false);
+                sweetAlertDialog.setContentText("Data have been saved successfully!!");
+                sweetAlertDialog.show();
+                sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sweetAlertDialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -489,15 +501,21 @@ public class MyActionActivity extends AppCompatActivity {
         actionBinding.spinnerSelectActionType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.d("TAG", "onItemSelected: "+position);
                 if (position != 0) {
                     actionType = String.valueOf(adapterView.getItemAtPosition(position));
                     actionTypeID = IDActionTypeList.get(position - 1);
                     if (position == 19) {
-                        if (ContextCompat.checkSelfPermission(MyActionActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(MyActionActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ACTION_GET_CONTENT_PDF_WORD_REQUEST);
-                        } else {
+                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S) {
+                            if (ContextCompat.checkSelfPermission(MyActionActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(MyActionActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, ACTION_GET_CONTENT_PDF_WORD_REQUEST);
+                            } else {
+                                openPdfAndWordFile();
+                            }
+                        }else{
                             openPdfAndWordFile();
                         }
+
 
                     } else {
                         openBottomSheetDialog();
@@ -519,34 +537,36 @@ public class MyActionActivity extends AppCompatActivity {
         actionBinding.clickPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String fileName = "photo";
+                File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                try {
+                    File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+                    currentPhotoPath = imageFile.getAbsolutePath();
+                    Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, CAMERA_REQUEST);
+                } catch (Exception ex) {
+                }
 
-                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
-//                Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
-                    @Override
-                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
-                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
-                            String fileName = "photo";
-                            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                            try {
-                                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
-                                currentPhotoPath = imageFile.getAbsolutePath();
-                                Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
-                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                                startActivityForResult(intent, CAMERA_REQUEST);
-                            } catch (Exception ex) {
-                            }
-                        } else {
-                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
-                    }
-                }).check();
+//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+////                Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+//                    @Override
+//                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+//                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+//
+//
+//                        } else {
+//                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+//                        permissionToken.continuePermissionRequest();
+//                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
+//                    }
+//                }).check();
             }
         });
 
@@ -679,17 +699,35 @@ public class MyActionActivity extends AppCompatActivity {
         camera_linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fileName = "photo";
-                File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                try {
-                    File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
-                    currentPhotoPath = imageFile.getAbsolutePath();
-                    Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                    startActivityForResult(intent, CAMERA_REQUEST);
-                } catch (Exception ex) {
-                }
+//                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+                                    Dexter.withContext(MyActionActivity.this).withPermissions( Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                        if (multiplePermissionsReport.areAllPermissionsGranted()) {
+                            String fileName = "photo";
+                            File storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                            try {
+                                File imageFile = File.createTempFile(fileName, ".jpg", storageDirectory);
+                                currentPhotoPath = imageFile.getAbsolutePath();
+                                Uri imageUri = FileProvider.getUriForFile(MyActionActivity.this, "com.org.visus.fileprovider", imageFile);
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                                startActivityForResult(intent, CAMERA_REQUEST);
+                            } catch (Exception ex) {
+                            }
+
+                        } else {
+                            Toast.makeText(MyActionActivity.this, "Please Allow All the Permission", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                        Toast.makeText(MyActionActivity.this, "continue permission", Toast.LENGTH_SHORT).show();
+                    }
+                }).check();
+
 //                Dexter.withContext(MyActionActivity.this).withPermissions(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA).withListener(new MultiplePermissionsListener() {
 //                    @Override
 //                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
@@ -901,7 +939,7 @@ public class MyActionActivity extends AppCompatActivity {
         try {
             if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK /*&& data != null*/) {
                 action_image_bitmap = BitmapFactory.decodeFile(currentPhotoPath);
-                int quality = 50; // You can adjust the quality (0-100)
+                int quality = 10; // You can adjust the quality (0-100)
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 action_image_bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
                 String INV_code = PrefUtils.getFromPrefs(MyActionActivity.this, PrefUtils.INV_code);
@@ -917,6 +955,7 @@ public class MyActionActivity extends AppCompatActivity {
                     stringBuilder.append("Address: " + method_geocoder() + "!");
                 }
                 stringBuilder.append("Submitted Date: " + getCurrentDateTime());
+                Log.d("TAG", "onActivityResult: "+currentLocation.getLatitude());
                 if (action_image_bitmap != null) {
                     SaveInvestigatorAction saveInvestigatorAction = new SaveInvestigatorAction();
                     SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData = (saveInvestigatorAction).new SaveInvestigatorActionData();
@@ -1035,6 +1074,44 @@ public class MyActionActivity extends AppCompatActivity {
         }
         return destinationFile;
     }
+    public File compressImageToFile(File file, int targetSizeKB) {
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        int quality = 100; // Start with high quality
+
+        // Compress the image and check the file size
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+        while (outputStream.size() / 1024 > targetSizeKB && quality > 0) {
+            // Reduce quality and compress again
+            outputStream.reset(); // Clear the previous data
+            quality -= 10; // Decrease quality
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+        }
+
+        // Optionally resize the image if needed
+        if (outputStream.size() / 1024 > targetSizeKB) {
+            bitmap = resizeBitmap(bitmap, 1024); // Resize to a width of 1024px
+            outputStream.reset();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+        }
+
+        // Save the compressed image to a new file
+        File compressedFile = new File(file.getParent(), "compressed_image.jpg");
+        try (FileOutputStream fos = new FileOutputStream(compressedFile)) {
+            fos.write(outputStream.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return compressedFile;
+    }
+
+    private Bitmap resizeBitmap(Bitmap bitmap, int newWidth) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float aspectRatio = (float) height / width;
+        int newHeight = Math.round(newWidth * aspectRatio);
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true);
+    }
 
     public String getFilePathFromContentUriNew(Uri contentUri) {
         String filePath = "", fileName = "";
@@ -1137,9 +1214,11 @@ public class MyActionActivity extends AppCompatActivity {
                     Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
                 }
                 File file_action_image = new File(action_image_file.toString());
+                file_action_image= compressImageToFile(file_action_image, 400);
                 saveInvestigatorActionData.setActivityFilePath(file_action_image.getPath());
                 saveInvestigatorActionData.setOriginalFileName(action_image_file.toString());
                 saveInvestigatorActionData.setFileSubmittionOnDate(formattedDate);
+
 
                 RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
                 body_action_image = MultipartBody.Part.createFormData("OriginalFIleName", file_action_image.getName(), request_file_action_photo);
