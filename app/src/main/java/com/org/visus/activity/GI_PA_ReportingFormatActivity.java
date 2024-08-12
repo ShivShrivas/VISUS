@@ -17,6 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiPaReportingFormatBinding;
 import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.GI_PAResponse;
@@ -782,6 +783,8 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_PAResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(GI_PA_ReportingFormatActivity.this,GI_PA_ReportingFormatActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.Investigator;
 import com.org.visus.utility.PrefUtils;
 
@@ -129,6 +130,8 @@ public class InvestigatorActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Investigator> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(InvestigatorActivity.this,InvestigatorActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(InvestigatorActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }

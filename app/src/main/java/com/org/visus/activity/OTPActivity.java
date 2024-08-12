@@ -14,6 +14,7 @@ import com.chaos.view.PinView;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.SMSAsOTP;
 import com.org.visus.utility.PrefUtils;
 
@@ -133,6 +134,8 @@ public class OTPActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SMSAsOTP> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(OTPActivity.this,OTPActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(OTPActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }

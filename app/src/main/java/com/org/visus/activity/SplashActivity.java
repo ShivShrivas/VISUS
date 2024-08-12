@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceRegistrationResponse;
 import com.org.visus.models.TokenResponse;
@@ -131,6 +132,8 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(SplashActivity.this,SplashActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(SplashActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -228,6 +231,8 @@ public class SplashActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<DeviceRegistrationResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(SplashActivity.this,SplashActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
                 }
             });

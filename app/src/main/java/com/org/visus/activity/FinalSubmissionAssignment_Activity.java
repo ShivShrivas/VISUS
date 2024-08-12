@@ -21,6 +21,7 @@ import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.adapters.FinalSubmissionAssignment_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityFinalSubmissionAssignmentBinding;
 import com.org.visus.models.GetServices;
 import com.org.visus.models.MyAssignment;
@@ -129,6 +130,8 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,FinalSubmissionAssignment_Activity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -191,6 +194,8 @@ public class FinalSubmissionAssignment_Activity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(FinalSubmissionAssignment_Activity.this,FinalSubmissionAssignment_Activity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(FinalSubmissionAssignment_Activity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }

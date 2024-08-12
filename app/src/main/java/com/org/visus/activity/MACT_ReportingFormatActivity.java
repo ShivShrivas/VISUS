@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityMactReportingFormatBinding;
 import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.MACTInsuCheckList;
@@ -1207,6 +1208,8 @@ public class MACT_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<MACTResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(MACT_ReportingFormatActivity.this,MACT_ReportingFormatActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }

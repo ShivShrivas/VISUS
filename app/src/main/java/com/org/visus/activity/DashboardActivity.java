@@ -29,6 +29,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityDashboardBinding;
 import com.org.visus.models.DeviceInvLocation;
 import com.org.visus.models.SaveInvestigatorAction;
@@ -227,6 +228,8 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
@@ -293,6 +296,8 @@ public class DashboardActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                            ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                            apiCall.saveErrorLog();
                             setSweetDailog(t.getMessage(), "Sorry!!!");
                             if (dialog != null && dialog.isShowing()) {
                                 dialog.dismiss();
@@ -359,6 +364,8 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(DashboardActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -667,7 +674,8 @@ public class DashboardActivity extends AppCompatActivity {
 
                                         @Override
                                         public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
-
+                                            ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                                            apiCall.saveErrorLog();
                                         }
                                     });
                                 }
@@ -710,7 +718,9 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
-                Log.d("TAG", "onFailure data: "+t.getMessage());
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
+
                 call.cancel();
             }
         });
@@ -739,6 +749,8 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DeviceInvLocation> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(DashboardActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }

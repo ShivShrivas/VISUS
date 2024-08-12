@@ -10,6 +10,7 @@ import com.org.visus.adapters.FinalSubmissionAction_Adapter;
 import com.org.visus.adapters.FinalSubmissionAssignment_Adapter;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityActionFinalSubmitBinding;
 import com.org.visus.models.InvReqActivityFile;
 import com.org.visus.models.MyAssignment;
@@ -79,6 +80,8 @@ public class Action_FinalSubmit_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<InvReqActivityFile> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(Action_FinalSubmit_Activity.this,Action_FinalSubmit_Activity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(Action_FinalSubmit_Activity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityLifeInsuranceReportingFormatBinding;
 import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.LifeInsuranceCheckList;
@@ -565,6 +566,8 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<LifeInsuranceCheckList> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(LifeInsuranceReportingFormatActivity.this,LifeInsuranceReportingFormatActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
                 }
             });

@@ -36,6 +36,7 @@ import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.models.DeviceInfo;
 import com.org.visus.models.DeviceInvLocation;
 import com.org.visus.models.DeviceOfInvStatus;
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(LoginActivity.this);
+
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S) { // Check if the Android version is 12 or lower
             Dexter.withContext(getApplicationContext())
                     .withPermissions(
@@ -208,6 +210,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetServices> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -239,6 +243,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RequreActions> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -274,6 +280,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -311,6 +319,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -351,6 +361,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MyAssignment> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t, Toast.LENGTH_LONG).show();
             }
@@ -386,6 +398,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TotalCases> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(LoginActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -520,6 +534,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DeviceInvLocation> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 closeProgress();
             }
         });
@@ -598,6 +614,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<DeviceRegistrationResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     Toast.makeText(getApplicationContext(), "" + t.toString(), Toast.LENGTH_LONG).show();
                     if (progressDialog != null && progressDialog.isShowing()) {
                         progressDialog.dismiss();
@@ -650,6 +668,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DeviceStatusResponse> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(LoginActivity.this,LoginActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 closeProgress();
             }
         });

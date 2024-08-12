@@ -65,6 +65,7 @@ import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityMyActionBinding;
 import com.org.visus.models.MyAssignment;
 import com.org.visus.models.RequreActions;
@@ -353,6 +354,8 @@ public class MyActionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(MyActionActivity.this,MyActionActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 dialog.dismiss();
                 call.cancel();
             }
@@ -480,6 +483,8 @@ public class MyActionActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                            ErrorLogAPICall apiCall=new ErrorLogAPICall(MyActionActivity.this,MyActionActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                            apiCall.saveErrorLog();
                             if (dialog != null && dialog.isShowing()) {
                                 dialog.dismiss();
                             }

@@ -21,6 +21,7 @@ import com.org.visus.R;
 import com.org.visus.activity.datasource.VISUS_DataSource;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityDashboardBinding;
 import com.org.visus.databinding.ActivityDataSyncBinding;
 import com.org.visus.models.DeviceInvLocation;
@@ -116,6 +117,8 @@ public class DataSyncActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(DataSyncActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -144,6 +147,8 @@ public class DataSyncActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DeviceInvLocation> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 call.cancel();
                 Toast.makeText(DataSyncActivity.this, "fail " + t.toString(), Toast.LENGTH_LONG).show();
             }
@@ -215,6 +220,8 @@ public class DataSyncActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                                apiCall.saveErrorLog();
 
                             }
                         });
@@ -296,6 +303,8 @@ public class DataSyncActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
@@ -334,6 +343,9 @@ public class DataSyncActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+
+                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                apiCall.saveErrorLog();
                 Log.d("TAG", "onFailure data: "+t.getMessage());
                 call.cancel();
             }
@@ -397,6 +409,8 @@ public class DataSyncActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<SaveInvestigatorAction> call, Throwable t) {
+                                ErrorLogAPICall apiCall=new ErrorLogAPICall(DataSyncActivity.this,DataSyncActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                                apiCall.saveErrorLog();
                                 setSweetDailog(t.getMessage(), "Sorry!!!");
                                 if (dialog != null && dialog.isShowing()) {
                                     dialog.dismiss();

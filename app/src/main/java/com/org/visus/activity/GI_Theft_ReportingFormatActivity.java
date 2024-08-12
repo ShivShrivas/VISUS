@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
+import com.org.visus.apis.ErrorLogAPICall;
 import com.org.visus.databinding.ActivityGiTheftReportingFormatBinding;
 import com.org.visus.holdgassessment.actvity.FinalSubmissionAssignmentHoldActivity;
 import com.org.visus.models.GI_TheftResponse;
@@ -260,6 +261,8 @@ public class GI_Theft_ReportingFormatActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GI_TheftResponse> call, Throwable t) {
+                    ErrorLogAPICall apiCall=new ErrorLogAPICall(GI_Theft_ReportingFormatActivity.this,GI_Theft_ReportingFormatActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                    apiCall.saveErrorLog();
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "" + t, Toast.LENGTH_LONG).show();
                 }
