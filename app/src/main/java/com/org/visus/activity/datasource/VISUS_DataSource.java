@@ -492,6 +492,52 @@ public class VISUS_DataSource {
         return i;
     }
 
+    public long insertPostInvestigatorImageResponseData(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData) {
+        Log.d("TAG", "insertPostInvestigatorActionDataNew: "+new Gson().toJson(investigatorActionData));
+        long i = 0;
+        ContentValues values = new ContentValues();
+        values.put(VISUS_SQLiteHelper.Token, "");
+        values.put(VISUS_SQLiteHelper.OriginalFileName, "");
+        values.put(VISUS_SQLiteHelper.ServiceTypeID, investigatorActionData.getServiceTypeID());
+        values.put(VISUS_SQLiteHelper.ServiceID, investigatorActionData.getServiceID());
+        values.put(VISUS_SQLiteHelper.InvestigatorActionDataServerID, investigatorActionData.getInvestigatorActionDataServerID());
+        values.put(VISUS_SQLiteHelper.InvID, investigatorActionData.getInvID());
+        values.put(VISUS_SQLiteHelper.Comments, investigatorActionData.getComments());
+        values.put(VISUS_SQLiteHelper.ActionID, investigatorActionData.getActionID());
+        values.put(VISUS_SQLiteHelper.Latitude, investigatorActionData.getLatitude());
+        values.put(VISUS_SQLiteHelper.Longitude, investigatorActionData.getLongitude());
+        values.put(VISUS_SQLiteHelper.CellAddress, investigatorActionData.getCellAddress());
+        values.put(VISUS_SQLiteHelper.InvInsuranceRelID_SAVING, investigatorActionData.getInvInsuranceRelID());
+        values.put(VISUS_SQLiteHelper.isSyncedRequreActionsData, "false");
+        i = sqLiteDatabase.insert(VISUS_SQLiteHelper.tblPostInvestigatorSavedResponsedata, null, values);
+        return i;
+    }
+    @SuppressLint("Range")
+    public List<SaveInvestigatorActionOnlyData.InvestigatorActionData> getPostInvestigatorSavedResponseData() {
+        SaveInvestigatorActionOnlyData saveInvestigatorActionData = new SaveInvestigatorActionOnlyData();
+        List<SaveInvestigatorActionOnlyData.InvestigatorActionData> list = new ArrayList<>();
+        SaveInvestigatorActionOnlyData.InvestigatorActionData postInvestigatorActionData;
+        String sql = "select * From " + VISUS_SQLiteHelper.tblPostInvestigatorSavedResponsedata;
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            postInvestigatorActionData = (saveInvestigatorActionData).new InvestigatorActionData();
+            postInvestigatorActionData.setClientID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.common_id)));
+            postInvestigatorActionData.setServiceTypeID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ServiceTypeID)));
+            postInvestigatorActionData.setServiceID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ServiceID)));
+            postInvestigatorActionData.setInvID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvID)));
+            postInvestigatorActionData.setComments(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.Comments)));
+            postInvestigatorActionData.setActionID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ActionID)));
+            postInvestigatorActionData.setLatitude(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.Latitude)));
+            postInvestigatorActionData.setLongitude(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.Longitude)));
+            postInvestigatorActionData.setCellAddress(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.CellAddress)));
+            postInvestigatorActionData.setInvestigatorActionDataServerID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorActionDataServerID)));
+            postInvestigatorActionData.setInvInsuranceRelID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvInsuranceRelID_SAVING)));
+            list.add(postInvestigatorActionData);
+            cursor.moveToNext();
+        }
+        return list;
+    }
 
     public int updatetblPostInvestigatorActionDataToken(String token) {
         ContentValues contentValues = new ContentValues();
@@ -530,6 +576,12 @@ public class VISUS_DataSource {
         String whereClause = VISUS_SQLiteHelper.common_id + "=?";
         String[] whereArgs = {commonID};
         return sqLiteDatabase.delete(VISUS_SQLiteHelper.tblPostInvestigatorActionData, whereClause, whereArgs);
+    }
+
+    public int delete_tblPostInvestigatorResponsedata(String commonID) {
+        String whereClause = VISUS_SQLiteHelper.common_id + "=?";
+        String[] whereArgs = {commonID};
+        return sqLiteDatabase.delete(VISUS_SQLiteHelper.tblPostInvestigatorSavedResponsedata, whereClause, whereArgs);
     }
 
     public long insertDeviceInvLocation(DeviceInvLocation deviceInvLocation) {

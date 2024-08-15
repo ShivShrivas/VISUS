@@ -19,6 +19,7 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
     public static String tblInvestigatorObj = "tblInvestigatorObj";
     public static String tblRequreActionsData = "tblRequreActionsData";
     public static String tblPostInvestigatorActionData = "tblPostInvestigatorActionData";
+    public static String tblPostInvestigatorSavedResponsedata = "tblPostInvestigatorSavedResponsedata";
     public static String tblPostInvestigatorActionDataPhoto = "tblPostInvestigatorActionDataPhoto";
 
 
@@ -89,6 +90,7 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
     public static String OriginalFileName = "OriginalFileName";
     public static String ServiceTypeID = "ServiceTypeID";
     public static String ServiceID = "ServiceID";
+    public static String InvestigatorActionDataServerID = "InvestigatorActionDataServerID";
     public static String InvID = "InvID";
     public static String Comments = "Comments";
     public static String ActionID = "ActionID";
@@ -103,6 +105,7 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
 
 
     private final String create_tblPostInvestigatorActionData = "create table " + tblPostInvestigatorActionData + " (" + common_id + " integer primary key autoincrement ," + OriginalFileName + " text," + ServiceTypeID + " text," + ServiceID + " text," + InvID + " text," + Comments + " text," + ActionID + " text," + Latitude + " text," + Longitude + " text," + CellAddress + " text," + Token + " text," + InvInsuranceRelID_SAVING + " text," + isSyncedRequreActionsData + " text );";
+    private final String create_tblPostInvestigatorImageResponseData = "create table " + tblPostInvestigatorSavedResponsedata + " (" + common_id + " integer primary key autoincrement ," + OriginalFileName + " text," + ServiceTypeID + " text," + ServiceID + " text," + InvID + " text," + Comments + " text," + ActionID + " text," + Latitude + " text," + Longitude + " text," + CellAddress + " text," + Token + " text," + InvInsuranceRelID_SAVING + " text," + InvestigatorActionDataServerID + " text," + isSyncedRequreActionsData + " text );";
 
     private final String create_tblRequreActionsData = "create table " + tblRequreActionsData + " (" + common_id + " integer primary key autoincrement ," + InvestigatorReqActivity_ID + " text," + InsuranceClaimTypeID + " text," + InsuranceClaimTypeText + " text," + InvestigatorReqActivity_Text + " text," + IsSelfieRequired + " text," + IsCompulsory + " text," + IsPhotoRequired + " text," + MinimumPhotoRequired + " text," + MaximumPhotoRequired + " text," + IsVedioFileRequired + " text," + MinumumVedioFileRequired + " text," + MaximumVedioFileRequired + " text," + MaxmumSizeOfVedioFileInMB + " text," + IsActiveInvestigatorReqActivity + " text );";
 
@@ -217,6 +220,7 @@ public class VISUS_SQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(create_tblMyAssignmentData_Hold);
         sqLiteDatabase.execSQL(create_tblMyTotalCase_Hold);
         sqLiteDatabase.execSQL(create_tblPostInvestigatorActionDataPhoto);
+        sqLiteDatabase.execSQL(create_tblPostInvestigatorImageResponseData);
 
     }
 
