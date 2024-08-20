@@ -452,73 +452,88 @@ public class DashboardActivity extends AppCompatActivity {
          imageButton_uploadData.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 String Token = PrefUtils.getFromPrefs(DashboardActivity.this, PrefUtils.Token);
-                 ApiService apiService = ApiClient.getClient(DashboardActivity.this).create(ApiService.class);
-                 Call<SaveInvestigatorActionOnlyData> call2 = apiService.SaveInvestigatorActionListDataOnly("Bearer " + Token, getPostInvestigatorActionData);
-                 call2.enqueue(new Callback<SaveInvestigatorActionOnlyData>() {
-                     @Override
-                     public void onResponse(Call<SaveInvestigatorActionOnlyData> call, Response<SaveInvestigatorActionOnlyData> response) {
+                 if (getPostInvestigatorActionData.size()>0){
+                     String Token = PrefUtils.getFromPrefs(DashboardActivity.this, PrefUtils.Token);
+                     ApiService apiService = ApiClient.getClient(DashboardActivity.this).create(ApiService.class);
+                     Call<SaveInvestigatorActionOnlyData> call2 = apiService.SaveInvestigatorActionListDataOnly("Bearer " + Token, getPostInvestigatorActionData);
+                     call2.enqueue(new Callback<SaveInvestigatorActionOnlyData>() {
+                         @Override
+                         public void onResponse(Call<SaveInvestigatorActionOnlyData> call, Response<SaveInvestigatorActionOnlyData> response) {
 
-                         Log.d("TAG", "onResponse: "+new Gson().toJson(response.body()));
+                             Log.d("TAG", "onResponse: "+new Gson().toJson(response.body()));
 
-                         if (response.isSuccessful() && response.code()==200 && response.body().getStatusCode()==200){
-                             SaveInvestigatorActionOnlyData saveInvestigatorActionDataresponse = response.body();
+                             if (response.isSuccessful() && response.code()==200 && response.body().getStatusCode()==200){
+                                 SaveInvestigatorActionOnlyData saveInvestigatorActionDataresponse = response.body();
 
-                             VISUS_DataSource visus_dataSource1=new VISUS_DataSource(getApplicationContext());
-                             visus_dataSource1.open();
+                                 VISUS_DataSource visus_dataSource1=new VISUS_DataSource(getApplicationContext());
+                                 visus_dataSource1.open();
 
-                             for (SaveInvestigatorActionOnlyData.InvestigatorActionData saveInvestigatorActionData:saveInvestigatorActionDataresponse.getData() ) {
-                                 long saveResponseData =
-                                         visus_dataSource1.insertPostInvestigatorImageResponseData(saveInvestigatorActionData);
-                                 long valMainData =
-                                         visus_dataSource1.delete_tblPostInvestigatorActionData(saveInvestigatorActionData.getClientID());
-                                 Log.d("MAINID", " ID onResponse: "+saveInvestigatorActionData.getInvestigatorActionDataServerID());
-                                 long val =
-                                         visus_dataSource1.update_tblPostInvestigatorActionDataPhoto(saveInvestigatorActionData.getInvestigatorActionDataServerID(), saveInvestigatorActionData.getClientID());
+                                 for (SaveInvestigatorActionOnlyData.InvestigatorActionData saveInvestigatorActionData:saveInvestigatorActionDataresponse.getData() ) {
+                                     long saveResponseData =
+                                             visus_dataSource1.insertPostInvestigatorImageResponseData(saveInvestigatorActionData);
+                                     long valMainData =
+                                             visus_dataSource1.delete_tblPostInvestigatorActionData(saveInvestigatorActionData.getClientID());
+                                     Log.d("MAINID", " ID onResponse: "+saveInvestigatorActionData.getInvestigatorActionDataServerID());
+                                     long val =
+                                             visus_dataSource1.update_tblPostInvestigatorActionDataPhoto(saveInvestigatorActionData.getInvestigatorActionDataServerID(), saveInvestigatorActionData.getClientID());
+                                 }
+
+
+                                 visus_dataSource1.close();
+                                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                                 sweetAlertDialog.setTitleText("Great!!");
+                                 sweetAlertDialog.setCancelable(false);
+                                 sweetAlertDialog.setContentText("All data have been sync successfully!!");
+                                 sweetAlertDialog.show();
+                                 sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
+                                         txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
+                                         sweetAlertDialog.dismiss();
+                                     }
+                                 });
+                             }else{
+                                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.ERROR_TYPE);
+                                 sweetAlertDialog.setTitleText("Data Sync Error!!");
+                                 sweetAlertDialog.setCancelable(false);
+                                 sweetAlertDialog.setContentText(response.body().getMsg());
+                                 sweetAlertDialog.show();
+                                 sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
+                                         txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
+                                         sweetAlertDialog.dismiss();
+                                     }
+                                 });
                              }
 
 
-                             visus_dataSource1.close();
-                             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                             sweetAlertDialog.setTitleText("Great!!");
-                             sweetAlertDialog.setCancelable(false);
-                             sweetAlertDialog.setContentText("All data have been sync successfully!!");
-                             sweetAlertDialog.show();
-                             sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                 @Override
-                                 public void onClick(View v) {
-                                     txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
-                                     txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
-                                     sweetAlertDialog.dismiss();
-                                 }
-                             });
-                         }else{
-                             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.ERROR_TYPE);
-                             sweetAlertDialog.setTitleText("Data Sync Error!!");
-                             sweetAlertDialog.setCancelable(false);
-                             sweetAlertDialog.setContentText(response.body().getMsg());
-                             sweetAlertDialog.show();
-                             sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
-                                 @Override
-                                 public void onClick(View v) {
-                                     txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
-                                     txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
-                                     sweetAlertDialog.dismiss();
-                                 }
-                             });
                          }
 
+                         @Override
+                         public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
+                             ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
+                             apiCall.saveErrorLog();
 
-                     }
+                             call.cancel();
+                         }
+                     });
+                 }else{
+                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.WARNING_TYPE);
+                     sweetAlertDialog.setTitleText("Synchronization");
+                     sweetAlertDialog.setCancelable(false);
+                     sweetAlertDialog.setContentText("No Need to Sync");
+                     sweetAlertDialog.show();
+                     sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View v) {
+                             sweetAlertDialog.dismiss();
+                         }
+                     });
+                 }
 
-                     @Override
-                     public void onFailure(Call<SaveInvestigatorActionOnlyData> call, Throwable t) {
-                         ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
-                         apiCall.saveErrorLog();
-
-                         call.cancel();
-                     }
-                 });
              }
          });
          imageButton_uploadImage.setOnClickListener(new View.OnClickListener() {
@@ -560,7 +575,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
                                              Log.d("TAG", "saveData: file size "+(fileSizeInBytes / 1024));
-                                             RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), uri.toString());
+                                             RequestBody request_file_action_photo = RequestBody.create(MediaType.parse("multipart/form-data"), file_action_image);
                                              body_action_image1 = MultipartBody.Part.createFormData(count + "", !file_action_image.getName().equalsIgnoreCase("") ? file_action_image.getName() : "N?A", request_file_action_photo);
                                              imageParts.add(body_action_image1);
                                          } else {
@@ -600,9 +615,24 @@ public class DashboardActivity extends AppCompatActivity {
                                              long valMainData =
                                                      visus_dataSource1.delete_tblPostInvestigatorResponsedata(mainData.getClientID());
                                              Log.d("TAG", "MAINID...onResponse: "+abc);
-                                             visus_dataSource1.close();
+
+                                             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                                             sweetAlertDialog.setTitleText("Great!!");
+                                             sweetAlertDialog.setCancelable(false);
+                                             sweetAlertDialog.setContentText("All data have been sync successfully!!");
+                                             sweetAlertDialog.show();
+                                             sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     txtUploadData.setText("Upload Data ("+visus_dataSource1.getPostInvestigatorActionData().size()+")");
+                                                     txtUploadImage.setText("Upload Image ("+visus_dataSource1.getPostInvestigatorSavedResponseData().size()+")");
+                                                     visus_dataSource1.close();
+                                                     sweetAlertDialog.dismiss();
+
+                                                 }
+                                             });
                                          }else{
-                                             visus_dataSource.close();
+
                                              SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.ERROR_TYPE);
                                              sweetAlertDialog.setTitleText("Image Data Sync Error!!");
                                              sweetAlertDialog.setCancelable(false);
@@ -614,6 +644,7 @@ public class DashboardActivity extends AppCompatActivity {
                                                      txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
                                                      txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
                                                      sweetAlertDialog.dismiss();
+
                                                  }
                                              });
                                          }
@@ -645,16 +676,16 @@ public class DashboardActivity extends AppCompatActivity {
                          }
 
                      }
-                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
-                     sweetAlertDialog.setTitleText("Great!!");
+
+                 }else{
+                     SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.WARNING_TYPE);
+                     sweetAlertDialog.setTitleText("Synchronization");
                      sweetAlertDialog.setCancelable(false);
-                     sweetAlertDialog.setContentText("All data have been sync successfully!!");
+                     sweetAlertDialog.setContentText("No Need to Sync");
                      sweetAlertDialog.show();
                      sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
                          @Override
                          public void onClick(View v) {
-                             txtUploadData.setText("Upload Data ("+visus_dataSource.getPostInvestigatorActionData().size()+")");
-                             txtUploadImage.setText("Upload Image ("+visus_dataSource.getPostInvestigatorSavedResponseData().size()+")");
                              sweetAlertDialog.dismiss();
                          }
                      });
