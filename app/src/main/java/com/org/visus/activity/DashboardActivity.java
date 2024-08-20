@@ -559,9 +559,10 @@ public class DashboardActivity extends AppCompatActivity {
                      progressDialog.setTitle("Synchronization");
                      progressDialog.setMessage("Uploading images...");
                      progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                     progressDialog.setMax(arrayListSaveInvestigatorActionDataPhoto.size());
+                     progressDialog.setMax(100);
                      progressDialog.setCancelable(false);
                      progressDialog.show();
+                     final int[] setProgress = {0};
 
                      for (SaveInvestigatorActionOnlyData.InvestigatorActionData mainData : savedResponseList) {
                          arrayListSaveInvestigatorActionDataPhoto = visus_dataSource.getPostInvestigatorActionDataPhoto();
@@ -639,7 +640,7 @@ public class DashboardActivity extends AppCompatActivity {
                                              Log.d("TAG", "MAINID...onResponse: "+abc);
 
 
-                                             progressDialog.setProgress((arrayListSaveInvestigatorActionDataPhoto.size()-visus_dataSource1.getPostInvestigatorActionDataPhoto().size()));
+                                           //  progressDialog.setProgress((arrayListSaveInvestigatorActionDataPhoto.size()-visus_dataSource1.getPostInvestigatorActionDataPhoto().size()));
 //                                             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
 //                                             sweetAlertDialog.setTitleText("Great!!");
 //                                             sweetAlertDialog.setCancelable(false);
@@ -655,8 +656,25 @@ public class DashboardActivity extends AppCompatActivity {
 //
 //                                                 }
 //                                             });
+                                             setProgress[0]=setProgress[0]+(100/savedResponseList.size());
+                                             progressDialog.setProgress(setProgress[0]);
+                                             if (visus_dataSource1.getPostInvestigatorSavedResponseData().size()==0){
+                                                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.SUCCESS_TYPE);
+                                             sweetAlertDialog.setTitleText("Great!!");
+                                             sweetAlertDialog.setCancelable(false);
+                                             sweetAlertDialog.setContentText("All data have been sync successfully!!");
+                                             sweetAlertDialog.show();
+                                             sweetAlertDialog.getButton(SweetAlertDialog.BUTTON_CONFIRM).setOnClickListener(new View.OnClickListener() {
+                                                 @Override
+                                                 public void onClick(View v) {
+                                                     txtUploadData.setText("Upload Data ("+visus_dataSource1.getPostInvestigatorActionData().size()+")");
+                                                     txtUploadImage.setText("Upload Image ("+visus_dataSource1.getPostInvestigatorSavedResponseData().size()+")");
+                                                     visus_dataSource1.close();
+                                                     sweetAlertDialog.dismiss();
 
-                                             progressDialog.setProgress(progressDialog.getProgress() + 1);
+                                                 }
+                                             });
+                                             }
                                          }else{
 
                                              SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(DashboardActivity.this, SweetAlertDialog.ERROR_TYPE);
