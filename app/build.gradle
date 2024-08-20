@@ -61,4 +61,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22" // Match the versions
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3' // Version might vary
 
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.11.0'
+
+
 }

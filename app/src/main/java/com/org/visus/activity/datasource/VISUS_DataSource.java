@@ -538,7 +538,25 @@ public class VISUS_DataSource {
         }
         return list;
     }
-
+    public long insertPostInvestigatorActionErrorData(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData) {
+        Log.d("TAG", "insertPostInvestigatorActionErrorData: "+new Gson().toJson(investigatorActionData));
+        long i = 0;
+        ContentValues values = new ContentValues();
+        values.put(VISUS_SQLiteHelper.Token, "");
+        values.put(VISUS_SQLiteHelper.OriginalFileName, "");
+        values.put(VISUS_SQLiteHelper.ServiceTypeID, investigatorActionData.getServiceTypeID());
+        values.put(VISUS_SQLiteHelper.ServiceID, investigatorActionData.getServiceID());
+        values.put(VISUS_SQLiteHelper.InvID, investigatorActionData.getInvID());
+        values.put(VISUS_SQLiteHelper.Comments, investigatorActionData.getComments());
+        values.put(VISUS_SQLiteHelper.ActionID, investigatorActionData.getActionID());
+        values.put(VISUS_SQLiteHelper.Latitude, investigatorActionData.getLatitude());
+        values.put(VISUS_SQLiteHelper.Longitude, investigatorActionData.getLongitude());
+        values.put(VISUS_SQLiteHelper.CellAddress, investigatorActionData.getCellAddress());
+        values.put(VISUS_SQLiteHelper.InvInsuranceRelID_SAVING, investigatorActionData.getInvInsuranceRelID());
+        values.put(VISUS_SQLiteHelper.isSyncedRequreActionsData, "false");
+        i = sqLiteDatabase.insert(VISUS_SQLiteHelper.tblPostInvestigatorActionData, null, values);
+        return i;
+    }
     public int updatetblPostInvestigatorActionDataToken(String token) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(VISUS_SQLiteHelper.Token, "Bearer " + token);
