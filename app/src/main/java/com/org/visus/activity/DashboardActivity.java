@@ -96,7 +96,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (ConnectionUtility.isConnected(DashboardActivity.this)) {
-                    getToken();
+                    ProgressDialog dialog = ProgressDialog.show(DashboardActivity.this, "Synchronization", "Please wait...", true);
+
+                    getToken(dialog);
 //                    Intent intent=new Intent(DashboardActivity.this,DataSyncActivity.class);
 //                    startActivity(intent);
 
@@ -336,7 +338,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    private void getToken() {
+    private void getToken(ProgressDialog dialog) {
         ApiService apiService;
         apiService = ApiClient.getClient(this).create(ApiService.class);
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -356,7 +358,6 @@ public class DashboardActivity extends AppCompatActivity {
                         VISUS_DataSource visus_dataSource = new VISUS_DataSource(getApplicationContext());
                         visus_dataSource.open();
                         String Token = PrefUtils.getFromPrefs(DashboardActivity.this, PrefUtils.Token);
-                        ProgressDialog dialog = ProgressDialog.show(DashboardActivity.this, "Synchronization", "Please wait...", true);
 
                         List<DeviceInvLocation> deviceInvLocationList = visus_dataSource.getDeviceInvLocation();
                         if (deviceInvLocationList != null && deviceInvLocationList.size() > 0) {
@@ -370,11 +371,16 @@ public class DashboardActivity extends AppCompatActivity {
                         }
                         visus_dataSource.close();
                     }
+                }else{
+                    dialog.dismiss();
+
                 }
             }
 
             @Override
             public void onFailure(Call<TokenResponse> call, Throwable t) {
+                dialog.dismiss();
+
                 ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
                 apiCall.saveErrorLog();
                 call.cancel();
@@ -566,7 +572,6 @@ public class DashboardActivity extends AppCompatActivity {
 
                      for (SaveInvestigatorActionOnlyData.InvestigatorActionData mainData : savedResponseList) {
                          arrayListSaveInvestigatorActionDataPhoto = visus_dataSource.getPostInvestigatorActionDataPhoto();
-                         Log.d("TAG", "saveData image: " + new Gson().toJson(arrayListSaveInvestigatorActionDataPhoto));
                          if (arrayListSaveInvestigatorActionDataPhoto.size() > 0) {
                              ApiService apiService = ApiClient.getClient(DashboardActivity.this).create(ApiService.class);
                              String token = PrefUtils.getFromPrefs(DashboardActivity.this, PrefUtils.Token);
@@ -580,7 +585,8 @@ public class DashboardActivity extends AppCompatActivity {
                              String InvInsuranceRelID = "";
                              String InvestigatorCaseActivityPhotoServerID = "";
                              for (SaveInvestigatorAction.SaveInvestigatorActionData imagedata : arrayListSaveInvestigatorActionDataPhoto) {
-                                 if (imagedata.InvInsuranceRelID.equals(mainData.getInvInsuranceRelID()) && imagedata.getInvestigatorCaseActivityCaseInsuranceID().equals(mainData.getServiceID())) {
+                                 Log.d("TAG", "onClick: "+imagedata.getInvestigatorCaseActivity_ClientD()+"/////"+mainData.getClientID());
+                                 if (imagedata.getInvestigatorCaseActivity_ClientD().equals(mainData.getClientID())) {
                                      count++;
                                      VisusServicesID = imagedata.getVisusServicesID();
                                      InvestigatorCaseActivityCaseInsuranceID = imagedata.getInvestigatorCaseActivityCaseInsuranceID();
@@ -618,6 +624,7 @@ public class DashboardActivity extends AppCompatActivity {
                                  }
 
                              }
+                             Log.d("TAG", "onClick: count="+count);
                              if (count > 0) {
 
                                  Call<SaveInvestigatorAction> call2 = apiService.saveInvestigatorActionlstPhotoData("Bearer " + token, imageParts, VisusServicesID, InvestigatorCaseActivityCaseInsuranceID, InvestigatorCaseActivityInvID, InvestigatorRequiredActivityID, InvestigatorCaseActivity_ClientD, InvInsuranceRelID, InvestigatorCaseActivityPhotoServerID);
@@ -1071,14 +1078,17 @@ public class DashboardActivity extends AppCompatActivity {
                      //   saveData(Token, dialog);
                         showDialogForSaveData(dialog);
                     } else {
+                        dialog.dismiss();
                     }
                     visus_dataSource.close();
                 } else {
+                    dialog.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<DeviceInvLocation> call, Throwable t) {
+                dialog.dismiss();
                 ErrorLogAPICall apiCall=new ErrorLogAPICall(DashboardActivity.this,DashboardActivity.this.getClass().getSimpleName(),Thread.currentThread().getStackTrace()[2].getMethodName(),t.getMessage(),"API ERROR");
                 apiCall.saveErrorLog();
                 call.cancel();

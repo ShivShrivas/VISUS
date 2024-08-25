@@ -499,6 +499,7 @@ public class VISUS_DataSource {
         values.put(VISUS_SQLiteHelper.Token, "");
         values.put(VISUS_SQLiteHelper.OriginalFileName, "");
         values.put(VISUS_SQLiteHelper.ServiceTypeID, investigatorActionData.getServiceTypeID());
+        values.put(VISUS_SQLiteHelper.ClientID, investigatorActionData.getClientID());
         values.put(VISUS_SQLiteHelper.ServiceID, investigatorActionData.getServiceID());
         values.put(VISUS_SQLiteHelper.InvestigatorActionDataServerID, investigatorActionData.getInvestigatorActionDataServerID());
         values.put(VISUS_SQLiteHelper.InvID, investigatorActionData.getInvID());
@@ -510,6 +511,10 @@ public class VISUS_DataSource {
         values.put(VISUS_SQLiteHelper.InvInsuranceRelID_SAVING, investigatorActionData.getInvInsuranceRelID());
         values.put(VISUS_SQLiteHelper.isSyncedRequreActionsData, "false");
         i = sqLiteDatabase.insert(VISUS_SQLiteHelper.tblPostInvestigatorSavedResponsedata, null, values);
+
+        // {"ActionID":"5","CellAddress":"110, Gali Number 8/3, Talimabad, Sangam Vihar, New Delhi, Delhi 110062, India","ClientID":"21"
+        // ,"Comments":"","ExceptionIfAny":"","InvID":"24","InvInsuranceRelID":"7208","InvestigatorActionDataServerID":"5","IsSavedInvActionData":"true"
+        // ,"Latitude":"28.5096864","Longitude":"77.2497605","ServiceID":"2227","ServiceTypeID":"2"}
         return i;
     }
     @SuppressLint("Range")
@@ -522,7 +527,7 @@ public class VISUS_DataSource {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             postInvestigatorActionData = (saveInvestigatorActionData).new InvestigatorActionData();
-            postInvestigatorActionData.setClientID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.common_id)));
+            postInvestigatorActionData.setClientID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ClientID)));
             postInvestigatorActionData.setServiceTypeID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ServiceTypeID)));
             postInvestigatorActionData.setServiceID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ServiceID)));
             postInvestigatorActionData.setInvID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvID)));

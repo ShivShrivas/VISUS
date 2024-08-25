@@ -1020,7 +1020,7 @@ public class MyActionActivity extends AppCompatActivity {
                     saveInvestigatorActionData.setActivityFilePath(myFile.getPath());
                     saveInvestigatorActionData.setOriginalFileName("Pdf_" + myFile.getPath());
                     saveInvestigatorActionData.setFileSubmittionOnDate(getCurrentDateTime());
-                    arrayListSaveInvestigatorActionDataPhoto.clear();
+                    //arrayListSaveInvestigatorActionDataPhoto.clear();
                     arrayListSaveInvestigatorActionDataPhoto.add(saveInvestigatorActionData);
                     actionBinding.pdf.setVisibility(View.VISIBLE);
                     actionBinding.pdf.setText(myFile.getName() != null && !myFile.getName().equalsIgnoreCase("") ? myFile.getName() : "N?A");
