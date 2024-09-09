@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.org.visus.R;
 import com.org.visus.apis.ApiClient;
 import com.org.visus.apis.ApiService;
@@ -50,7 +52,6 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
     Map<String, String> mapNeighbourDetails = new HashMap<String, String>();
     Map<String, String> mapMedicalStoreDetails = new HashMap<String, String>();
     Map<String, String> mapHospitalDetails = new HashMap<String, String>();
-    LifeInsuranceCheckList.InvLifeInsuCheckListNeighbours invLifeInsuCheckListNeighbours = new LifeInsuranceCheckList.InvLifeInsuCheckListNeighbours();
     LifeInsuranceCheckList.InvLifeInsuCheckListMedicalStore invLifeInsuCheckListMedicalStore = new LifeInsuranceCheckList.InvLifeInsuCheckListMedicalStore();
     LifeInsuranceCheckList.InvLifeInsuCheckListHospitalCheck lifeInsuCheckListHospitalCheck = new LifeInsuranceCheckList.InvLifeInsuCheckListHospitalCheck();
 
@@ -299,6 +300,7 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
 
                             List<LifeInsuranceCheckList.InvLifeInsuCheckListNeighbours> listNeighbours = new ArrayList<>();
                             for (Map.Entry<String, String> entry : mapNeighbourDetails.entrySet()) {
+                                LifeInsuranceCheckList.InvLifeInsuCheckListNeighbours invLifeInsuCheckListNeighbours = new LifeInsuranceCheckList.InvLifeInsuCheckListNeighbours();
                                 invLifeInsuCheckListNeighbours.setNeighbours_Name(entry.getValue());
                                 invLifeInsuCheckListNeighbours.setNeighbours_ContactNumber(entry.getKey());
                                 listNeighbours.add(invLifeInsuCheckListNeighbours);
@@ -441,6 +443,7 @@ public class LifeInsuranceReportingFormatActivity extends AppCompatActivity {
                     TextView Mobile = view.findViewById(R.id.Mobile);
                     Mobile.setText(neighbourDetailsContactNumber);
                     ImageView deleteDetails = view.findViewById(R.id.deleteDetails);
+
                     mapNeighbourDetails.put(neighbourDetailsContactNumber, neighbourDetailsName);
                     activityLifeInsuranceReportingFormatBinding.linearLayoutNeighbourDetailLayout.addView(view);
                     deleteDetails.setOnClickListener(new View.OnClickListener() {

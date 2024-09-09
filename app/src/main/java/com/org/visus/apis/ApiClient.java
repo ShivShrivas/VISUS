@@ -21,8 +21,8 @@ public class ApiClient {
         if (retrofit == null) {
             OkHttpClient.Builder httpClient;
             httpClient = new OkHttpClient.Builder();
-            httpClient.connectTimeout(1, TimeUnit.MINUTES); // connect timeout
-            httpClient.readTimeout(1, TimeUnit.MINUTES);
+            httpClient.connectTimeout(20, TimeUnit.MINUTES); // connect timeout
+            httpClient.readTimeout(20, TimeUnit.MINUTES);
             httpClient.addInterceptor(loggingInterceptor);
             retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).client(httpClient.build()).build();
         }

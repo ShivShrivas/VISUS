@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -723,6 +724,7 @@ public class GI_PA_ReportingFormatActivity extends AppCompatActivity {
         apiService = ApiClient.getClient(this).create(ApiService.class);
         if (ConnectionUtility.isConnected(GI_PA_ReportingFormatActivity.this)) {
             Token = PrefUtils.getFromPrefs(GI_PA_ReportingFormatActivity.this, PrefUtils.Token);
+
             Call<GI_PAResponse> lifeInsuranceCheckListCall = apiService.postGI_PA("Bearer " + Token, gi_pa);
             lifeInsuranceCheckListCall.enqueue(new Callback<GI_PAResponse>() {
                 @Override
