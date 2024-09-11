@@ -543,6 +543,15 @@ public class VISUS_DataSource {
         }
         return list;
     }
+    @SuppressLint("Range")
+    public int getPostInvestigatorImagesDataCountBuClientId(String clientId) {
+        String sql = "select * From " + VISUS_SQLiteHelper.tblPostInvestigatorActionDataPhoto + " WHERE "+ VISUS_SQLiteHelper.InvestigatorCaseActivity_ClientD + " = '"+clientId+"'";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        int count = cursor.getCount(); // Get the count of rows
+        cursor.close(); // Always close the cursor when you're done
+        return count;
+    }
+
     public long insertPostInvestigatorActionErrorData(SaveInvestigatorActionOnlyData.InvestigatorActionData investigatorActionData) {
         Log.d("TAG", "insertPostInvestigatorActionErrorData: "+new Gson().toJson(investigatorActionData));
         long i = 0;
@@ -602,7 +611,7 @@ public class VISUS_DataSource {
     }
 
     public int delete_tblPostInvestigatorResponsedata(String commonID) {
-        String whereClause = VISUS_SQLiteHelper.common_id + "=?";
+        String whereClause = VISUS_SQLiteHelper.ClientID + "=?";
         String[] whereArgs = {commonID};
         return sqLiteDatabase.delete(VISUS_SQLiteHelper.tblPostInvestigatorSavedResponsedata, whereClause, whereArgs);
     }
@@ -707,6 +716,33 @@ public class VISUS_DataSource {
         List<SaveInvestigatorAction.SaveInvestigatorActionData> list = new ArrayList<>();
         SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData;
         String sql = "select * From " + VISUS_SQLiteHelper.tblPostInvestigatorActionDataPhoto + " WHERE " + VISUS_SQLiteHelper.isSyncedRequreActionsData + " = 'false'";
+        Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            saveInvestigatorActionData = (saveInvestigatorAction).new SaveInvestigatorActionData();
+            saveInvestigatorActionData.setInvestigatorCaseActivity_ClientD(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorCaseActivity_ClientD)));
+            saveInvestigatorActionData.setOriginalFileName(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.OriginalFileName)));
+            saveInvestigatorActionData.setActivityFilePath(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.ActivityFilePath)));
+            saveInvestigatorActionData.setVisusServicesID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.VisusServicesID)));
+            saveInvestigatorActionData.setInvestigatorCaseActivityInvID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorCaseActivity_InvID)));
+            saveInvestigatorActionData.setInvestigatorRequiredActivityID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorRequiredActivityID)));
+            saveInvestigatorActionData.setInvInsuranceRelID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvInsuranceRelID)));
+            saveInvestigatorActionData.setInvestigatorCaseActivityPhotoServerID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorCaseActivityPhotoServerID)));
+            saveInvestigatorActionData.setInvestigatorCaseActivityCaseInsuranceID(cursor.getString(cursor.getColumnIndex(VISUS_SQLiteHelper.InvestigatorCaseActivity_CaseInsuranceID)));
+
+            list.add(saveInvestigatorActionData);
+            cursor.moveToNext();
+        }
+        return list;
+    }
+
+
+    @SuppressLint("Range")
+    public List<SaveInvestigatorAction.SaveInvestigatorActionData> getPostInvestigatorActionDataPhotosByClintId(String clientId) {
+        SaveInvestigatorAction saveInvestigatorAction = new SaveInvestigatorAction();
+        List<SaveInvestigatorAction.SaveInvestigatorActionData> list = new ArrayList<>();
+        SaveInvestigatorAction.SaveInvestigatorActionData saveInvestigatorActionData;
+        String sql = "select * From " + VISUS_SQLiteHelper.tblPostInvestigatorActionDataPhoto + " WHERE " + VISUS_SQLiteHelper.isSyncedRequreActionsData + " = 'false' And " + VISUS_SQLiteHelper.InvestigatorCaseActivity_ClientD + " = '"+clientId+"'";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

@@ -96,11 +96,11 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (ConnectionUtility.isConnected(DashboardActivity.this)) {
-                    ProgressDialog dialog = ProgressDialog.show(DashboardActivity.this, "Synchronization", "Please wait...", true);
+                   // ProgressDialog dialog = ProgressDialog.show(DashboardActivity.this, "Synchronization", "Please wait...", true);
 
-                    getToken(dialog);
-//                    Intent intent=new Intent(DashboardActivity.this,DataSyncActivity.class);
-//                    startActivity(intent);
+//                    getToken(dialog);
+                    Intent intent=new Intent(DashboardActivity.this,DataSyncActivity.class);
+                    startActivity(intent);
 
                 } else {
                     ConnectionUtility.AlertDialogForNoConnectionAvaialble(DashboardActivity.this);

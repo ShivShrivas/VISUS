@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:onClick="goBack"

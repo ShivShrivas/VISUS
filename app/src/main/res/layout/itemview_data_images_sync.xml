@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_margin="5sp"
+        android:layout_margin="8dp"
         app:cardElevation="3sp"
         app:cardCornerRadius="8dp"
         android:layout_height="100dp"
@@ -22,6 +22,10 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
+                android:src="@drawable/img"
+                android:background="@color/white"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
                 android:layout_width="100dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -30,8 +34,9 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="40dp"
-                app:cardCornerRadius="20sp"
+                app:cardCornerRadius="20dp"
                 android:layout_height="40dp"
+                app:cardElevation="6dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageButton"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,10 +47,12 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/imageCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="16"
+                        android:textStyle="bold"
+                        android:textColor="@color/app_red"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +62,7 @@
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvItemName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -63,24 +70,28 @@
                 android:textColor="@color/main_blue_color"
                 android:textSize="12dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/button"
+                app:layout_constraintEnd_toStartOf="@+id/button_upload"
                 app:layout_constraintHorizontal_bias="0.033"
                 app:layout_constraintStart_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="@+id/imageButton" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
                 android:text="address"
-                app:layout_constraintEnd_toStartOf="@+id/button"
-                app:layout_constraintHorizontal_bias="0.007"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/button_upload"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageButton"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/tvItemName"
+                app:layout_constraintVertical_bias="0.111" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/button_upload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
